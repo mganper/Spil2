@@ -1,5 +1,7 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil\spil.model\spil.model.entity\Notification.php';
+
 class NotificationImpl implements Notification {
 
     /**
@@ -20,7 +22,7 @@ class NotificationImpl implements Notification {
      */
     private $text;
 
-    function __construct($idNotification, $idUser, String $text) {
+    function __construct($idNotification, $idUser, $text) {
         $this->idNotification = $idNotification;
         $this->idUser = $idUser;
         $this->text = $text;

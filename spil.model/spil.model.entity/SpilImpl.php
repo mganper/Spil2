@@ -1,5 +1,7 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'].'\Spil\spil.model\spil.model.entity\Spil.php';
+
 /**
  * @author Carlos Aunion Dominguez <caundom@alu.upo.es>
  */
@@ -46,7 +48,7 @@ class SpilImpl implements Spil {
      */
     private $report;
 
-    function __construct($id, String $text, $idUser, Date $writeDate, $editNum, $adultContent, $report) {
+    function __construct($id, $text, $idUser, $writeDate, $editNum, $adultContent, $report) {
         $this->id = $id;
         $this->text = $text;
         $this->idUsuario = $idUser;
@@ -60,7 +62,7 @@ class SpilImpl implements Spil {
         return $this->id;
     }
 
-    function getText(): String {
+    function getText(){
         return $this->text;
     }
 
@@ -68,7 +70,7 @@ class SpilImpl implements Spil {
         return $this->idUsuario;
     }
 
-    function getWriteDate(): Date {
+    function getWriteDate(){
         return $this->writeDate;
     }
 
@@ -88,7 +90,7 @@ class SpilImpl implements Spil {
         $this->id = $id;
     }
 
-    function setText(String $text) {
+    function setText($text) {
         $this->text = $text;
     }
 
@@ -96,7 +98,7 @@ class SpilImpl implements Spil {
         $this->idUser = $idUser;
     }
 
-    function setWriteDate(Date $writeDate) {
+    function setWriteDate($writeDate) {
         $this->writeDate = $writeDate;
     }
 

@@ -1,5 +1,9 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'].'\Spil\spil.model\SpilModel.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'].'\Spil\spil.model\spil.model.persistence\spil.model.persistence.dao\SpilDAOImpl.php';
+
 class SpilModelImpl implements SpilModel {
 
     private $controller;
@@ -40,9 +44,16 @@ class SpilModelImpl implements SpilModel {
         $dao = $this->obtainNotDao();
         return $dao->update($spil);
     }
+    
+    public function report($pk) {
+        $dao = $this->obtainNotDao();
+        return $dao->report($pk);
+    }
 
     private function obtainNotDao() {
         return new SpilDAOImpl();
     }
+
+    
 
 }
