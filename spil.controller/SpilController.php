@@ -6,7 +6,7 @@ interface SpilController {
     
     function listMsgs($idUser);
     
-    function report();
+    function report($pk);
     
     function edit($idSpil, $text);
     
