@@ -1,6 +1,6 @@
 <?php
 
-class connectionSingleton {
+class ConnectionSingleton {
 
     private static $conn;
     private static $servidor = 'localhost';

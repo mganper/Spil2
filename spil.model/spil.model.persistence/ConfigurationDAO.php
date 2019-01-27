@@ -9,7 +9,5 @@ interface ConfigurationDAO {
     function update($configuration);
 
     function delete($configuration);
-
-    function listed();
     
 }
