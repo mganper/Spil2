@@ -1,5 +1,7 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.entity/User.php';
+
 class UserImpl implements User{
     private $usuario;
     private $contrasenya;
@@ -20,8 +22,9 @@ class UserImpl implements User{
         $this->fechaAlta = $fechaAlta;
    }
    
-   function __construct($usuario){
+   function __construct($usuario, $avatar){
        $this->usuario = $usuario;
+       $this->avatar = $avatar;
    }
 
    public function getUsuario(){
