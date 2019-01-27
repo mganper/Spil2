@@ -12,15 +12,15 @@ class UserDAOImpl implements UserDAO{
         
     }
 
-    public function listed() {
-        
-    }
-
-    public function read($pk) {
-        
-    }
-
     public function update($user) {
+        
+    }
+
+    public function listFollowers($user) {
+        
+    }
+
+    public function listFollows($user) {
         
     }
 
