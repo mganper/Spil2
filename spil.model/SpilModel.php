@@ -15,4 +15,6 @@ interface SpilModel {
     function updateSpil($spil);
 
     function deleteSpil($spil);
+    
+    function report($spil);
 }

@@ -1,5 +1,8 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil\spil.model\spil.model.persistence\spil.model.persistence.dao\NotificationDAOImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil\spil.model\NotificationModel.php';
+
 class NotificationModelImpl implements NotificationModel {
 
     private $controller;

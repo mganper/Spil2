@@ -1,13 +1,18 @@
 <?php
 
-class NotificationControllerImpl implements NotificationController{
-    
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil\spil.controller\NotificationController.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil\spil.model\NotificationModelImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil\spil.model\spil.model.entity\NotificationImpl.php';
+
+class NotificationControllerImpl implements NotificationController {
+
     private $model;
-    
+
     public function __construct() {
-        $this->$model = new NotificationModelImpl();
-        $this->model->setController($this);
+        $this->model = new NotificationModelImpl();
+        return $this->model->setController($this);
     }
+
     public function createNot($idUser, $text) {
         $notification = new NotificationImpl(NULL, $idUser, $text);
         $this->model->newNotification($notification);
@@ -19,7 +24,7 @@ class NotificationControllerImpl implements NotificationController{
     }
 
     public function listNot($idUser) {
-        $this->model->check($idUser);
+        return $this->model->check($idUser);
     }
 
     public function updateNot($idNotification, $text) {

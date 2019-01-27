@@ -8,13 +8,14 @@ class ConnectionSingleton {
     private static $pass = '';
     private static $db = 'spil';
 
-    public static function getConn()
-    {
-        if (is_null(self::$instance)) {
-            self::$conn = new connectionSingleton();
+    public static function getConn() {
+        if (is_null(self::$conn)) {
+            self::$conn = new mysqli(self::$servidor, self::$user, self::$pass, self::$db);
+            if (self::$conn->connect_errno) {
+                echo "Fallo al conectar";
+            }
         }
-
-        return self::$instance;
+        return self::$conn;
     }
 
 }

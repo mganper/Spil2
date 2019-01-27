@@ -18,11 +18,11 @@ interface Spil {
 
     function setId($id);
 
-    function setText(String $text);
+    function setText($text);
 
     function setIdUser($idUser);
 
-    function setWriteDate(Date $writeDate);
+    function setWriteDate($writeDate);
 
     function setEditNum($editNum);
 

@@ -7,5 +7,5 @@ interface NotificationController {
     
     function deleteNot($idNotification);
     
-    function updateNot($idNotification);
+    function updateNot($idNotification, $text);
 }
