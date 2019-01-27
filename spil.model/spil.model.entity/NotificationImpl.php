@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil\spil.model\spil.model.entity\Notification.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.entity\Notification.php';
 
 class NotificationImpl implements Notification {
 

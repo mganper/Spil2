@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'\Spil\spil.model\spil.model.entity\Spil.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'\Spil2\spil.model\spil.model.entity\Spil.php';
 
 /**
  * @author Carlos Aunion Dominguez <caundom@alu.upo.es>
