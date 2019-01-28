@@ -19,7 +19,7 @@
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
 
         <style> 
-            
+
             .navbar {
                 margin-bottom: 0;
                 border-radius: 0;
@@ -34,7 +34,7 @@
                 padding-bottom: 50%;
                 background-color: #f1f1f1;
             }
-        
+
         </style>
 
     </head>
@@ -43,11 +43,11 @@
         <nav class="navbarnavbar-expand-md bg-info">
             <div class="container" style="text-align: center;">         
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_iz.png" style="max-width: 40px">          
-                <a class="navbar-brand nav-link" href="#">Inicio</a>
-                <a class="navbar-brand nav-link" href="#">Notificaciones</a>
-                <a class="navbar-brand nav-link" href="#">Perfil</a>
-                <a class="navbar-brand nav-link" href="#">Configuracion</a>
-                <button class="navbar-brand btn" style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
+                <a class="navbar-brand nav-link" href="Lobby.php">Inicio</a>
+                <a class="navbar-brand nav-link" href="Notification.php">Notificaciones</a>
+                <a class="navbar-brand nav-link" href="User.php">Perfil</a>
+                <a class="navbar-brand nav-link" href="Configuration.php">Configuracion</a>
+                <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal"style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px">
 
             </div>
@@ -59,27 +59,24 @@
                 <div class="row content" style="margin-top: 5px;">
                     <div class="col-sm-2 sidenav">
                         <img class="img-circle" src="pk2-free-v2.0.1/assets/img/faces/erik-lucatero-2.jpg" style="max-height: 200px; max-width: 200px;">
+                        <label class="label label-info">@USERname</label>
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
                             <div class="info-user ">
-                                <a href="#">Seguidores <span class="label label-primary">555</span></a><br>
-                                <a href="#">Seguidos <span class="label label-primary">1025</span></a><br>
-                                <a href="#">Spils <span class="label label-primary">2</span></a><br>                                
-                                <a href="#">Me gusta<span class="label label-primary">252</span></a>                                
+                                <a href="Seguidores.php">Seguidores <span class="label label-info">555</span></a><br>
+                                <a href="Seguidos.php">Seguidos <span class="label label-info">1025</span></a><br>
+                                <a href="User.php">Spils <span class="label label-info">2</span></a><br>                                
+                                <a href="Like.php">Me gusta<span class="label label-info">252</span></a>                             
                             </div>
                         </div>
-                        
+
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 10px;">
                             <div>
                                 <footer>FOOTER                              </footer>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-8 text-center"> 
-                        <div class="col-sm-11  label label-primary bg-info">
-                            <h2><b>Nombre de usuario</b></h2>
-                            <p>biografia</p>
-                        </div>
-                        <hr>
+                    <div class="col-sm-8 text-center">
+                        <!-- CODIGO PARA MOSTRAR MENSAJES AQUÍ-->
                         <h3>MENSAJE 1</h3>
                         <hr>
                         <h3>MENSAJE 2</h3>
@@ -89,6 +86,7 @@
                     <div class="col-sm-2 sidenav">
                         <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
                             <div class="info-user ">
+                                <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
                                 <h5>RANK1</h5>
                                 <HR>
                                 <h5>RANK2</h5>
@@ -103,7 +101,44 @@
 
 
         <!-- Modal Bodies come here -->
-
+        
+        <div class="modal fade" id="MSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" id="exampleModalLabel">¿Qué tienes que decir?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- FORMULARIO QUE RECIBE LA FUNCIONALIDAD ENVIAR SPIL AQUÍ-->
+                    <form action="#">
+                        <div class="modal-body"> 
+                            <textarea class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
+                            <label>Contenido sensible</label>
+                            <div class="form-check-radio">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                    Off
+                                    <span class="form-check-sign"></span>
+                                </label>
+                            </div>
+                            <div class="form-check-radio">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" >
+                                    On
+                                    <span class="form-check-sign"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal">Publicar</button>
+                            <div class="divider"></div>                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <!--   end modal -->
 
 

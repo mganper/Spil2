@@ -39,11 +39,11 @@
         <nav class="navbarnavbar-expand-md bg-info">
             <div class="container" style="text-align: center;">         
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_iz.png" style="max-width: 40px">          
-                <a class="navbar-brand nav-link" href="#">Inicio</a>
-                <a class="navbar-brand nav-link" href="#">Notificaciones</a>
-                <a class="navbar-brand nav-link" href="#">Perfil</a>
-                <a class="navbar-brand nav-link" href="#">Configuracion</a>
-                <button class="navbar-brand btn" style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
+                <a class="navbar-brand nav-link" href="Lobby.php">Inicio</a>
+                <a class="navbar-brand nav-link" href="Notification.php">Notificaciones</a>
+                <a class="navbar-brand nav-link" href="User.php">Perfil</a>
+                <a class="navbar-brand nav-link" href="Configuration.php">Configuracion</a>
+                <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal"style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px">
 
             </div>
@@ -84,7 +84,45 @@
 
 
         <!-- Modal Bodies come here -->
+        <div class="modal fade" id="MSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" id="exampleModalLabel">¿Qué tienes que decir?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    
+                    <!-- FORMULARIO QUE RECIBE LA FUNCIONALIDAD ENVIAR SPIL AQUÍ-->
 
+                    <form action="#">
+                        <div class="modal-body"> 
+                            <textarea class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
+                            <label>Contenido sensible</label>
+                            <div class="form-check-radio">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                    Off
+                                    <span class="form-check-sign"></span>
+                                </label>
+                            </div>
+                            <div class="form-check-radio">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" >
+                                    On
+                                    <span class="form-check-sign"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal">Publicar</button>
+                            <div class="divider"></div>                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <!--   end modal -->
 
 

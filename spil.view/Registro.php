@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
 
         <link href="pk2-free-v2.0.1/assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -20,20 +20,14 @@
                 <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3">
                     <div class="card-register bg-primary">
                         <h3 style="color:blue;">Welcome to Spil!</h3>
+                        <!-- FORMULARIO DE REGISTRO-->
                         <form class="register-form">
                             <label>Nombre</label>
                             <input type="text" placeholder="Nombre" class="form-control">
                             <label>Nombre</label>
                             <input type="text" placeholder="Apellidos" class="form-control">
                             <label>Fecha de nacimiento</label>
-                            <div class="form-group">
-                                <div class='input-group date' id='datetimepicker'>
-                                    <input type='text' class="form-control datetimepicker" placeholder="05/08/2017" />
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                                    </span>
-                                </div>
-                            </div>
+                            <input type="text" id="birth-date" placeholder="DD-MM-AAAA" class="form-control" onkeyup="checkDate()">
                             <label>User</label>
                             <input class="form-control" type="text" placeholder="User">
                             <label>Password</label>
@@ -54,21 +48,26 @@
             </div>
         </div>
     </body>
-    <!-- javascript --><script>
-        $('#datetimepicker').datetimepicker({
-            icons: {
-                time: "fa fa-clock-o",
-                date: "fa fa-calendar",
-                up: "fa fa-chevron-up",
-                down: "fa fa-chevron-down",
-                previous: 'fa fa-chevron-left',
-                next: 'fa fa-chevron-right',
-                today: 'fa fa-screenshot',
-                clear: 'fa fa-trash',
-                close: 'fa fa-remove'
-            }
+    <!-- javascript -->
+    <script>
+        var cont = 0;
+        function checkDate() {
+            var char = document.getElementById("birth-date").value;
+            var ascii = char.charCodeAt(cont++);
 
-        });</script>
+            if ((cont === 3 || cont === 6) && (ascii === 47 || ascii === 45) && cont < 11) {
+
+            } else {
+                if ((ascii >= 48 && ascii <= 57) && cont < 11) {
+                    if (cont === 3 || cont === 6) {
+                        document.getElementById("birth-date").value = char.substring(0, --cont);
+                    }
+                } else {
+                    document.getElementById("birth-date").value = char.substring(0, --cont);
+                }
+            }
+        }
+    </script>
     <!-- Core JS Files -->
     <script src="pk2-free-v2.0.1/assets/js/jquery-3.2.1.js" type="text/javascript"></script>
     <script src="pk2-free-v2.0.1/assets/js/jquery-ui-1.12.1.custom.min.js" type="text/javascript"></script>

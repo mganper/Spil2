@@ -18,7 +18,9 @@
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
 
-        <style> .navbar {
+        <style> 
+            
+            .navbar {
                 margin-bottom: 0;
                 border-radius: 0;
             }
@@ -31,7 +33,9 @@
                 padding-top: 20px;
                 padding-bottom: 50%;
                 background-color: #f1f1f1;
-            }</style>
+            }
+        
+        </style>
 
     </head>
     <body>
@@ -54,32 +58,40 @@
             <div class="container-fluid text-center">    
                 <div class="row content" style="margin-top: 5px;">
                     <div class="col-sm-2 sidenav">
+                        <img class="img-circle" src="pk2-free-v2.0.1/assets/img/faces/erik-lucatero-2.jpg" style="max-height: 200px; max-width: 200px;">
+                        <label class="label label-info">@USERname</label>
+                        <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
+                            <div class="info-user ">
+                                <a href="Seguidores.php">Seguidores <span class="label label-info">555</span></a><br>
+                                <a href="Seguidos.php">Seguidos <span class="label label-info">1025</span></a><br>
+                                <a href="User.php">Spils <span class="label label-info">2</span></a><br>                                
+                                <a href="Like.php">Me gusta<span class="label label-info">252</span></a>                                  
+                            </div>
+                        </div>
+                        
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 10px;">
                             <div>
-                                <footer>FOOTER                              </footer>
+                                <footer>FOOTER</footer>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-8 text-center"> 
-                        <h4 style="text-align: left">Seguridad</h4>
+                        
+                        <!-- CODIGO PARA MOSTRAR USUARIOS AQUÍ-->
+                        <h3>SEGUIDO 1</h3>
                         <hr>
-                        <h5 style="text-align: left">Cambiar contraseña:</h5><br>
-                        <form class="register-form"  style="text-align: left;">
-                            <label>Contraseña actual:</label>
-                            <input type="password" placeholder="Contraseña"><br>
-                            <label>Nueva contraseña:</label>
-                            <input type="password" placeholder="Nueva contraseña"><br>
-                            <label>Repetir contraseña:</label>
-                            <input type="password" placeholder="Repetir contraseña"><br>
-                            <button class="btn btn-round bg-info">Cambiar contraseña</button>
-                        </form>
+                        <h3>SEGUIDO 2</h3>
                         <hr>
-                        <h3>NOTIFICACION 2</h3>
-                        <hr>
-                        <h4></h4>
+                        <h3>SEGUIDO N</h3>
                     </div>
                     <div class="col-sm-2 sidenav">
-
+                        <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
+                            <div class="info-user ">
+                                <h5>RANK1</h5>
+                                <HR>
+                                <h5>RANK2</h5>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -89,7 +101,7 @@
 
 
         <!-- Modal Bodies come here -->
-        <div class="modal fade" id="MSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="MSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -98,6 +110,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <!-- FORM-->
                     <form action="#">
                         <div class="modal-body"> 
                             <textarea class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>

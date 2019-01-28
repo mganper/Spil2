@@ -13,6 +13,7 @@
                 <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3 ">
                     <div class="card-register bg-primary">
                         <h3 style="color:blue;">Welcome to Spil!</h3>
+                        <!-- FORMULARIO DE LOGIN-->
                         <form class="register-form">
                             <label>User</label>
                             <input class="form-control" type="text" placeholder="User">
