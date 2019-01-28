@@ -10,15 +10,17 @@ interface UserController {
 
     function modifyAvatar($idusuario, $newAvatar);
 
-    function getFollowers($idUsuario);
+    function getSeguidores($idUsuario);
 
-    function getFollows($idUsuario);
+    function getSeguidos($idUsuario);
 
-    function getNumFollowers($idUsuario);
+    function getNumSeguidores($idUsuario);
 
-    function getNumFollows($idUsuario);
-    
+    function getNumSeguidos($idUsuario);
+
     function addReport($idUsuario);
-    
-  
+
+    function addfollower($idSeguidor, $idSeguido);
+
+    function removefollower($idSeguidor, $idSeguido);
 }

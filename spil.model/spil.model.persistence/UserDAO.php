@@ -10,9 +10,9 @@ interface UserDAO {
 
     function delete($user);
 
-    function listFollowers($user);
+    function listSeguidores($user);
 
-    function listFollows($user);
+    function listSeguidos($user);
 
     function getNumFollowers($user);
 
@@ -21,4 +21,8 @@ interface UserDAO {
     function addReport($id);
 
     public static function isGoodLogin($user, $pass);
+
+    function addfollower($idSeguidor, $idSeguido);
+
+    function removefollower($idSeguidor, $idSeguido);
 }

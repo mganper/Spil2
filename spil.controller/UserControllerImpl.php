@@ -3,6 +3,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\UserController.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\UserModelImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.entity\UserImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persistence\spil.model.persistence.dao\UserDAOImpl.php';
 
 class UserControllerImpl implements UserController {
 
@@ -27,30 +28,36 @@ class UserControllerImpl implements UserController {
 
         if ($res2 = $this->model->newUser($user)) {
             $res = True;
-            session_start();
-            $_SESSION['usuario'] = $usuario;
+            if (!isset($_SESSION['usuario'])) {
+                session_start();
+                $_SESSION['usuario'] = $usuario;
+            }
         }
         return $res;
     }
 
     public function deleteUser($idUsuario) {
-        
-        return $this->model->deleteUser($idUsuario);
+        if (!isset($_SESSION['usuario'])) {
+            return $this->model->deleteUser($idUsuario);
+        } else {
+
+            return false;
+        }
     }
 
-    public function getFollowers($idUsuario) {
+    public function getSeguidores($idUsuario) {
         return $this->model->listaSeguidores($idUsuario);
     }
 
-    public function getFollows($idUsuario) {
+    public function getSeguidos($idUsuario) {
         return $this->model->listaSeguidos($idUsuario);
     }
 
-    public function getNumFollowers($idUsuario) {
+    public function getNumSeguidores($idUsuario) {
         return $this->model->getNumSeguidores($idUsuario);
     }
 
-    public function getNumFollows($idUsuario) {
+    public function getNumSeguidos($idUsuario) {
         return $this->model->getNumSeguidos($idUsuario);
     }
 
@@ -63,7 +70,7 @@ class UserControllerImpl implements UserController {
     public function modifyPassword($idusuario, $oldPass, $newPass) {
 
         $res = false;
-        if (RespilDAOImpl::isgoodLogin($idusuario, $oldPass)) {
+        if (UserDAOImpl::isgoodLogin($idusuario, $oldPass)) {
             $user = new UserImpl($idusuario, $newPass, NULL, NULL, NULL, NULL, NULL);
             $res = $this->model->updatePassword($user);
             $res = true;
@@ -74,5 +81,15 @@ class UserControllerImpl implements UserController {
     public function addReport($idUsuario) {
         return $this->model->addReport($idUsuario);
     }
+
+    public function addfollower($idSeguidor, $idSeguido) {
+        return $this->model->addfollower($idSeguidor, $idSeguido);
+    }
+
+    public function removefollower($idSeguidor, $idSeguido) {
+        return $this->model->removefollower($idSeguidor, $idSeguido);
+    }
+
+   
 
 }

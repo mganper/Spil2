@@ -22,12 +22,12 @@ class UserModelImpl implements UserModel {
 
     public function listaSeguidores($idUsuario) {
         $dao = $this->getUsuarioDAO();
-        return $dao->listFollowers($idUsuario);
+        return $dao->listSeguidores($idUsuario);
     }
 
     public function listaSeguidos($idUsuario) {
         $dao = $this->getUsuarioDAO();
-        return $dao->listFollows($idUsuario);
+        return $dao->listSeguidos($idUsuario);
     }
 
     public function newUser($user) {
@@ -62,6 +62,16 @@ class UserModelImpl implements UserModel {
     public function addReport($id) {
         $dao = $this->getUsuarioDAO();
         return $dao->addReport($id);
+    }
+
+    public function addfollower($idSeguidor, $idSeguido) {
+        $dao = $this->getUsuarioDAO();
+        return $dao->addfollower($idSeguidor, $idSeguido);
+    }
+
+    public function removefollower($idSeguidor, $idSeguido) {
+        $dao = $this->getUsuarioDAO();
+        return $dao->removefollower($idSeguidor, $idSeguido);
     }
 
 }

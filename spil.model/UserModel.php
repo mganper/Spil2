@@ -9,7 +9,7 @@ interface UserModel {
     function newUser($user);
 
     function updatePassword($user);
-    
+
     function updateAvatar($user);
 
     function deleteUser($user);
@@ -21,6 +21,10 @@ interface UserModel {
     function getNumSeguidores($id);
 
     function getNumSeguidos($id);
-    
+
     function addReport($id);
+
+    function addfollower($idSeguidor, $idSeguido);
+
+    function removefollower($idSeguidor, $idSeguido);
 }

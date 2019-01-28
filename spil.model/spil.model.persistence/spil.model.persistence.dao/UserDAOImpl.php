@@ -9,9 +9,9 @@ class UserDAOImpl implements UserDAO {
     public function create($user) {
         $ret = TRUE;
 
-        $query = "INSERT INTO usuario (usuario, contrasenya, nombre, apellidos, fechaNacimiento, fechaAlta, esModerador)"
+        $query = "INSERT INTO usuario (usuario, contrasenya, nombre, apellidos, fechaNacimiento, fechaAlta, esModerador,numReportes)"
                 . "VALUES ('" . $user->getUsuario() . "','" . password_hash($user->getContrasenya(), PASSWORD_DEFAULT) . "','" . $user->getNombre() . "','"
-                . $user->getApellidos() . "','" . $user->getFechaNacimiento() . "','" . $user->getFechaAlta() . "', 0)";
+                . $user->getApellidos() . "','" . $user->getFechaNacimiento() . "','" . $user->getFechaAlta() . "', 0,0)";
 
         if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
@@ -34,7 +34,7 @@ class UserDAOImpl implements UserDAO {
 
     public function updatePassword($user) {
         $ret = TRUE;
-        $query = "UPDATE usuario SET contrasenya = '" . $user->getContrasenya() . "' WHERE usuario = '" . $user->getUsuario() . "'";
+        $query = "UPDATE usuario SET contrasenya = '" . password_hash($user->getContrasenya(), PASSWORD_DEFAULT) . "' WHERE usuario = '" . $user->getUsuario() . "'";
 
         if (!connectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
@@ -43,10 +43,10 @@ class UserDAOImpl implements UserDAO {
         return $ret;
     }
 
-    public function listFollowers($pk) {
+    public function listSeguidores($pk) {
         $listaUsuarios = Array();
 
-        $query = 'SELECT idUsuarioSeguidor FROM seguidores WHERE idUsuarioSeguido = "' . $pk . '"';
+        $query = "SELECT idUsuarioSeguidor FROM seguidores WHERE idUsuarioSeguido = '" . $pk . "'";
 
         if (!($res = connectionSingleton::getConn()->query($query))) {
             echo 'No se pudieron descargar los usuarios de la base de datos.';
@@ -59,9 +59,9 @@ class UserDAOImpl implements UserDAO {
                     echo 'No se pudieron descargar los usuarios de la base de datos.';
                     return FALSE;
                 } else {
-                    $userAvatar = $res->fetch_assoc();
+                    $userAvatar = $data->fetch_assoc();
 
-                    $userRecovered = new UserImpl($userAvatar['usuario'], $userAvatar['avatar']);
+                    $userRecovered = new UserImpl($userAvatar['usuario'], $userAvatar['avatar'], null, null, null, null, null);
 
                     array_push($listaUsuarios, $userRecovered);
                 }
@@ -71,7 +71,7 @@ class UserDAOImpl implements UserDAO {
         return $listaUsuarios;
     }
 
-    function listFollows($pk) {
+    function listSeguidos($pk) {
         $listaUsuarios = Array();
 
         $query = 'SELECT idUsuarioSeguido FROM seguidores WHERE idUsuarioSeguidor = "' . $pk . '"';
@@ -89,7 +89,7 @@ class UserDAOImpl implements UserDAO {
                 } else {
                     $userAvatar = $data->fetch_assoc();
 
-                    $userRecovered = new UserImpl($userAvatar['usuario'], $userAvatar['avatar']);
+                    $userRecovered = new UserImpl($userAvatar['usuario'], $userAvatar['avatar'], null, null, null, null, null);
 
                     array_push($listaUsuarios, $userRecovered);
                 }
@@ -100,13 +100,13 @@ class UserDAOImpl implements UserDAO {
     }
 
     public function getNumFollowers($user) {
-        $query = 'SELECT COUNT(*) FROM seguidores WHERE idUsuarioSeguidor = "' . $user->usuario . '"';
+        $query = 'SELECT COUNT(*) FROM seguidores WHERE idUsuarioSeguido = "'. $user .'"';
 
         if (!($res = connectionSingleton::getConn()->query($query))) {
             echo 'No se pudieron comprobar los seguidores.';
             return FALSE;
         } else {
-            if (($row = $res->fetch_row()) === 1) {
+            if (($row = $res->fetch_row()) ) {
                 $res = $row[0];
             } else {
                 return false;
@@ -117,13 +117,13 @@ class UserDAOImpl implements UserDAO {
     }
 
     public function getNumFollows($user) {
-        $query = 'SELECT COUNT(*) FROM seguidores WHERE idUsuarioSeguidor = "' . $user->usuario . '"';
+        $query = "SELECT COUNT(*) FROM seguidores WHERE idUsuarioSeguidor = '". $user ."'";
 
         if (!($res = connectionSingleton::getConn()->query($query))) {
             echo 'No se pudieron comprobar los seguidos.';
             return FALSE;
         } else {
-            if (($row = $res->fetch_row()) === 1) {
+            if (($row = $res->fetch_row())) {
                 $res = $row[0];
             } else {
                 return false;
@@ -135,7 +135,7 @@ class UserDAOImpl implements UserDAO {
 
     public function updateAvatar($user) {
         $ret = TRUE;
-        $query = "UPDATE usuarios SET avatar = '" . $user->getAvatar() . "' WHERE usuario = '" . $user->getUsuario() . "';";
+        $query = "UPDATE usuario SET avatar = '" . $user->getAvatar() . "' WHERE usuario = '" . $user->getUsuario() . "';";
 
         if (!connectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
@@ -146,10 +146,11 @@ class UserDAOImpl implements UserDAO {
 
     public function addReport($id) {
         $ret = TRUE;
-        $query = 'UPDATE usuarios SET numReportes = numReportes + 1 WHERE usuario = "' . $id . "'";
+        $query = "UPDATE usuario SET numReportes=(numReportes + 1) WHERE usuario = '" . $id . "';";
 
         if (!connectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
+            echo "no entra";
         }
 
         return $ret;
@@ -163,7 +164,6 @@ class UserDAOImpl implements UserDAO {
 
         if (!($result = connectionSingleton::getConn()->query($query))) {
             $res = FALSE;
-            echo "cccccc";
         } else if ($row = mysqli_fetch_array($result)) {
             $res = password_verify($pass, $row['contrasenya']);
         }
@@ -171,6 +171,26 @@ class UserDAOImpl implements UserDAO {
 
 
 
+        return $res;
+    }
+
+    public function addfollower($idSeguidor, $idSeguido) {
+        $res = True;
+        $query = "INSERT INTO seguidores (idUsuarioSeguidor, idUsuarioSeguido)VALUES ('" . $idSeguidor . "','" . $idSeguido . "');";
+
+        if (!($result = connectionSingleton::getConn()->query($query))) {
+            $res = FALSE;
+        }
+        return $res;
+    }
+
+    public function removefollower($idSeguidor, $idSeguido) {
+        $res = True;
+        $query = "DELETE FROM seguidores WHERE idUsuarioSeguidor = '"  . $idSeguidor . "'AND idUsuarioSeguido ='" . $idSeguido . "';";
+
+        if (!($result = connectionSingleton::getConn()->query($query))) {
+            $res = FALSE;
+        }
         return $res;
     }
 
