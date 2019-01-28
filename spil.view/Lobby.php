@@ -37,34 +37,15 @@
     <body>
         <!--    navbar come here          -->
         <nav class="navbarnavbar-expand-md bg-info">
-            <div class="container">
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-info" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-bar"></span>
-                    <span class="navbar-toggler-bar"></span>
-                    <span class="navbar-toggler-bar"></span>
-                </button>
-                <a class="navbar-brand nav-link" href="">Spil</a>                
+            <div class="container" style="text-align: center;">         
+                <img src="pk2-free-v2.0.1/assets/img/spil_favicon_iz.png" style="max-width: 40px">          
                 <a class="navbar-brand nav-link" href="#">Inicio</a>
                 <a class="navbar-brand nav-link" href="#">Notificaciones</a>
                 <a class="navbar-brand nav-link" href="#">Perfil</a>
                 <a class="navbar-brand nav-link" href="#">Configuracion</a>
                 <button class="navbar-brand btn" style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
-<!--                <div class="collapse navbar-collapse" id="navbar-info">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Notificaciones</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Perfil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Configuracion</a>
-                        </li>
-                    </ul>
-                </div>-->
+                <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px">
+
             </div>
         </nav>
         <!-- end navbar  -->
@@ -89,11 +70,6 @@
                         </div>
                     </div>
                     <div class="col-sm-8 text-center"> 
-                        <div class="col-sm-11  label label-primary bg-info">
-                            <h2><b>Nombre de usuario</b></h2>
-                            <p>biografia</p>
-                        </div>
-                        <hr>
                         <h3>MENSAJE 1</h3>
                         <hr>
                         <h3>MENSAJE 2</h3>
