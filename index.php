@@ -8,6 +8,7 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title></title>
+        
     </head>
     <body>
         <?php
@@ -29,17 +30,20 @@ and open the template in the editor.
         //$resp= $contLik->nuevoLikeGesture(1, 'hola');
         //$resp = $contLik->borrarLikeGesture(3, 'hola');
 
-        $contUser = new UserControllerImpl();
+//        $contUser = new UserControllerImpl();
         //$resp = $contUser->createUser("andres", "andres", "andres", "pepon", '2010-10-1');
         //$resp = $contUser->deleteUser("andres");
-        $resp = $contUser->modifyPassword("hola","probando");
-        $resp = $contUser->getFollows("hola");
-        print_r($resp);
+//        $resp = $contUser->modifyPassword("hola","probando");
+//        $resp = $contUser->getFollows("hola");
+//        print_r($resp);
 //        echo "hola";
 //        for ($i = 0, $size = $resp); $i < $size; $i++) {
 //            echo "<br />el respil $i es " . $resp[$i]->getIdMensaje() . " " + $resp[$i]->getIdUsuario();
 //        }
 //        NOTA IMPORTANTE MODIFICAR ALERTA POR NO INSERCION O NO BORRADO
         ?>
+        
+        <textarea id="msg"/>
+        <button onclick="enviaMsg()"/>
     </body>
 </html>
