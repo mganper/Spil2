@@ -21,6 +21,7 @@ class UserImpl implements User{
         $this->fechaNacimiento = $fechaNacimiento;
         $this->fechaAlta = $fechaAlta;
         $this->avatar = $avatar;
+       
    }
    
    public function getUsuario(){
