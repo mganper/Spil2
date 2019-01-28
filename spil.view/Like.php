@@ -77,7 +77,7 @@
                     </div>
                     <div class="col-sm-8 text-center"> 
 
-                        <h3>LIKE 1</h3>
+                        <h3 data-toggle="modal" data-target="#IMSGModal">LIKE 1</h3>
                         <hr>
                         <h3>LIKE 2</h3>
                         <hr>
@@ -136,6 +136,36 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Modal para ver Spil-->
+        
+        <div class="modal fade" id="IMSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img src="pk2-free-v2.0.1/assets/img/faces/clem-onojeghuo-2.jpg" style="max-width: 20%; text-align: left;" class="img-circle">
+                        <br>
+                        <br>
+                        <h5 class="modal-title " id="exampleModalLabel">
+                            METER AQÚI EL CONTENIDO DEL MENSAJE
+                        </h5>                                             
+                    </div>
+
+                    <!-- SI ES EL DUEÑO DEL MENSAJE MOSTRAR ESTO -->
+                    <div class="modal-footer" hidden="">
+                        <div class="left-side">
+                            <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Editar</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="right-side">
+                            <button type="button" class="btn btn-danger btn-link">Eliminar</button>
+                        </div>                         
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div> 
+
         <!--   end modal -->
 
 
