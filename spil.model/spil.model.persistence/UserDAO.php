@@ -5,7 +5,7 @@ interface UserDAO {
     function create($user);
 
     function updatePassword($user);
-    
+
     function updateAvatar($user);
 
     function delete($user);
@@ -17,6 +17,8 @@ interface UserDAO {
     function getNumFollowers($user);
 
     function getNumFollows($user);
-    
+
     function addReport($id);
+
+    public static function isGoodLogin($user, $pass);
 }

@@ -6,7 +6,7 @@ interface UserController {
 
     function deleteUser($idUsuario);
 
-    function modifyPassword($idusuario, $newPass);
+    function modifyPassword($idusuario, $newPass, $oldPass);
 
     function modifyAvatar($idusuario, $newAvatar);
 
@@ -19,4 +19,6 @@ interface UserController {
     function getNumFollows($idUsuario);
     
     function addReport($idUsuario);
+    
+  
 }

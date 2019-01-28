@@ -14,13 +14,27 @@ class UserControllerImpl implements UserController {
     }
 
     public function createUser($usuario, $contrasenya, $nombre, $apellidos, $fechaNacimiento) {
-    
+        $res = False;
+        $usuario = filter_var($usuario, FILTER_SANITIZE_STRING);
+        $contrasenya = filter_var($contrasenya, FILTER_SANITIZE_STRING);
+        $nombre = filter_var($nombre, FILTER_SANITIZE_STRING);
+        $apellidos = filter_var($apellidos, FILTER_SANITIZE_STRING);
+        $fechaNacimiento = filter_var($fechaNacimiento, FILTER_SANITIZE_STRING);
+
+
         $user = new UserImpl($usuario, $contrasenya, $nombre, $apellidos, $fechaNacimiento, date('Y-m-d'), NULL);
 
-        return $this->model->newUser($user);
+
+        if ($res2 = $this->model->newUser($user)) {
+            $res = True;
+            session_start();
+            $_SESSION['usuario'] = $usuario;
+        }
+        return $res;
     }
 
     public function deleteUser($idUsuario) {
+        
         return $this->model->deleteUser($idUsuario);
     }
 
@@ -46,10 +60,15 @@ class UserControllerImpl implements UserController {
         return $this->model->updateAvatar($user);
     }
 
-    public function modifyPassword($idusuario, $newPass) {
-        $user = new UserImpl($idusuario, $newPass, NULL, NULL, NULL, NULL, NULL);
+    public function modifyPassword($idusuario, $oldPass, $newPass) {
 
-        return $this->model->updateAvatar($user);
+        $res = false;
+        if (RespilDAOImpl::isgoodLogin($idusuario, $oldPass)) {
+            $user = new UserImpl($idusuario, $newPass, NULL, NULL, NULL, NULL, NULL);
+            $res = $this->model->updatePassword($user);
+            $res = true;
+        }
+        return $res;
     }
 
     public function addReport($idUsuario) {

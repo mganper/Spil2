@@ -8,14 +8,14 @@ class UserDAOImpl implements UserDAO {
 
     public function create($user) {
         $ret = TRUE;
-       
+
         $query = "INSERT INTO usuario (usuario, contrasenya, nombre, apellidos, fechaNacimiento, fechaAlta, esModerador)"
-                . "VALUES ('" . $user->getUsuario() . "','" . $user->getContrasenya() . "','" . $user->getNombre() . "','"
+                . "VALUES ('" . $user->getUsuario() . "','" . password_hash($user->getContrasenya(), PASSWORD_DEFAULT) . "','" . $user->getNombre() . "','"
                 . $user->getApellidos() . "','" . $user->getFechaNacimiento() . "','" . $user->getFechaAlta() . "', 0)";
-     
+
         if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
-            echo 'Error al acceder a la base de datos';
+            //echo 'Error al acceder a la base de datos';
         }
 
         return $ret;
@@ -23,7 +23,7 @@ class UserDAOImpl implements UserDAO {
 
     public function delete($pk) {
         $ret = TRUE;
-        $query = "DELETE FROM usuario WHERE usuario = '" . $pk."';";
+        $query = "DELETE FROM usuario WHERE usuario = '" . $pk . "';";
 
         if (!connectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
@@ -34,7 +34,7 @@ class UserDAOImpl implements UserDAO {
 
     public function updatePassword($user) {
         $ret = TRUE;
-        $query = 'UPDATE usuarios SET contrasenya = "' . $user->contrasenya . '" WHERE usuario = "' . $user->usuario . "'";
+        $query = "UPDATE usuario SET contrasenya = '" . $user->getContrasenya() . "' WHERE usuario = '" . $user->getUsuario() . "'";
 
         if (!connectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
@@ -153,6 +153,25 @@ class UserDAOImpl implements UserDAO {
         }
 
         return $ret;
+    }
+
+    public static function isGoodLogin($user, $pass) {
+
+        $res = False;
+
+        $query = "SELECT contrasenya FROM usuario WHERE UPPER(usuario) like UPPER('" . $user . "') LIMIT 1";
+
+        if (!($result = connectionSingleton::getConn()->query($query))) {
+            $res = FALSE;
+            echo "cccccc";
+        } else if ($row = mysqli_fetch_array($result)) {
+            $res = password_verify($pass, $row['contrasenya']);
+        }
+
+
+
+
+        return $res;
     }
 
 }

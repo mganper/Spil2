@@ -14,6 +14,7 @@ and open the template in the editor.
         require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\RespilControllerImpl.php';
         require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\LikeControllerImpl.php';
         require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\UserControllerImpl.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persistence\spil.model.persistence.dao\UserDAOImpl.php';
 
         //echo "empezando test";
         //  $contRes = new RespilControllerImpl();
@@ -30,10 +31,12 @@ and open the template in the editor.
         //$resp = $contLik->borrarLikeGesture(3, 'hola');
 
         $contUser = new UserControllerImpl();
-        //$resp = $contUser->createUser("andres", "andres", "andres", "pepon", '2010-10-1');
+        $resp = $contUser->createUser("andres", "andres", "andres", "pepon", '2010-10-1');
         //$resp = $contUser->deleteUser("andres");
         $resp = $contUser->modifyPassword("hola","probando");
-        $resp = $contUser->getFollows("hola");
+        $resp = UserDAOImpl::isGoodLogin("andres","andres");
+        //$resp = $contUser->getFollows("hola");
+        printf($resp);
         print_r($resp);
 //        echo "hola";
 //        for ($i = 0, $size = $resp); $i < $size; $i++) {
