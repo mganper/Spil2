@@ -45,7 +45,7 @@
                 <a class="navbar-brand nav-link" href="Configuration.php">Configuracion</a>
                 <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal"style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px">
-
+                <a class='navbar-brand nav-link navbar-right'href>Log out</a>
             </div>
         </nav>
         <!-- end navbar  -->
@@ -87,26 +87,37 @@
                         <!-- FOTO PERFIL AQUÍ-->
                         <h5 style="text-align: left"><b>Cambiar foto de perfil:</b></h5><br>
                         <form class="register-form"  style="text-align: left;">
-                            
+
                             <br>
                             <button class="btn btn-round bg-info">Enviar</button>
                         </form>
                         <hr>
                         <h4 style="text-align: left">Seguridad</h4>
                         <hr>
-                        <h5 style="text-align: left">Cambiar contraseña:</h5><br>
+                        <h5 style="text-align: left"><b>Cambiar contraseña:</b></h5><br>
                         <form class="register-form"  style="text-align: left;">
-                            <label>Contraseña actual:</label>
+                            <label>Contraseña actual: </label>
                             <input type="password" placeholder="Contraseña"><br>
-                            <label>Nueva contraseña:</label>
+                            <label>Nueva contraseña: </label>
                             <input type="password" placeholder="Nueva contraseña"><br>
-                            <label>Repetir contraseña:</label>
-                            <input type="password" placeholder="Repetir contraseña"><br>
+                            <label>Repetir contraseña: </label>
+                            <input class=""type="password" placeholder="Repetir contraseña"><br><br>
                             <button class="btn btn-round bg-info">Cambiar contraseña</button>
                         </form>
                         <hr>
+                        <h4 style="text-align: left">Privacidad</h4>
                         <hr>
-                        <h4></h4>
+                        <h5 style="text-align: left"><b>Cambiar nivel de privacidad:</b></h5><br>
+                        <form class="register-form"  style="text-align: left;">
+                            <div class="form-group">
+                                <label for="sel1">Seleciona un nivel:</label>
+                                <select class="form-control" id="sel1" style="max-width: 30%">
+                                    <option>Baja</option>
+                                    <option>Atla</option>
+                                </select>
+                            </div> 
+                            <button class="btn btn-round bg-info">Cambiar contraseña</button>
+                        </form>
                     </div>
                     <div class="col-sm-2 sidenav">
 
