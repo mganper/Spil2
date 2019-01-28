@@ -5,13 +5,13 @@ require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\RespilControllerImpl
 session_start();
 
 if(isset($_SESSION['usuario'])){
-    $idUsuario = $_SESSION['usuario'];
+    $idSeguidor = $_SESSION['usuario'];
     
     $spilId = $_POST['spilId'];
     
-    $controller = new SpilControllerImpl();
+    $controller = new RespilControllerImpl();
     
-    $resp = ['resp' => $controller->borrarRespilGesture($spilId, $idUsuario)];
+    $resp = ['resp' => $controller->borrarRespilGesture($spilId, $idSeguidor)];
     
     echo json_encode($resp);
 } else {

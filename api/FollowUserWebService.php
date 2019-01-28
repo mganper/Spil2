@@ -5,13 +5,13 @@ require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\UserControllerImpl.p
 session_start();
 
 if(isset($_SESSION['usuario'])){
-    $idUsuario = $_SESSION['usuario'];
+    $idSeguidor = $_SESSION['usuario'];
     
-    $idUsuarioSeguido = $_POST['idUsuarioSeguido'];
+    $idSeguido = $_POST['idUsuarioSeguido'];
     
     $controller = new UserControllerImpl();
     
-    $resp = ['resp' => $controller->followUser($idUsuario, $idUsuarioSeguido)];
+    $resp = ['resp' => $controller->addfollower($idSeguidor, $idSeguido)];
     
     echo json_encode($resp);
 } else {

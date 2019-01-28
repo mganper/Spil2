@@ -5,13 +5,13 @@ require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\LikeControllerImpl.p
 session_start();
 
 if(isset($_SESSION['usuario'])){
-    $idUsuario = $_SESSION['usuario'];
+    $idSeguidor = $_SESSION['usuario'];
     
     $spilId = $_POST['spilId'];
     
     $controller = new LikeControllerImpl();
     
-    $resp = ['resp' => $controller->borrarLikeGesture($spilId, $idUsuario)];
+    $resp = ['resp' => $controller->borrarLikeGesture($spilId, $idSeguidor)];
     
     echo json_encode($resp);
 } else {
