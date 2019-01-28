@@ -1,5 +1,16 @@
 <?php
 
 interface ConfigurationModel {
-    //put your code here
+
+    function getController();
+
+    function setController($controller);
+
+    function createConfiguration($configuration);
+
+    function deleteConfiguration($idusuario);
+
+    function updateConfiguraiton($configuration);
+    
+    function getConfiguration($idUser);
 }

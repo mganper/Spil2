@@ -8,9 +8,9 @@ class UserDAOImpl implements UserDAO {
 
     public function create($user) {
         $ret = TRUE;
-        $query = 'INSERT INTO usuario (usuario, contrasenya, nombre, apellidos, fechaNacimiento, fechaAlta) '
+        $query = 'INSERT INTO usuario (usuario, contrasenya, nombre, apellidos, fechaNacimiento, fechaAlta, numReportes) '
                 . 'VALUES (' . $user->usuario . ',' . $user->contrasenya . ',' . $user->nombre . ','
-                . $user->apellidos . ',' . $user->fechaNacimiento . ',' . $user->fechaAlta . ')';
+                . $user->apellidos . ',' . $user->fechaNacimiento . ',' . $user->fechaAlta . ', 0)';
 
         if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
@@ -20,9 +20,9 @@ class UserDAOImpl implements UserDAO {
         return $ret;
     }
 
-    public function delete($user) {
+    public function delete($pk) {
         $ret = TRUE;
-        $query = 'DELETE FROM usuario WHERE usuario = ' . $user->usuario;
+        $query = 'DELETE FROM usuario WHERE usuario = ' . $pk;
 
         if (!connectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
@@ -31,7 +31,7 @@ class UserDAOImpl implements UserDAO {
         return $ret;
     }
 
-    public function update($user) {
+    public function updatePassword($user) {
         $ret = TRUE;
         $query = 'UPDATE usuarios SET contrasenya = "' . $user->contrasenya . '" WHERE usuario = "' . $user->usuario . "'";
 
@@ -42,10 +42,10 @@ class UserDAOImpl implements UserDAO {
         return $ret;
     }
 
-    public function listFollowers($user) {
+    public function listFollowers($pk) {
         $listaUsuarios = Array();
         
-        $query = 'SELECT idUsuarioSeguidor FROM seguidores WHERE idUsuarioSeguido = "' . $user->usuario . '"';
+        $query = 'SELECT idUsuarioSeguidor FROM seguidores WHERE idUsuarioSeguido = "' . $pk . '"';
         
         if (!($res = connectionSingleton::getConn()->query($query))) {
             echo 'No se pudieron descargar los usuarios de la base de datos.';
@@ -70,10 +70,10 @@ class UserDAOImpl implements UserDAO {
         return $listaUsuarios;
     }
 
-    function listFollows($user) {
+    function listFollows($pk) {
         $listaUsuarios = Array();
         
-        $query = 'SELECT idUsuarioSeguido FROM seguidores WHERE idUsuarioSeguidor = "' . $user->usuario . '"';
+        $query = 'SELECT idUsuarioSeguido FROM seguidores WHERE idUsuarioSeguidor = "' . $$pk . '"';
         
         if (!($res = connectionSingleton::getConn()->query($query))) {
             echo 'No se pudieron descargar los usuarios de la base de datos.';
@@ -96,6 +96,63 @@ class UserDAOImpl implements UserDAO {
         }
         
         return $listaUsuarios;
+    }
+
+    public function getNumFollowers($user) {
+        $query = 'SELECT COUNT(*) FROM seguidores WHERE idUsuarioSeguidor = "' . $user->usuario . '"';
+        
+        if (!($res = connectionSingleton::getConn()->query($query))) {
+            echo 'No se pudieron comprobar los seguidores.';
+            return FALSE;
+        } else {
+            if (($row = $res->fetch_row()) === 1) {
+                $res = $row[0];
+            }else {
+                return false;
+            }
+        }
+        
+        return $res;
+        
+    }
+
+    public function getNumFollows($user) {
+        $query = 'SELECT COUNT(*) FROM seguidores WHERE idUsuarioSeguidor = "' . $user->usuario . '"';
+        
+        if (!($res = connectionSingleton::getConn()->query($query))) {
+            echo 'No se pudieron comprobar los seguidos.';
+            return FALSE;
+        } else {
+            if (($row = $res->fetch_row()) === 1) {
+                $res = $row[0];
+            }else {
+                return false;
+            }
+        }
+        
+        return $res;
+    }
+
+    public function updateAvatar($user) {
+        $ret = TRUE;
+        $query = 'UPDATE usuarios SET avatar = "' . $user->avatar . '" WHERE usuario = "' . $user->usuario . "'";
+
+        if (!connectionSingleton::getConn()->query($query)) {
+            $ret = FALSE;
+        }
+
+        return $ret;
+    }
+
+    public function addReport($id) {
+        $ret = TRUE;
+        $query = 'UPDATE usuarios SET numReportes = numReportes + 1 WHERE usuario = "' . $id . "'";
+
+        if (!connectionSingleton::getConn()->query($query)) {
+            $ret = FALSE;
+        }
+
+        return $ret;
     }
 
 }

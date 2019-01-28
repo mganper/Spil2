@@ -21,10 +21,10 @@ class ConfigurationDAOImpl implements ConfigurationDAO {
         return $ret;
     }
 
-    public function delete($configuration) {
+    public function delete($pk) {
         $ret = TRUE;
 
-        $query = 'DELETE FROM configuration WHERE idUsuario = "' . $configuration->idUsuario . '"';
+        $query = 'DELETE FROM configuration WHERE idUsuario = "' . $pk . '"';
 
         if (!connectionSingleton::getConn()->query($query)) {
             $ret = FALSE;

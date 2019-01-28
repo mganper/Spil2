@@ -13,20 +13,16 @@ class UserImpl implements User{
     private $fechaAlta;
     private $numReportes;
     
-    function __construct($usuario, $contrasenya, $nombre, $apellidos, $fechaNacimiento, $fechaAlta) {
+    function __construct($usuario, $contrasenya, $nombre, $apellidos, $fechaNacimiento, $fechaAlta, $avatar) {
         $this->usuario = $usuario;
         $this->contrasenya = $contrasenya;
         $this->nombre = $nombre;
         $this->apellidos = $apellidos;
         $this->fechaNacimiento = $fechaNacimiento;
         $this->fechaAlta = $fechaAlta;
+        $this->avatar = $avatar;
    }
    
-   function __construct($usuario, $avatar){
-       $this->usuario = $usuario;
-       $this->avatar = $avatar;
-   }
-
    public function getUsuario(){
         return $this->usuario;
     }
