@@ -6,11 +6,11 @@
  */
 interface RespilDAO {
 
-    function read($idMensaje, $idUsuario);
+    function read($respil);
 
-    function create($idMensaje, $idUsuario);
+    function create($respil);
 
-    function delete($idMensaje, $idUsuario);
+    function delete($respil);
 
     function listed($identificador);
 }

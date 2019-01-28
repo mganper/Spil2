@@ -1,5 +1,22 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'].'\Spil2\spil.model\spil.model.entity\Like.php';
 
-class LikeImpl {
-    //put your code here
+class LikeImpl implements Like {
+
+    private $idUsuario;
+    private $idMensaje;
+
+    function getIdUsuario() {
+        return $this->idUsuario;
+    }
+
+    function getIdMensaje() {
+        return $this->idMensaje;
+    }
+
+    function __construct($idMensaje, $idUsuario) {
+        $this->idUsuario = $idUsuario;
+        $this->idMensaje = $idMensaje;
+    }
+
 }

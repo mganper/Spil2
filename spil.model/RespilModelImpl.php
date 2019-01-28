@@ -1,29 +1,35 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\RespilModel.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persistence\spil.model.persistence.dao\RespilDAOImpl.php';
+
 class RespilModelImpl implements RespilModel {
 
-    private $respilController;
-
-    public function getController() {
-        return $respilcontroller;
+    //private $respilController;
+    function __construct() {
+        
     }
 
-    public function setController(\RespilController $resCont) {
-        $this->$RespilController = $resCont;
-    }
+//    public function getController() {
+//       // return $respilcontroller;
+//    }
+//
+//    public function setController(\RespilController $resCont) {
+//       // $this->$RespilController = $resCont;
+//    }
 
-    public function nuevoRespil(\Respil $respil) {
+    public function nuevoRespil($respil) {
         $dao = $this->obtenerImplementacionRespilDao();
         $dao->create($respil);
-        $this->respilController->fireDataModelChanged();
     }
 
-    public function obtenerRespil($idMensaje, $idUsuario) {
+    public function obtenerRespil($respil) {
         $dao = $this->obtenerImplementacionRespilDao();
-        return $dao->read($idMensaje, $idUsuario);
+        return $dao->read($respil->getIdMensaje(), $respil->getIdUsuario());
     }
 
-    public function eliminarRespil(\Respil $respil) {
+    public function eliminarRespil($respil) {
         $dao = $this->obtenerImplementacionRespilDao();
         $dao->delete($respil);
     }

@@ -6,15 +6,15 @@
 
 interface LikeModel {
     
-    //enlace controlador
-    function getController();
-    function setController(LikeController $resCont);
+//    //enlace controlador
+//    function getController();
+//    function setController(LikeController $resCont);
     
     
    //funciones modelo
-    function nuevoLike(Like $respil);
+    function nuevoLike( $respil);
     function obtenerLike($idMensaje,$idUsuario);
-    function eliminarLike(Like $respil);
+    function eliminarLike( $respil);
     function listarLikesPorUsuario($idUsuario);
     function listarLikesPorMensaje($idUsuario);
     

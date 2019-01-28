@@ -1,30 +1,27 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\LikeModel.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persistence\spil.model.persistence.dao\LikeDAOImpl.php';
+
 class LikeModelImpl implements LikeModel {
+
     //put your code here
-   
-    private $likeController;
-
-    public function getController() {
-        return $likecontroller;
+    function __construct() {
+        
     }
 
-    public function setController(\LikeController $resCont) {
-        $this->$LikeController = $resCont;
-    }
-
-    public function nuevoLike(\Like $like) {
-        $dao = $this->obtenerImplementacionRLikeDao();
+    public function nuevoLike($like) {
+        $dao = $this->obtenerImplementacionLikeDao();
         $dao->create($like);
-        $this->likeController->fireDataModelChanged();
     }
 
     public function obtenerLike($idMensaje, $idUsuario) {
         $dao = $this->obtenerImplementacionLikeDao();
-        return $dao->read($idMensaje, $idUsuario);
+        return $dao->read($idMensaje, $idUsuario, idMensaje, $idUsuario);
     }
 
-    public function eliminarLike(\Like $kike) {
+    public function eliminarLike($like) {
         $dao = $this->obtenerImplementacionLikeDao();
         $dao->delete($like);
     }
@@ -46,4 +43,5 @@ class LikeModelImpl implements LikeModel {
         return new LikeDAOImpl();
         //CUIDADO CON INTERFAZ PHP ¿deberiamos trabajar con interfaz?
     }
+
 }

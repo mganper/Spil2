@@ -8,9 +8,9 @@ interface LikeDAO {
 
     function read($idMensaje, $idUsuario);
 
-    function create($idMensaje, $idUsuario);
+    function create($like);
 
-    function delete($idMensaje, $idUsuario);
+    function delete($like);
 
     function listed($identificador);
 }

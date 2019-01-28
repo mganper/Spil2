@@ -3,15 +3,15 @@
 
 interface RespilModel {
     
-    //enlace controlador
-    function getController();
-    function setController(RespilController $resCont);
+//    //enlace controlador
+//    function getController();
+//    function setController(RespilController $resCont);
     
     
    //funciones modelo
-    function nuevoRespil(Respil $respil);
-    function obtenerRespil($idMensaje,$idUsuario);
-    function eliminarRespil(Respil $respil);
+    function nuevoRespil( $respil);
+    function obtenerRespil($respil);
+    function eliminarRespil( $respil);
     function listarRespilsPorUsuario($idUsuario);
     function listarRespilsPorMensaje($idUsuario);
     

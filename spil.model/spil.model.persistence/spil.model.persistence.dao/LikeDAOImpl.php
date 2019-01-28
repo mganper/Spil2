@@ -1,116 +1,123 @@
 <?php
 
-class LikeDAOImpl implements LikeDAO {
-     public function read($idMensaje, $idUsuario) {
-        $like = null;
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2\spil.model\spil.model.persistence\LikeDAO.php';
 
-        $query = "SELECT * FROM like WHERE idMensaje ='" + $idMensaje +
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persistence\spil.model.persistence.dao\connectionSingleton.php';
+
+class LikeDAOImpl implements LikeDAO {
+
+    public function read($idMensaje, $idUsuario) {
+      
+
+        $query = "SELECT * FROM megusta WHERE idMensaje ='" + $idMensaje +
                 "' and idUsuario = '" + $idUsuario + "';";
         //try
         $con = connectionSingleton::getConn();
 
         if (!($result = $conn->query($query))) {
 
-            alert("no encontrado RESPIL"); /////////////ELIMINAR/MODIFICAR!!!
+            echo("no encontrado RESPIL"); /////////////ELIMINAR/MODIFICAR!!!
         } else {
 
             $Like = new LikeImpl($result["idMensaje"], $result["idUsuario"]);
-            $con->closeConn();
+        //    mysqli_close($con);
         }
         return $like;
     }
 
     public function create($like) {
-        $like = null;
+       
 
-        $query = "INSERT INTO RESPIL like (idMensaje,idUsuario) VALUES(" + $like->getIdMensaje() + "," + $like->getIdUsuario + ");";
+        $query = "INSERT INTO megusta (idMensaje,idUsuario) VALUES('".$like->getIdMensaje()."','".$like->getIdUsuario()."');";
         //try
         $con = connectionSingleton::getConn();
 
-        if (!($result = $conn->query($query))) {
+        if (!($result = $con->query($query))) {
 
-            alert("no Creado RESPIL"); /////////////ELIMINAR/MODIFICAR!!!
+            echo("no Creado RESPIL"); /////////////ELIMINAR/MODIFICAR!!!
         } else {
 
 
-            $con->closeConn();
+        //    mysqli_close($con);
         }
     }
 
     public function delete($like) {
 
-        $like = null;
 
-        $query = "DELETE FROM like WHERE idMensaje ='" + $like->idMensaje +
-                "' and idUsuario = '" + $like->idUsuario + "';";
+
+        $query = "DELETE FROM megusta WHERE idMensaje ='".$like->getIdMensaje(). 
+                "' and idUsuario = '".$like->getIdUsuario()."';";
         //try
         $con = connectionSingleton::getConn();
 
-        if (!($result = $conn->query($query))) {
+        if (!($result = $con->query($query))) {
 
-            alert("no encontrado RESPIL, no posible borrado"); /////////////ELIMINAR/MODIFICAR!!!
-        } else {
-            $con->closeConn();
+
+            echo("no encontrado RESPIL, no posible borrado"); /////////////ELIMINAR/MODIFICAR!!!
         }
+      //  mysqli_close($con);
     }
 
     public function listed($identificador) {
-        $likes[];
+        $likes;
 
 
-        if (gettype($identificador) === string) {
-            $likes = listaLikeUsuario($identificador);
-        } elseif (gettype($identificador) === integer) {
-            $likes = listaLikeMensaje($identificador);
+        if (gettype($identificador) === 'string') {
+
+            $likes = $this->listaLikeUsuario($identificador);
+        } elseif (gettype($identificador) === 'integer') {
+
+            $likes = $this->listaLikeMensaje($identificador);
         } else {
-            alert("FALLO EN LISTED RESPILDAOIML FORMATO DE "
-                    . "IDENTIFICADOR NO PASA CRIBA");
+            echo("FALLO EN LISTED LikeDAOIML FORMATO DE "
+            . "IDENTIFICADOR NO PASA CRIBA");
         }
         return $likes;
     }
 
     private function listaLikeUsuario($idUsuario) {
-        $likes[];
+        $likes ;
         $cont = 0;
 
-        $query = "SELECT * FROM like WHERE idUsuario = '" + $idUsuario + "';";
+        $query = "SELECT * FROM megusta WHERE idUsuario = '$idUsuario';";
         //try
         $con = connectionSingleton::getConn();
 
-        if (!($result = $conn->query($query))) {
+        if (!($result = $con->query($query))) {
 
-            alert("no encontrado RESPIL// error consulta"); /////////////ELIMINAR/MODIFICAR!!!
+            echo("no encontrado like// error consulta"); /////////////ELIMINAR/MODIFICAR!!!
         } else {
 
-            while ($row = mysql_fetch_array($result)) {
+            while ($row = mysqli_fetch_array($result)) {
                 $likes[$cont++] = new LikeImpl($row['idMensaje'], $row['idUsuario']);
             }
 
 
-            $con->closeConn();
+          //  mysqli_close($con);
         }
         return $likes;
     }
 
     private function listaLikeMensaje($idMensaje) {
-        $likes[];
+        $likes;
         $cont = 0;
 
-        $query = "SELECT * FROM like WHERE idMensaje = '" + $idMensaje + "';";
+        $query = "SELECT * FROM megusta WHERE idMensaje = '$idMensaje';";
         //try
         $con = connectionSingleton::getConn();
 
-        if (!($result = $conn->query($query))) {
+        if (!($result = $con->query($query))) {
 
-            alert("no encontrado RESPIL// error consulta"); /////////////ELIMINAR/MODIFICAR!!!
+            echo("  no encontrado LIKE// error consulta"); /////////////ELIMINAR/MODIFICAR!!!
         } else {
 
-            while ($row = mysql_fetch_array($result)) {
+            while ($row = mysqli_fetch_array($result)) {
                 $likes[$cont++] = new LikeImpl($row['idMensaje'], $row['idUsuario']);
             }
 
 
-            $con->closeConn();
+         //   mysqli_close($con);
         }
         return $likes;
     }

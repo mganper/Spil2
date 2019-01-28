@@ -1,117 +1,126 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2\spil.model\spil.model.persistence\RespilDAO.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persistence\spil.model.persistence.dao\connectionSingleton.php';
+
 class RespilDAOImpl implements RespilDAO {
 
-    public function read($idMensaje, $idUsuario) {
+    public function read($respil) {
         $respil = null;
 
-        $query = "SELECT * FROM respil WHERE idMensaje ='" + $idMensaje +
-                "' and idUsuario = '" + $idUsuario + "';";
+        $query = "SELECT * FROM respil WHERE idMensaje ='" + $respil->getIdMensaje() +
+                "' and idUsuario = '" + $respil->getIdUsuario() + "';";
         //try
         $con = connectionSingleton::getConn();
 
         if (!($result = $conn->query($query))) {
 
-            alert("no encontrado RESPIL"); /////////////ELIMINAR/MODIFICAR!!!
+            echo "no encontrado RESPIL"; /////////////ELIMINAR/MODIFICAR!!!
         } else {
 
             $Respil = new RespilImpl($result["idMensaje"], $result["idUsuario"]);
-            $con->closeConn();
+            //  mysqli_close($con);
         }
         return $respil;
     }
 
     public function create($respil) {
-        $respil = null;
 
-        $query = "INSERT INTO RESPIL respil (idMensaje,idUsuario) VALUES(" + $respil->getIdMensaje() + "," + $respil->getIdUsuario + ");";
+
+        $query = "INSERT INTO respil (idMensaje,idUsuario) VALUES( '" . $respil->getIdMensaje() . "' ,  '" . $respil->getIdUsuario() . "');";
         //try
         $con = connectionSingleton::getConn();
 
-        if (!($result = $conn->query($query))) {
+        if (!($result = $con->query($query))) {
 
-            alert("no Creado RESPIL"); /////////////ELIMINAR/MODIFICAR!!!
+            echo "no Creado RESPIL"; /////////////ELIMINAR/MODIFICAR!!!
         } else {
 
 
-            $con->closeConn();
+            // mysqli_close($con);
         }
     }
 
     public function delete($respil) {
+        $res = true;
 
-        $respil = null;
 
-        $query = "DELETE FROM respil WHERE idMensaje ='" + $respil->idMensaje +
-                "' and idUsuario = '" + $respil->idUsuario + "';";
+        $query = "DELETE FROM respil WHERE idMensaje ='" . $respil->getIdMensaje() . "
+                ' and idUsuario = '" . $respil->getIdUsuario() . "';";
         //try
         $con = connectionSingleton::getConn();
 
-        if (!($result = $conn->query($query))) {
+        if (!($result = $con->query($query))) {
 
-            alert("no encontrado RESPIL, no posible borrado"); /////////////ELIMINAR/MODIFICAR!!!
+            echo "no encontrado RESPIL, no posible borrado"; /////////////ELIMINAR/MODIFICAR!!!
         } else {
-            $con->closeConn();
+            $res = false;
+            // mysqli_close($con);
         }
+        return $res;
     }
 
     public function listed($identificador) {
-        $respils[];
 
+        $respils;
 
-        if (gettype($identificador) === string) {
-            $respils = listaRespilUsuario($identificador);
-        } elseif (gettype($identificador) === integer) {
-            $respils = listaRespilMensaje($identificador);
+        if (gettype($identificador) === 'string') {
+
+            $respils = $this->listaRespilUsuario($identificador);
+        } elseif (gettype($identificador) === 'integer') {
+
+            $respils = $this->listaRespilMensaje($identificador);
         } else {
-            alert("FALLO EN LISTED RESPILDAOIML FORMATO DE "
-                    . "IDENTIFICADOR NO PASA CRIBA");
+            echo"FALLO EN LISTED RESPILDAOIML FORMATO DE "
+            . "IDENTIFICADOR NO PASA CRIBA";
         }
         return $respils;
     }
 
     private function listaRespilUsuario($idUsuario) {
-        $respils[];
+        $pepe = null;
         $cont = 0;
 
-        $query = "SELECT * FROM respil WHERE idUsuario = '" + $idUsuario + "';";
+        $query = "SELECT * FROM respil WHERE idUsuario = '$idUsuario';";
         //try
         $con = connectionSingleton::getConn();
 
-        if (!($result = $conn->query($query))) {
+        if (!($result = $con->query($query))) {
 
-            alert("no encontrado RESPIL// error consulta"); /////////////ELIMINAR/MODIFICAR!!!
+            echo"no encontrado RESPIL// error consulta"; /////////////ELIMINAR/MODIFICAR!!!
         } else {
 
-            while ($row = mysql_fetch_array($result)) {
-                $respils[$cont++] = new RespilImpl($row['idMensaje'], $row['idUsuario']);
+            while ($row = mysqli_fetch_array($result)) {
+
+                $pepe[$cont++] = new RespilImpl($row['idMensaje'], $row['idUsuario']);
             }
 
 
-            $con->closeConn();
+            // mysqli_close($con);
         }
-        return $respils;
+        return $pepe;
     }
 
     private function listaRespilMensaje($idMensaje) {
-        $respils[];
+        $respils;
         $cont = 0;
 
-        $query = "SELECT * FROM respil WHERE idMensaje = '" + $idMensaje + "';";
+        $query = "SELECT * FROM respil WHERE idMensaje = '$idMensaje';";
         //try
         $con = connectionSingleton::getConn();
 
-        if (!($result = $conn->query($query))) {
+        if (!($result = $con->query($query))) {
 
-            alert("no encontrado RESPIL// error consulta"); /////////////ELIMINAR/MODIFICAR!!!
+            echo "no encontrado RESPIL// error consulta"; /////////////ELIMINAR/MODIFICAR!!!
         } else {
 
-            while ($row = mysql_fetch_array($result)) {
+            while ($row = mysqli_fetch_array($result)) {
                 $respils[$cont++] = new RespilImpl($row['idMensaje'], $row['idUsuario']);
             }
 
 
-            $con->closeConn();
+            //mysqli_close($con);
         }
         return $respils;
     }

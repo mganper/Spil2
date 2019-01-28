@@ -1,22 +1,23 @@
 <?php
 
-class RespilImpl implements Respil{
-   public $idMensaje;
-   public $idUsuario;
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.entity\Respil.php';
+
+class RespilImpl implements Respil {
+
+    private $idMensaje;
+    private $idUsuario;
+
+    function __construct($idMensaje, $idUsuario) {
+        $this->idMensaje = $idMensaje;
+        $this->idUsuario = $idUsuario;
+    }
+
+    public function getIdMensaje() {
+        return $this->idMensaje;
+    }
+
+    public function getIdUsuario() {
+        return $this->idUsuario;
+    }
+
 }
-
-function __construct($idMensaje, $idUsuario) {
-    $this->idMensaje = $idMensaje;
-    $this->idUsuario = $idUsuario;
-}
-
-
-function getIdMensaje() {
-    return $this->idMensaje;
-}
-
- function getIdUsuario() {
-    return $this->idUsuario;
-}
-
-
