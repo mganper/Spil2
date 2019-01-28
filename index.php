@@ -47,6 +47,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persisten
 
 $contUser = new UserControllerImpl();
 $contConf = new ConfigurationControllerImpl();
+
+$contConf->createConfiguration("hola", 1, $modoAdulto)
 //$contUser->addReport("andres");
 //echo"andres sigue a ".
 //$contUser->getNumSeguidos("andres"). " y es seguido por ".
