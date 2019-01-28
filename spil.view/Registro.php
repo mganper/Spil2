@@ -2,9 +2,16 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link href="pk2-free-v2.0.1/assets/css/bootstrap.min.css" rel="stylesheet">
-        <link href="pk2-free-v2.0.1/assets/css/paper-kit.css?v=2.0.1" rel="stylesheet">
-        <link href="pk2-free-v2.0.1/assets/css/demo.css" rel="stylesheet">
+         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        <meta name="viewport" content="width=device-width" />
+
+        <link href="pk2-free-v2.0.1/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="pk2-free-v2.0.1/assets/css/paper-kit.css?v=2.0.1" rel="stylesheet"/>
+
+        <!--     Fonts and icons     -->
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+        <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
         <title>Spil</title>
     </head>
     <body style="background-image: url('https://simbiotica.files.wordpress.com/2017/03/south-africa-927268_1920.jpg');">
@@ -19,7 +26,14 @@
                             <label>Nombre</label>
                             <input type="text" placeholder="Apellidos" class="form-control">
                             <label>Fecha de nacimiento</label>
-                            <input type='text' class="form-control datetimepicker" placeholder="05/08/2017" />
+                            <div class="form-group">
+                                <div class='input-group date' id='datetimepicker'>
+                                    <input type='text' class="form-control datetimepicker" placeholder="05/08/2017" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                    </span>
+                                </div>
+                            </div>
                             <label>User</label>
                             <input class="form-control" type="text" placeholder="User">
                             <label>Password</label>
@@ -40,6 +54,21 @@
             </div>
         </div>
     </body>
+    <!-- javascript --><script>
+        $('#datetimepicker').datetimepicker({
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-chevron-up",
+                down: "fa fa-chevron-down",
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-screenshot',
+                clear: 'fa fa-trash',
+                close: 'fa fa-remove'
+            }
+
+        });</script>
     <!-- Core JS Files -->
     <script src="pk2-free-v2.0.1/assets/js/jquery-3.2.1.js" type="text/javascript"></script>
     <script src="pk2-free-v2.0.1/assets/js/jquery-ui-1.12.1.custom.min.js" type="text/javascript"></script>
