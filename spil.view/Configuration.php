@@ -116,7 +116,7 @@
                                     <option>Atla</option>
                                 </select>
                             </div> 
-                            <button class="btn btn-round bg-info">Cambiar contraseña</button>
+                            <button class="btn btn-round bg-info">Enviar</button>
                         </form>
                     </div>
                     <div class="col-sm-2 sidenav">
