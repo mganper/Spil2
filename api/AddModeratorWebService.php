@@ -7,7 +7,7 @@ session_start();
 if(isset($_SESSION['usuario'])){
     $idUsuario = $_SESSION['usuario'];
     
-    $idUsuarioAsc = $_POST['msg'];
+    $idUsuarioAsc = $_POST['idUsuarioAsc'];
     
     $controller = new UserControllerImpl();
     

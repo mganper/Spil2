@@ -1,22 +1,117 @@
-function enviaMsg() {
-    var mensage = $('#msg').val();
-    var cAdulto = $('#cAdulto').val();
-
-
-    console.log("hola");
-    $.post('api/CreateSpilWebService.php', {
-        msg: mensage,
-        aContent: cAdulto
+function addModeratorCall(idUsuario) {
+    $.post('api/AddModeratorWebService.php', {
+        idUsuarioAsc: idUsuario
     }, function (data, status) {
-        console.log(data);
         var content = JSON.parse(data);
-        if (content.resp){
+        if (content.resp) {
             alert("Bien");
         } else {
             alert("Mal");
         }
     });
-
 }
 
+function createSpilCall(mensage, cAdulto) {
+    $.post('api/CreateSpilWebService.php', {
+        msg: mensage,
+        aContent: cAdulto
+    }, function (data, status) {
+        var content = JSON.parse(data);
+        if (content.resp) {
+            alert("Bien");
+        } else {
+            alert("Mal");
+        }
+    });
+}
 
+function deleteSpilCall(spilId) {
+    $.post('api/DeleteSpilWebService.php', {
+        spilId: spilId
+    }, function (data, status) {
+        var content = JSON.parse(data);
+        if (content.resp) {
+            alert("Bien");
+        } else {
+            alert("Mal");
+        }
+    });
+}
+
+function followUserCall(idUsuario) {
+    $.post('api/FollowUserWebService.php', {
+        idUsuarioSeguido: idUsuario
+    }, function (data, status) {
+        var content = JSON.parse(data);
+        if (content.resp) {
+            alert("Bien");
+        } else {
+            alert("Mal");
+        }
+    });
+}
+
+function giveLikeCall(spilId) {
+    $.post('api/GiveLikeWebService.php', {
+        spilId: spilId
+    }, function (data, status) {
+        var content = JSON.parse(data);
+        if (content.resp) {
+            alert("Bien");
+        } else {
+            alert("Mal");
+        }
+    });
+}
+
+function giveRespilCall(spilId) {
+    $.post('api/GiveRespilWebService.php', {
+        spilId: spilId
+    }, function (data, status) {
+        var content = JSON.parse(data);
+        if (content.resp) {
+            alert("Bien");
+        } else {
+            alert("Mal");
+        }
+    });
+}
+
+function removeLikeCall(spilId) {
+    $.post('api/RemoveLikeWebService.php', {
+        spilId: spilId
+    }, function (data, status) {
+        var content = JSON.parse(data);
+        if (content.resp) {
+            alert("Bien");
+        } else {
+            alert("Mal");
+        }
+    });
+}
+
+function removeRespilCall(spilId) {
+    $.post('api/RemoveRespilWebService.php', {
+        spilId: spilId
+    }, function (data, status) {
+        var content = JSON.parse(data);
+        if (content.resp) {
+            alert("Bien");
+        } else {
+            alert("Mal");
+        }
+    });
+}
+
+function unfollowUserCall(idUsuarioSeguido) {
+    $.post('api/UnfollowUserWebService.php', {
+        idUsuarioSeguido: idUsuarioSeguido
+    }, function (data, status) {
+        var content = JSON.parse(data);
+        if (content.resp) {
+            alert("Bien");
+        } else {
+            alert("Mal");
+        }
+    });
+}
