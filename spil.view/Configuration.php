@@ -61,6 +61,37 @@
                         </div>
                     </div>
                     <div class="col-sm-8 text-center"> 
+
+                        <h4 style="text-align: left">General</h4>
+                        <hr>
+                        <h5 style="text-align: left"><b>Mostrar contenido sensible:</b></h5><br>
+                        <form class="register-form"  style="text-align: left;">
+                            <div class="form-check-radio">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
+                                    Sí
+                                    <span class="form-check-sign"></span>
+                                </label>
+                            </div>
+                            <div class="form-check-radio">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" checked>
+                                    No
+                                    <span class="form-check-sign"></span>
+                                </label>
+                            </div>
+                            <br>
+                            <button class="btn btn-round bg-info">Enviar</button>
+                        </form>
+                        <br>
+                        <!-- FOTO PERFIL AQUÍ-->
+                        <h5 style="text-align: left"><b>Cambiar foto de perfil:</b></h5><br>
+                        <form class="register-form"  style="text-align: left;">
+                            
+                            <br>
+                            <button class="btn btn-round bg-info">Enviar</button>
+                        </form>
+                        <hr>
                         <h4 style="text-align: left">Seguridad</h4>
                         <hr>
                         <h5 style="text-align: left">Cambiar contraseña:</h5><br>
@@ -74,7 +105,6 @@
                             <button class="btn btn-round bg-info">Cambiar contraseña</button>
                         </form>
                         <hr>
-                        <h3>NOTIFICACION 2</h3>
                         <hr>
                         <h4></h4>
                     </div>

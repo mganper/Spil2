@@ -14,7 +14,7 @@
                     <div class="card-register bg-primary">
                         <h3 style="color:blue;">Welcome to Spil!</h3>
                         <!-- FORMULARIO DE LOGIN-->
-                        <form class="register-form">
+                        <form class="register-form" action='Lobby.php'>
                             <label>User</label>
                             <input class="form-control" type="text" placeholder="User">
                             <label>Password</label>

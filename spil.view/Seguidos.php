@@ -19,7 +19,7 @@
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
 
         <style> 
-            
+
             .navbar {
                 margin-bottom: 0;
                 border-radius: 0;
@@ -34,7 +34,7 @@
                 padding-bottom: 50%;
                 background-color: #f1f1f1;
             }
-        
+
         </style>
 
     </head>
@@ -49,7 +49,7 @@
                 <a class="navbar-brand nav-link" href="Configuration.php">Configuracion</a>
                 <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal"style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px">
-
+                <a class='navbar-brand nav-link navbar-right'href>Log out</a>
             </div>
         </nav>
         <!-- end navbar  -->
@@ -68,7 +68,7 @@
                                 <a href="Like.php">Me gusta<span class="label label-info">252</span></a>                                  
                             </div>
                         </div>
-                        
+
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 10px;">
                             <div>
                                 <footer>FOOTER</footer>
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="col-sm-8 text-center"> 
-                        
+
                         <!-- CODIGO PARA MOSTRAR USUARIOS AQUÍ-->
                         <h3>SEGUIDO 1</h3>
                         <hr>
@@ -101,7 +101,7 @@
 
 
         <!-- Modal Bodies come here -->
-<div class="modal fade" id="MSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="MSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
