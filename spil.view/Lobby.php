@@ -45,7 +45,7 @@
                 <a class="navbar-brand nav-link" href="Configuration.php">Configuracion</a>
                 <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal" style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px">
-
+                <a class='navbar-brand nav-link navbar-right'href>Log out</a>
             </div>
         </nav>
         <!-- end navbar  -->
@@ -137,23 +137,30 @@
             </div>
         </div>
 
-
         <!-- Modal para ver Spil-->
+
         <div class="modal fade" id="IMSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title text-center" id="exampleModalLabel">¿Qué tienes que decir?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <img src="pk2-free-v2.0.1/assets/img/faces/clem-onojeghuo-2.jpg" style="max-width: 20%; text-align: left;" class="img-circle">
+                        <br>
+                        <br>
+                        <h5 class="modal-title " id="exampleModalLabel">
+                            METER AQÚI EL CONTENIDO DEL MENSAJE
+                        </h5>                                             
                     </div>
 
-                    
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal">Publicar</button>
-                            <div class="divider"></div>                            
+                    <!-- SI ES EL DUEÑO DEL MENSAJE MOSTRAR ESTO -->
+                    <div class="modal-footer" hidden="">
+                        <div class="left-side">
+                            <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Editar</button>
                         </div>
+                        <div class="divider"></div>
+                        <div class="right-side">
+                            <button type="button" class="btn btn-danger btn-link">Eliminar</button>
+                        </div>                         
+                    </div>
                     </form>
                 </div>
             </div>

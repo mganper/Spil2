@@ -45,7 +45,7 @@
                 <a class="navbar-brand nav-link" href="Configuration.php">Configuracion</a>
                 <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal"style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px">
-
+                <a class='navbar-brand nav-link navbar-right'href>Log out</a>
             </div>
         </nav>
         <!-- end navbar  -->
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="col-sm-8 text-center"> 
-                        <h3>Notificacion 1</h3>
+                        <h3 data-toggle="modal" data-target="#notification-modal">Notificacion 1</h3>
                         <hr>
                         <h3>NOTIFICACION 2</h3>
                         <hr>
@@ -93,7 +93,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    
+
                     <!-- FORMULARIO QUE RECIBE LA FUNCIONALIDAD ENVIAR SPIL AQUÍ-->
 
                     <form action="#">
@@ -123,6 +123,20 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal para ver Notificaion-->
+        <div class="modal fade" id="notification-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title " id="exampleModalLabel">
+                            METER AQÚI EL CONTENIDO DE LA NOTIFICACION
+                        </h5>                                            
+                    </div>                    
+                    <button type="button" class="btn btn-danger btn-link">Eliminar</button>   
+                </div>
+            </div>
+        </div> 
         <!--   end modal -->
 
 
