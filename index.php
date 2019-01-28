@@ -1,14 +1,18 @@
+<?php
+
+session_start();
+
+$_SESSION['usuario'] = 'hola';
+
+?>
+
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <meta charset="UTF-8">
         <title></title>
-        
+        <script src="spil.view\pk2-free-v2.0.1\assets\js\jquery-3.2.1.js"></script>
+        <script src="js/ejemploWebService.js"></script>
     </head>
     <body>
         <?php
@@ -29,7 +33,6 @@ and open the template in the editor.
         //$resp = $contLik->listarMegustasUsuario('hola');
         //$resp= $contLik->nuevoLikeGesture(1, 'hola');
         //$resp = $contLik->borrarLikeGesture(3, 'hola');
-
 //        $contUser = new UserControllerImpl();
         //$resp = $contUser->createUser("andres", "andres", "andres", "pepon", '2010-10-1');
         //$resp = $contUser->deleteUser("andres");
@@ -40,10 +43,14 @@ and open the template in the editor.
 //        for ($i = 0, $size = $resp); $i < $size; $i++) {
 //            echo "<br />el respil $i es " . $resp[$i]->getIdMensaje() . " " + $resp[$i]->getIdUsuario();
 //        }
-//        NOTA IMPORTANTE MODIFICAR ALERTA POR NO INSERCION O NO BORRADO
+//        NOTA IMPORTANTE MODIFICAR ALERTA POR NO INSERCION O NO BORRADO        
         ?>
-        
-        <textarea id="msg"/>
-        <button onclick="enviaMsg()"/>
+
+        <textarea id="msg"></textarea>
+        <select id="cAdulto">
+            <option value="true">Si</option>
+            <option value="false">No</option>
+        </select> 
+        <button onclick="enviaMsg()">Enviar</button>
     </body>
 </html>
