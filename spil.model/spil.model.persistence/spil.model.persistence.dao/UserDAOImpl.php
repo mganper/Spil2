@@ -150,7 +150,7 @@ class UserDAOImpl implements UserDAO {
 
         if (!connectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
-            echo "no entra";
+        
         }
 
         return $ret;
@@ -192,6 +192,18 @@ class UserDAOImpl implements UserDAO {
             $res = FALSE;
         }
         return $res;
+    }
+    public function ascenderModerador($idUsuario){
+        
+         $ret = TRUE;
+        $query = "UPDATE usuario SET esModerador=1 WHERE usuario = '" . $idUsuario . "';";
+
+        if (!connectionSingleton::getConn()->query($query)) {
+            $ret = FALSE;
+           
+        }
+
+        return $ret;
     }
 
 }

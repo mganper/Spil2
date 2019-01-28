@@ -25,4 +25,6 @@ interface UserDAO {
     function addfollower($idSeguidor, $idSeguido);
 
     function removefollower($idSeguidor, $idSeguido);
+
+    function ascenderModerador($idUsuario);
 }

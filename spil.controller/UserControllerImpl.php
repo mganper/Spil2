@@ -90,6 +90,9 @@ class UserControllerImpl implements UserController {
         return $this->model->removefollower($idSeguidor, $idSeguido);
     }
 
-   
+    public function ascenderModerador($idUsuario) {
+        return $this->model->ascenderModerador($idUsuario);
+        
+    }
 
 }
