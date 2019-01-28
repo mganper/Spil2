@@ -8,8 +8,6 @@ interface ConfigurationDAO {
 
     function update($configuration);
 
-    function delete($configuration);
-
-    function listed();
+    function delete($pk);
     
 }

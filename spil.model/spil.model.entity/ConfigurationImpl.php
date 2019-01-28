@@ -1,5 +1,7 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.entity/Configuration.php';
+
 class ConfigurationImpl implements Configuration{
 
     private $idUsuario;

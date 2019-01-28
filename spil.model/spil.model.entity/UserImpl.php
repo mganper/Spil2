@@ -1,5 +1,7 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.entity/User.php';
+
 class UserImpl implements User{
     private $usuario;
     private $contrasenya;
@@ -9,20 +11,19 @@ class UserImpl implements User{
     private $apellidos;
     private $fechaNacimiento;
     private $fechaAlta;
-    private $tokenAcceso;
-    private $fechaToken;
     private $numReportes;
     
-    function __construct($usuario, $contrasenya, $nombre, $apellidos, $fechaNacimiento, $fechaAlta) {
+    function __construct($usuario, $contrasenya, $nombre, $apellidos, $fechaNacimiento, $fechaAlta, $avatar) {
         $this->usuario = $usuario;
         $this->contrasenya = $contrasenya;
         $this->nombre = $nombre;
         $this->apellidos = $apellidos;
         $this->fechaNacimiento = $fechaNacimiento;
         $this->fechaAlta = $fechaAlta;
+        $this->avatar = $avatar;
    }
-    
-    public function getUsuario(){
+   
+   public function getUsuario(){
         return $this->usuario;
     }
     
@@ -52,14 +53,6 @@ class UserImpl implements User{
     
     public function getFechaAlta(){
         return $this->fechaAlta;
-    }
-    
-    public function getTokenAcceso(){
-        return $this->tokenAcceso;
-    }
-    
-    public function getFechaToken(){
-        return $this->fechaToken;
     }
     
     public function getNumReportes(){
@@ -94,20 +87,11 @@ class UserImpl implements User{
         $this->fechaNacimiento = $value;
     }
     
-    public function setFechaAlta($value){
-        $this->fechaAlta = $value;
+    public function addReporte(){
+        $this->numReportes++;
     }
-    
-    public function setTokenAcceso($value){
-        $this->tokenAcceso = $value;
+    public function discountReporte(){
+        $this->numReportes--;
     }
-    
-    public function setFechaToken($value){
-        $this->fechaToken = $value;
-    }
-    
-    public function setNumReportes($value){
-        $this->numReportes = $value;
-    }
-    
+
 }
