@@ -2,14 +2,22 @@
 
 <?php
 
-function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
-    $arrAux = array();
-    foreach ($arrIni as $key => $row) {
-        $arrAux[$key] = is_object($row) ? $arrAux[$key] = $row->$col : $row[$col];
-        $arrAux[$key] = strtolower($arrAux[$key]);
-    }
-    array_multisort($arrAux, $order, $arrIni);
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/LikeControllerImpl.php';
+
+function object_sorter($clave, $orden = null) {
+    return function ($a, $b) use ($clave, $orden) {
+        $result = ($orden == "DESC") ? strnatcmp($b->$clave, $a->$clave) : strnatcmp($a->$clave, $b->$clave);
+        return $result;
+    };
 }
+
+require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\LikeControllerImpl.php';
+require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\RespilControllerImpl.php';
+require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\SpilControllerImpl.php';
+require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\UserControllerImpl.php';
 
 require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\LikeControllerImpl.php';
 require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\RespilControllerImpl.php';
@@ -105,7 +113,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
 
     </head>
     <body>
-        <!--    navbar come here          -->
+        <!-- navbar come here  -->
         <nav class="navbarnavbar-expand-md bg-info">
             <div class="container" style="text-align: center;">         
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_iz.png" style="max-width: 40px">          
