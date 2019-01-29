@@ -60,7 +60,7 @@ class LikeDAOImpl implements LikeDAO {
     }
 
     public function listed($identificador) {
-        $likes;
+        $likes=FALSE;
 
 
         if (gettype($identificador) === 'string') {
@@ -100,7 +100,7 @@ class LikeDAOImpl implements LikeDAO {
     }
 
     private function listaLikeMensaje($idMensaje) {
-        $likes;
+        $likes=FALSE;
         $cont = 0;
 
         $query = "SELECT * FROM megusta WHERE idMensaje = '$idMensaje';";

@@ -7,7 +7,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persisten
 class RespilDAOImpl implements RespilDAO {
 
     public function read($respil) {
-        $respil = null;
+        $respil = FALSE;
 
         $query = "SELECT * FROM respil WHERE idMensaje ='" + $respil->getIdMensaje() +
                 "' and idUsuario = '" + $respil->getIdUsuario() + "';";
@@ -43,7 +43,7 @@ class RespilDAOImpl implements RespilDAO {
     }
 
     public function delete($respil) {
-        $res = true;
+        $res = TRUE;
 
 
         $query = "DELETE FROM respil WHERE idMensaje ='" . $respil->getIdMensaje() . "
@@ -55,7 +55,7 @@ class RespilDAOImpl implements RespilDAO {
 
             echo "no encontrado RESPIL, no posible borrado"; /////////////ELIMINAR/MODIFICAR!!!
         } else {
-            $res = false;
+            $res = FALSE;
             // mysqli_close($con);
         }
         return $res;
@@ -63,7 +63,7 @@ class RespilDAOImpl implements RespilDAO {
 
     public function listed($identificador) {
 
-        $respils;
+        $respils = FALSE;
 
         if (gettype($identificador) === 'string') {
 
@@ -79,7 +79,7 @@ class RespilDAOImpl implements RespilDAO {
     }
 
     private function listaRespilUsuario($idUsuario) {
-        $pepe = null;
+        $pepe = FALSE;
         $cont = 0;
 
         $query = "SELECT * FROM respil WHERE idUsuario = '$idUsuario';";
@@ -103,7 +103,7 @@ class RespilDAOImpl implements RespilDAO {
     }
 
     private function listaRespilMensaje($idMensaje) {
-        $respils;
+        $respils = FALSE;
         $cont = 0;
 
         $query = "SELECT * FROM respil WHERE idMensaje = '$idMensaje';";

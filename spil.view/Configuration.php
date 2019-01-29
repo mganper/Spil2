@@ -1,12 +1,16 @@
 <!doctype html>
 
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\ConfigurationControllerImpl.php';
+
 session_start();
 
 $_SESSION['usuario'] = 'pepe';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
+    $confController = new ConfigurationControllerImpl();
+    $config = $confController->getConfiguration($user);
 } else {
     header('Location: Login.php');
 }
@@ -69,7 +73,7 @@ if (isset($_SESSION['usuario'])) {
                     <div class="col-sm-2 sidenav">
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 10px;">
                             <div>
-                                <footer>FOOTER                              </footer>
+                                <footer>FOOTER</footer>
                             </div>
                         </div>
                     </div>
@@ -78,17 +82,28 @@ if (isset($_SESSION['usuario'])) {
                         <h4 style="text-align: left">General</h4>
                         <hr>
                         <h5 style="text-align: left"><b>Mostrar contenido sensible:</b></h5><br>
-                        <form class="register-form"  style="text-align: left;">
+
+                        <form class="register-form"  style="text-align: left;" action="#">
                             <div class="form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" 
+                                    <?php
+                                    if ($config->isModoAdulto()) {
+                                        echo "checked";
+                                    }
+                                    ?>>
                                     Sí
                                     <span class="form-check-sign"></span>
                                 </label>
                             </div>
                             <div class="form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" checked>
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"
+                                    <?php
+                                    if (!$config->isModoAdulto()) {
+                                        echo "checked";
+                                    }
+                                    ?>>
                                     No
                                     <span class="form-check-sign"></span>
                                 </label>
@@ -99,8 +114,7 @@ if (isset($_SESSION['usuario'])) {
                         <br>
                         <!-- FOTO PERFIL AQUÍ-->
                         <h5 style="text-align: left"><b>Cambiar foto de perfil:</b></h5><br>
-                        <form class="register-form"  style="text-align: left;">
-
+                        <form class="register-form"  style="text-align: left;" action="#">
                             <br>
                             <button class="btn btn-round bg-info">Enviar</button>
                         </form>
@@ -108,7 +122,7 @@ if (isset($_SESSION['usuario'])) {
                         <h4 style="text-align: left">Seguridad</h4>
                         <hr>
                         <h5 style="text-align: left"><b>Cambiar contraseña:</b></h5><br>
-                        <form class="register-form"  style="text-align: left;">
+                        <form class="register-form"  style="text-align: left;" action="#">
                             <label>Contraseña actual: </label>
                             <input type="password" placeholder="Contraseña"><br>
                             <label>Nueva contraseña: </label>
@@ -117,11 +131,11 @@ if (isset($_SESSION['usuario'])) {
                             <input class=""type="password" placeholder="Repetir contraseña" id="rnpass"><br><br>
                             <button class="btn btn-round bg-info">Cambiar contraseña</button>
                         </form>
-                        <hr>
+                        <!--<hr>
                         <h4 style="text-align: left">Privacidad</h4>
                         <hr>
                         <h5 style="text-align: left"><b>Cambiar nivel de privacidad:</b></h5><br>
-                        <form class="register-form"  style="text-align: left;">
+                        <form class="register-form"  style="text-align: left;" action="#">
                             <div class="form-group">
                                 <label for="sel1">Seleciona un nivel:</label>
                                 <select class="form-control" id="sel1" style="max-width: 30%">
@@ -130,7 +144,7 @@ if (isset($_SESSION['usuario'])) {
                                 </select>
                             </div> 
                             <button class="btn btn-round bg-info">Enviar</button>
-                        </form>
+                        </form> -->
                     </div>
                     <div class="col-sm-2 sidenav">
 
