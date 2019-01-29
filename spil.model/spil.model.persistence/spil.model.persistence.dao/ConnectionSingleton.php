@@ -12,7 +12,7 @@ class ConnectionSingleton {
         if (is_null(self::$conn)) {
             self::$conn = new mysqli(self::$servidor, self::$user, self::$pass, self::$db);
             if (self::$conn->connect_errno) {
-                echo "Fallo al conectar";
+                die('Fallo al conectar');
             }
         }
         return self::$conn;

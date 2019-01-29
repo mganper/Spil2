@@ -99,9 +99,9 @@
                             <label>Contraseña actual: </label>
                             <input type="password" placeholder="Contraseña"><br>
                             <label>Nueva contraseña: </label>
-                            <input type="password" placeholder="Nueva contraseña"><br>
+                            <input type="password" placeholder="Nueva contraseña" id="npass"><br>
                             <label>Repetir contraseña: </label>
-                            <input class=""type="password" placeholder="Repetir contraseña"><br><br>
+                            <input class=""type="password" placeholder="Repetir contraseña" id="rnpass"><br><br>
                             <button class="btn btn-round bg-info">Cambiar contraseña</button>
                         </form>
                         <hr>
