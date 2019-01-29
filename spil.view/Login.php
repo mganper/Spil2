@@ -46,7 +46,7 @@ function isGoodLogin($user, $pass) {
 
             if (isGoodLogin($entry['user'], $entry['pass'])) {
                 session_start();
-                $_SESSION['user'] = $entry['user'];
+                $_SESSION['usuario'] = $entry['user'];
                 header('Location: Lobby.php');
             } else {
                 ?>
