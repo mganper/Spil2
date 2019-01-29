@@ -1,7 +1,18 @@
 <!DOCTYPE html>
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerImpl.php';
+
+function register($name, $surname, $birthdate, $user, $pass) {
+    $userController = new UserControllerImpl();
+    return $userController->createUser($user, $pass, $name, $surname, $birthdate);
+}
+?>
 <html>
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
 
@@ -15,38 +26,103 @@
         <title>Spil</title>
     </head>
     <body style="background-image: url('https://simbiotica.files.wordpress.com/2017/03/south-africa-927268_1920.jpg');">
-        <div class="container" >
-            <div class="row">
-                <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3">
-                    <div class="card-register bg-primary">
-                        <h3 style="color:blue;">Welcome to Spil!</h3>
-                        <!-- FORMULARIO DE REGISTRO-->
-                        <form class="register-form" action="Login.php">
-                            <label>Nombre</label>
-                            <input type="text" placeholder="Nombre" class="form-control">
-                            <label>Nombre</label>
-                            <input type="text" placeholder="Apellidos" class="form-control">
-                            <label>Fecha de nacimiento</label>
-                            <input type="text" id="birth-date" placeholder="DD-MM-AAAA" class="form-control" onkeyup="checkDate()">
-                            <label>User</label>
-                            <input class="form-control" type="text" placeholder="User">
-                            <label>Password</label>
-                            <input class="form-control" type="password" placeholder="Password">
-                            <label>Confirm password</label>
-                            <input class="form-control" type="password" placeholder="Password">
-                            <button class="btn btn-danger btn-block btn-round">Registro</button>
-                        </form>
+        <?php
+        if (isset($_POST['send'])) {
+            $filter = Array(
+                'name' => FILTER_SANITIZE_STRING,
+                'surname' => FILTER_SANITIZE_STRING,
+                'user' => FILTER_SANITIZE_STRING,
+                'pass' => FILTER_SANITIZE_STRING
+            );
+            $pass = $_POST['pass'];
+            $rpass = $_POST['rpass'];
+            //echo "$pass $rpass";
+            if ($pass !== $rpass) {
+                ?>
+                <div class="container" >
+                    <div class="row">
+                        <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3">
+                            <div class="card-register bg-primary">
+                                <h3 style="color:blue;">Welcome to Spil!</h3>
+                                <!-- FORMULARIO DE REGISTRO-->
+                                <form class="register-form" action="#" method="POST">
+                                    <label>Nombre</label>
+                                    <input type="text" placeholder="Nombre" class="form-control" name="name" required>
+                                    <label>Nombre</label>
+                                    <input type="text" placeholder="Apellidos" class="form-control" name="surname" required>
+                                    <label>Fecha de nacimiento</label>
+                                    <input type="text" id="birth-date" placeholder="DD-MM-AAAA" class="form-control" onkeyup="checkDate()" name="birthdate" required>
+                                    <label>User</label>
+                                    <input class="form-control" type="text" placeholder="User" name="user">
+                                    <label>Contraseña</label>
+                                    <div class="form-group has-danger" id="divpsw1">
+                                        <input class="form-control form-control-danger" type="password" id="pwd1" placeholder="Password" name="pass" onblur="checkPasswd()" required>
+                                    </div>
+                                    <label>Confirmar contraseña</label>
+                                    <div class="form-group has-danger" id="divpwd2">
+                                        <input class="form-control form-control-danger" type="password" id="pwd2" placeholder="Password" name="rpass" onblur="checkPasswd()" required>
+                                        <div id="fallo" class="form-control-feedback">Las contraseñas no coinciden.</div>
+                                    </div>
+                                    <input type="submit" name="send" value="Registrar" class="btn btn-danger btn-block btn-round">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer register-footer text-center">
+                        <h6>
+                            © 
+                            <script>document.write(new Date().getFullYear())</script>
+                            , Grupo 10 Programacion Avanzada.
+                        </h6>
                     </div>
                 </div>
+
+                <?php
+            }
+            $entry = filter_input_array(INPUT_POST, $filter);
+
+            if (register($entry['name'], $entry['surname'], $_POST['birthdate'], $entry['user'], $entry['pass'])) {
+               header('Location: Login.php');
+            }
+        } else {
+            ?>
+            <div class="container" >
+                <div class="row">
+                    <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3">
+                        <div class="card-register bg-primary">
+                            <h3 style="color:blue;">Welcome to Spil!</h3>
+                            <!-- FORMULARIO DE REGISTRO-->
+                            <form class="register-form" action="#" method="POST">
+                                <label>Nombre</label>
+                                <input type="text" placeholder="Nombre" class="form-control" name="name">
+                                <label>Nombre</label>
+                                <input type="text" placeholder="Apellidos" class="form-control" name="surname">
+                                <label>Fecha de nacimiento</label>
+                                <input type="text" id="birth-date" placeholder="DD-MM-AAAA" class="form-control" onkeyup="checkDate()" name="birthdate">
+                                <label>User</label>
+                                <input class="form-control" type="text" placeholder="User" name="user">
+                                <label>Contraseña</label>
+                                <div class="form-group" id="divpsw1">
+                                    <input class="form-control" type="password" id="pwd1" placeholder="Password" name="pass" onblur="checkPasswd()">
+                                </div>
+                                <label>Confirmar contraseña</label>
+                                <div class="form-group" id="divpwd2">
+                                    <input class="form-control" type="password" id="pwd2" placeholder="Password" name="rpass" onblur="checkPasswd()">
+                                </div>
+                                <input type="submit" name="send" value="Registrar" class="btn btn-danger btn-block btn-round">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer register-footer text-center">
+                    <h6>
+                        © 
+                        <script>document.write(new Date().getFullYear())</script>
+                        , Grupo 10 Programacion Avanzada.
+                    </h6>
+                </div>
             </div>
-            <div class="footer register-footer text-center">
-                <h6>
-                    © 
-                    <script>document.write(new Date().getFullYear())</script>
-                    , Grupo 10 Programacion Avanzada.
-                </h6>
-            </div>
-        </div>
+        <?php } ?>
     </body>
     <!-- javascript -->
     <script>
