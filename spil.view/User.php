@@ -115,7 +115,6 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px;">
                 <a class='navbar-brand nav-link navbar-right'href="Logout.php">Log out</a>
             </div>
-
         </nav>
         <!-- end navbar  -->
 
