@@ -1,4 +1,17 @@
 <!doctype html>
+
+<?php
+session_start();
+
+$_SESSION['usuario'] = 'pepe';
+
+if (isset($_SESSION['usuario'])) {
+    $user = $_SESSION['usuario'];
+} else {
+    header('Location: Login.php');
+}
+?>
+
 <html lang="en">
     <head>
         <meta charset="utf-8" />
