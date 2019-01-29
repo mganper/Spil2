@@ -25,18 +25,20 @@ class SpilControllerImpl implements SpilController{
     }
 
     public function listMsgs($idUser) {
-        $model = new SpilModelImpl();
         return $this->model->listByUser($idUser);
     }
 
     public function report($pk) {
-        $model = new SpilModelImpl();
         return $this->model->report($pk);
     }
 
     public function write($text, $idUser, $writeDate, $adultContent) {
         $spil = new SpilImpl(NULL, $text, $idUser, $writeDate, 0, $adultContent, FALSE);
         return $this->model->newSpil($spil);
+    }
+
+    public function read($idSpil) {
+        return $this->model->getSpil($idSpil);
     }
 
 }
