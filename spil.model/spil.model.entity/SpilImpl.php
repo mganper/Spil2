@@ -67,7 +67,7 @@ class SpilImpl implements Spil {
     }
 
     function getIdUser() {
-        return $this->idUsuario;
+        return $this->idUser;
     }
 
     function getWriteDate(){

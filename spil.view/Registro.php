@@ -36,7 +36,7 @@ function register($name, $surname, $birthdate, $user, $pass) {
             );
             $pass = $_POST['pass'];
             $rpass = $_POST['rpass'];
-            //echo "$pass $rpass";
+            echo "$pass $rpass";
             if ($pass !== $rpass) {
                 ?>
                 <div class="container" >
