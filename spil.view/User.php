@@ -13,17 +13,6 @@ function object_sorter($clave, $orden = null) {
         return $result;
     };
 }
-
-require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\LikeControllerImpl.php';
-require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\RespilControllerImpl.php';
-require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\SpilControllerImpl.php';
-require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\UserControllerImpl.php';
-
-require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\LikeControllerImpl.php';
-require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\RespilControllerImpl.php';
-require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\SpilControllerImpl.php';
-require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\UserControllerImpl.php';
-
 session_start();
 
 $_SESSION['usuario'] = 'hola';
@@ -37,7 +26,7 @@ if (isset($_SESSION['usuario'])) {
 if (isset($_GET['user'])) {
     $userPerfil = $_GET['user'];
 } else {
-    header('Location: Lobby.php');
+    //header('Location: Lobby.php');
 }
 
 $userController = new UserControllerImpl();
@@ -59,7 +48,6 @@ if ($respils) {
     }
 
     array_sort_by($spils, 'writeDate');
-
 }
 
 $numSpils = count($spils);
@@ -222,13 +210,13 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
         <div class="modal fade" id="IMSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <img src="pk2-free-v2.0.1/assets/img/faces/clem-onojeghuo-2.jpg" style="max-width: 20%; text-align: left;" class="img-circle">
-                        <br>
-                        <br>
+                    <div class="modal-header">                        
                         <h5 class="modal-title " id="exampleModalLabel">
                             METER AQÚI EL CONTENIDO DEL MENSAJE
-                        </h5>                                             
+                        </h5>    
+                        <br>
+                        <br>
+                        <h7>- @usuario</h7>
                     </div>
 
                     <!-- SI ES EL DUEÑO DEL MENSAJE MOSTRAR ESTO -->
