@@ -146,7 +146,11 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
 
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 10px;">
                             <div>
-                                <footer>FOOTER</footer>
+                                <footer><h6>
+                                        © 
+                                        <script>document.write(new Date().getFullYear())</script>
+                                        , Grupo 10 Programacion Avanzada.
+                                    </h6></footer>
                             </div>
                         </div>
                     </div>
