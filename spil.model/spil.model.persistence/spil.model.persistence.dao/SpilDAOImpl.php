@@ -39,7 +39,7 @@ class SpilDAOImpl implements SpilDAO {
     }
 
     public function read($pk) {
-        $spil = new SpilImpl();
+        $spil = new SpilImpl(NULL,NULL,NULL,NULL,NULL,NULL,NULL);
         $query = "SELECT * FROM SPIL WHERE id=$pk";
 
         if (!($res = connectionSingleton::getConn()->query($query))) {
@@ -93,7 +93,7 @@ class SpilDAOImpl implements SpilDAO {
         $i;
         $query = "SELECT * FROM SPIL WHERE idUsuario='$idUser' ORDER BY fechaEscritura DESC;";
         
-        echo $query;
+        //echo $query;
 
         if (!($res = connectionSingleton::getConn()->query($query))) {
             echo 'No se pudieron descargar los mensajes de la base de datos.';
@@ -101,8 +101,6 @@ class SpilDAOImpl implements SpilDAO {
         } else {
             $i = 0;
             while ($row = $res->fetch_row()) {
-                echo '<br/>'.$i.'<br/>';
-                print_r($row);
                 $spil[$i] = new SpilImpl(NULL, NULL, NULL, NULL, NULL, NULL, NULL);
                 $spil[$i]->setId($row[0]);
                 $spil[$i]->setText($row[1]);

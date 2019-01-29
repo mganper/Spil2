@@ -1,17 +1,23 @@
 <!doctype html>
 
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/LikeControllerImpl.php';
 
-function object_sorter($clave, $orden = null) {
-    return function ($a, $b) use ($clave, $orden) {
-        $result = ($orden == "DESC") ? strnatcmp($b->$clave, $a->$clave) : strnatcmp($a->$clave, $b->$clave);
-        return $result;
-    };
+function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
+    $arrAux = array();
+    foreach ($arrIni as $key => $row) {
+        $arrAux[$key] = is_object($row) ? $arrAux[$key] = $row->$col : $row[$col];
+        $arrAux[$key] = strtolower($arrAux[$key]);
+    }
+    array_multisort($arrAux, $order, $arrIni);
 }
 
 session_start();
 
-$_SESSION['usuario'] = 'pepe';
+$_SESSION['usuario'] = 'cad2298';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
@@ -32,23 +38,29 @@ $likeController = new LikeControllerImpl();
 
 $seguidores = $userController->getNumSeguidores($userPerfil);
 $seguidos = $userController->getNumSeguidos($userPerfil);
+$avatar = NULL; //$userController->getAvatar($userPerfil);
 
 $spils = $spilController->listMsgs($userPerfil);
 $respils = $respilController->listarRespilsUsuario($userPerfil);
 
-for ($i = 0; $i < count($respils); $i++) {
-    $spilRec = $spilController->read($respils[$i]->getIdMensaje());
+if ($respils) {
+    for ($i = 0; $i < count($respils); $i++) {
+        $spilRec = $spilController->read($respils[$i]->getIdMensaje());
 
-    array_push($spils, $spilRec);
+        array_push($spils, $spilRec);
+    }
+
+    array_sort_by($spils, 'writeDate');
 }
-
-usort($spils, object_sorter('getWriteDate()'));
 
 $numSpils = count($spils);
 
-$likes = count($likeController->listarMegustasUsuario($userPerfil));
 
-
+if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
+    $numLikes = count($likes);
+} else {
+    $numLikes = 0;
+}
 ?>
 
 <html lang="en">
@@ -68,7 +80,19 @@ $likes = count($likeController->listarMegustasUsuario($userPerfil));
         <!--     Fonts and icons     -->
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
+
+        <script>
+            function displayModal(currUser, txt, owrUser) {
+                $("#modal-hiden").css("visibility","collapse");
+                $(".rm").remove();
+                $("#text-father").append("<h5 class='modal-title rm'>" + txt + "</h5><br class='rm'><br class='rm'><h7 class='rm'>-" + owrUser + "</h7>");
+                if (currUser === owrUser) {
+                    $("#modal-hiden").css("visibility","visible");
+                }
+            }
+        </script>
 
         <style> 
 
@@ -91,7 +115,7 @@ $likes = count($likeController->listarMegustasUsuario($userPerfil));
 
     </head>
     <body>
-        <!--    navbar come here          -->
+        <!-- navbar come here  -->
         <nav class="navbarnavbar-expand-md bg-info">
             <div class="container" style="text-align: center;">         
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_iz.png" style="max-width: 40px">          
@@ -101,9 +125,8 @@ $likes = count($likeController->listarMegustasUsuario($userPerfil));
                 <a class="navbar-brand nav-link" href="Configuration.php">Configuracion</a>
                 <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal"style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px;">
-                <a class='navbar-brand nav-link navbar-right'href>Log out</a>
+                <a class='navbar-brand nav-link navbar-right'href="Logout.php">Log out</a>
             </div>
-
         </nav>
         <!-- end navbar  -->
 
@@ -111,30 +134,54 @@ $likes = count($likeController->listarMegustasUsuario($userPerfil));
             <div class="container-fluid text-center">    
                 <div class="row content" style="margin-top: 5px;">
                     <div class="col-sm-2 sidenav">
-                        <img class="img-circle" src="pk2-free-v2.0.1/assets/img/faces/erik-lucatero-2.jpg" style="max-height: 200px; max-width: 200px;">
-                        <label class="label label-info">@USERname</label>
+                        <img class="img-circle" src="img/<?php echo $avatar; ?>" style="max-height: 200px; max-width: 200px; ">
+                        <br>
+                        <label class="label label-info">@<?php echo $userPerfil; ?></label>
+                        <br>
+                        <button class="btn btn-info">Seguir</button>
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
                             <div class="info-user ">
-                                <a href="Seguidores.php">Seguidores <span class="label label-info">555</span></a><br>
-                                <a href="Seguidos.php">Seguidos <span class="label label-info">1025</span></a><br>
-                                <a href="User.php">Spils <span class="label label-info">2</span></a><br>                                
-                                <a href="Like.php">Me gusta<span class="label label-info">252</span></a>                             
+                                <a href="Seguidores.php?user=<?php echo $userPerfil; ?>">Seguidores <span class="label label-info"><?php echo $seguidores; ?></span></a><br>
+                                <a href="Seguidos.php?user=<?php echo $userPerfil; ?>">Seguidos <span class="label label-info"><?php echo $seguidos; ?></span></a><br>
+                                <a href="User.php?user=<?php echo $userPerfil; ?>">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                                
+                                <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a><br>          
+                                <button class="btn btn-info">Ascender</button>
                             </div>
                         </div>
 
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 10px;">
                             <div>
-                                <footer>FOOTER                              </footer>
+                                <footer><h6>
+                                        © 
+                                        <script>document.write(new Date().getFullYear())</script>
+                                        , Grupo 10 Programacion Avanzada.
+                                    </h6></footer>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-8 text-center">
                         <!-- CODIGO PARA MOSTRAR MENSAJES AQUÍ-->
-                        <h3 data-toggle="modal" data-target="#IMSGModal">MENSAJE 1</h3>
-                        <hr>
-                        <h3>MENSAJE 2</h3>
-                        <hr>
-                        <h3>MENSAJE N</h3>
+                        <?php
+                        print_r($spils);
+                        foreach ($spils as $spil) {
+                            $txt = $spil->getText();
+                            $owrUser = $spil->getIdUser();
+                            ?>
+                            <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>')">
+                                <h3>
+                                    <?php
+                                    echo $txt;
+                                    ?>
+                                </h3>
+                                <h5>
+                                    <?php
+                                    echo $owrUser . ' on ';
+                                    echo $spil->getWriteDate();
+                                    ?>
+                                </h5>
+                            </div>
+                            <hr>
+                        <?php } ?>
                     </div>
                     <div class="col-sm-2 sidenav">
                         <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
@@ -198,24 +245,21 @@ $likes = count($likeController->listarMegustasUsuario($userPerfil));
         <div class="modal fade" id="IMSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <img src="pk2-free-v2.0.1/assets/img/faces/clem-onojeghuo-2.jpg" style="max-width: 20%; text-align: left;" class="img-circle">
-                        <br>
-                        <br>
-                        <h5 class="modal-title " id="exampleModalLabel">
-                            METER AQÚI EL CONTENIDO DEL MENSAJE
-                        </h5>                                             
+                    <div class="modal-header" id="text-father">
+
                     </div>
 
                     <!-- SI ES EL DUEÑO DEL MENSAJE MOSTRAR ESTO -->
-                    <div class="modal-footer" hidden="">
-                        <div class="left-side">
-                            <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Editar</button>
+                    <div id="modal-hiden" style="visibility: collapse;">
+                        <div class="modal-footer" id="modal-hidden">
+                            <div class="left-side">
+                                <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Editar</button>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="right-side">
+                                <button type="button" class="btn btn-danger btn-link">Eliminar</button>
+                            </div>                         
                         </div>
-                        <div class="divider"></div>
-                        <div class="right-side">
-                            <button type="button" class="btn btn-danger btn-link">Eliminar</button>
-                        </div>                         
                     </div>
                     </form>
                 </div>

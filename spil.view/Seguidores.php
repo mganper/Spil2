@@ -1,6 +1,21 @@
 <!doctype html>
 
 <?php
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/LikeControllerImpl.php';
+
+function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
+    $arrAux = array();
+    foreach ($arrIni as $key => $row) {
+        $arrAux[$key] = is_object($row) ? $arrAux[$key] = $row->$col : $row[$col];
+        $arrAux[$key] = strtolower($arrAux[$key]);
+    }
+    array_multisort($arrAux, $order, $arrIni);
+}
+
 session_start();
 
 $_SESSION['usuario'] = 'pepe';
@@ -10,6 +25,45 @@ if (isset($_SESSION['usuario'])) {
 } else {
     header('Location: Login.php');
 }
+
+if (isset($_GET['user'])) {
+    $userPerfil = $_GET['user'];
+} else {
+    header('Location: Lobby.php');
+}
+
+$userController = new UserControllerImpl();
+$spilController = new SpilControllerImpl();
+$respilController = new RespilControllerImpl();
+$likeController = new LikeControllerImpl();
+
+$seguidores = $userController->getNumSeguidores($userPerfil);
+$seguidos = $userController->getNumSeguidos($userPerfil);
+$avatar = NULL;//$userController->getAvatar($userPerfil);
+
+$spils = $spilController->listMsgs($userPerfil);
+$respils = $respilController->listarRespilsUsuario($userPerfil);
+
+if ($respils) {
+    for ($i = 0; $i < count($respils); $i++) {
+        $spilRec = $spilController->read($respils[$i]->getIdMensaje());
+
+        array_push($spils, $spilRec);
+    }
+
+    array_sort_by($spils, 'writeDate');
+
+}
+
+$numSpils = count($spils);
+
+
+if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
+    $numLikes = count($likes);
+} else {
+    $numLikes = 0;
+}
+
 ?>
 
 <html lang="en">
@@ -58,11 +112,11 @@ if (isset($_SESSION['usuario'])) {
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_iz.png" style="max-width: 40px">          
                 <a class="navbar-brand nav-link" href="Lobby.php">Inicio</a>
                 <a class="navbar-brand nav-link" href="Notification.php">Notificaciones</a>
-                <a class="navbar-brand nav-link" href="User.php">Perfil</a>
+                <a class="navbar-brand nav-link" href="User.php?user=<?php echo $user; ?>">Perfil</a>
                 <a class="navbar-brand nav-link" href="Configuration.php">Configuracion</a>
                 <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal"style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
-                <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px">
-                <a class='navbar-brand nav-link navbar-right'href>Log out</a>
+                <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px;">
+                <a class='navbar-brand nav-link navbar-right'href="Logout.php">Log out</a>
             </div>
         </nav>
         <!-- end navbar  -->
@@ -71,20 +125,25 @@ if (isset($_SESSION['usuario'])) {
             <div class="container-fluid text-center">    
                 <div class="row content" style="margin-top: 5px;">
                     <div class="col-sm-2 sidenav">
-                        <img class="img-circle" src="pk2-free-v2.0.1/assets/img/faces/erik-lucatero-2.jpg" style="max-height: 200px; max-width: 200px;">
-                        <label class="label label-info">@USERname</label>
+                        <img class="img-circle" src="img/<?php echo $avatar; ?>" style="max-height: 200px; max-width: 200px; ">
+                        <br>
+                        <label class="label label-info">@<?php echo $userPerfil; ?></label>
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
                             <div class="info-user ">
-                                <a href="Seguidores.php">Seguidores <span class="label label-info">555</span></a><br>
-                                <a href="Seguidos.php">Seguidos <span class="label label-info">1025</span></a><br>
-                                <a href="User.php">Spils <span class="label label-info">2</span></a><br>                              
-                                <a href="Like.php">Me gusta<span class="label label-info">252</span></a>                              
+                                <a href="Seguidores.php?user=<?php echo $userPerfil; ?>">Seguidores <span class="label label-info"><?php echo $seguidores; ?></span></a><br>
+                                <a href="Seguidos.php?user=<?php echo $userPerfil; ?>">Seguidos <span class="label label-info"><?php echo $seguidos; ?></span></a><br>
+                                <a href="User.php?user=<?php echo $userPerfil; ?>">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                                
+                                <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a>                             
                             </div>
                         </div>
 
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 10px;">
                             <div>
-                                <footer>FOOTER</footer>
+                                <footer><h6>
+                                        © 
+                                        <script>document.write(new Date().getFullYear())</script>
+                                        , Grupo 10 Programacion Avanzada.
+                                    </h6></footer>
                             </div>
                         </div>
                     </div>

@@ -28,7 +28,7 @@ class SpilImpl implements Spil {
      *
      * @var Date When the message was written.
      */
-    private $writeDate;
+    public $writeDate;
 
     /**
      *
@@ -67,7 +67,7 @@ class SpilImpl implements Spil {
     }
 
     function getIdUser() {
-        return $this->idUsuario;
+        return $this->idUser;
     }
 
     function getWriteDate(){
