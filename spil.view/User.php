@@ -2,6 +2,11 @@
 
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/LikeControllerImpl.php';
+
 function object_sorter($clave, $orden = null) {
     return function ($a, $b) use ($clave, $orden) {
         $result = ($orden == "DESC") ? strnatcmp($b->$clave, $a->$clave) : strnatcmp($a->$clave, $b->$clave);
@@ -22,7 +27,7 @@ if (isset($_SESSION['usuario'])) {
 if (isset($_GET['user'])) {
     $userPerfil = $_GET['user'];
 } else {
-    //header('Location: Lobby.php');
+    header('Location: Lobby.php');
 }
 
 $userController = new UserControllerImpl();
@@ -91,7 +96,7 @@ $likes = count($likeController->listarMegustasUsuario($userPerfil));
 
     </head>
     <body>
-        <!--    navbar come here          -->
+        <!-- navbar come here  -->
         <nav class="navbarnavbar-expand-md bg-info">
             <div class="container" style="text-align: center;">         
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_iz.png" style="max-width: 40px">          
@@ -111,7 +116,7 @@ $likes = count($likeController->listarMegustasUsuario($userPerfil));
             <div class="container-fluid text-center">    
                 <div class="row content" style="margin-top: 5px;">
                     <div class="col-sm-2 sidenav">
-                        <img class="img-circle" src="pk2-free-v2.0.1/assets/img/faces/erik-lucatero-2.jpg" style="max-height: 200px; max-width: 200px;">
+                        <img class="img-circle" src="pk2-free-v2.0.1/assets/img/faces/erik-lucatero-2.jpg" style="max-height: 200px; max-width: 200px; position:static;">
                         <label class="label label-info">@USERname</label>
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
                             <div class="info-user ">
