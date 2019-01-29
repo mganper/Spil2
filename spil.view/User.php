@@ -158,7 +158,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     <div class="col-sm-8 text-center">
                         <!-- CODIGO PARA MOSTRAR MENSAJES AQUÍ-->
                         <?php
-                        $i = 0;
+                        print_r($spils);
                         foreach ($spils as $spil) {
                             ?>
                             <div data-toggle="modal" data-target="#IMSGModal">
@@ -169,8 +169,8 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                                 </h3>
                                 <h5>
                                     <?php
-                                    echo $spil->getUser();
-                                    echo $pil->getWriteDate();
+                                    echo $spil->getIdUser();
+                                    echo $spil->getWriteDate();
                                     ?>
                                 </h5>
                             </div>
