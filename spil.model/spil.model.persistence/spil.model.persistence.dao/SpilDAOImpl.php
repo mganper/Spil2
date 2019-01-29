@@ -101,8 +101,6 @@ class SpilDAOImpl implements SpilDAO {
         } else {
             $i = 0;
             while ($row = $res->fetch_row()) {
-                echo '<br/>'.$i.'<br/>';
-                print_r($row);
                 $spil[$i] = new SpilImpl(NULL, NULL, NULL, NULL, NULL, NULL, NULL);
                 $spil[$i]->setId($row[0]);
                 $spil[$i]->setText($row[1]);

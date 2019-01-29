@@ -1,15 +1,54 @@
 <!doctype html>
 
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/LikeControllerImpl.php';
+
+function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
+    $arrAux = array();
+    foreach ($arrIni as $key => $row) {
+        $arrAux[$key] = is_object($row) ? $arrAux[$key] = $row->$col : $row[$col];
+        $arrAux[$key] = strtolower($arrAux[$key]);
+    }
+    array_multisort($arrAux, $order, $arrIni);
+}
+
 session_start();
 
-$_SESSION['usuario'] = 'pepe';
+$_SESSION['usuario'] = 'hola';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
 } else {
     header('Location: Login.php');
 }
+
+$userController = new UserControllerImpl();
+$spilController = new SpilControllerImpl();
+$respilController = new RespilControllerImpl();
+$likeController = new LikeControllerImpl();
+
+$seguidores = $userController->getNumSeguidores($user);
+$seguidos = $userController->getNumSeguidos($user);
+$avatar = NULL; //$userController->getAvatar($user);
+
+$spils = $spilController->listMsgs($user);
+$respils = $respilController->listarRespilsUsuario($user);
+
+if ($respils) {
+    for ($i = 0; $i < count($respils); $i++) {
+        $spilRec = $spilController->read($respils[$i]->getIdMensaje());
+
+        array_push($spils, $spilRec);
+    }
+
+    array_sort_by($spils, 'writeDate');
+}
+
+$numSpils = count($spils);
+
 ?>
 
 <html lang="en">
@@ -67,12 +106,12 @@ if (isset($_SESSION['usuario'])) {
             <div class="container-fluid text-center">    
                 <div class="row content" style="margin-top: 5px;">
                     <div class="col-sm-2 sidenav">
-                        <img class="img-circle" src="pk2-free-v2.0.1/assets/img/faces/erik-lucatero-2.jpg" style="max-height: 200px; max-width: 200px;">
+                        <img class="img-circle" src="img/<?php echo $avatar; ?>" style="max-height: 200px; max-width: 200px; ">
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
                             <div class="info-user" style="display: inline;">
-                                <a href="Seguidores.php">Seguidores <span class="label label-primary">555</span></a><br>
-                                <a href="Seguidos.php">Seguidos <span class="label label-primary">1025</span></a><br>
-                                <a href="User.php">Spils <span class="label label-primary">2</span></a><br>                             
+                                <a href="Seguidores.php?user=<?php echo $user; ?>">Seguidores <span class="label label-info"><?php echo $seguidores; ?></span></a><br>
+                                <a href="Seguidos.php?user=<?php echo $user; ?>">Seguidos <span class="label label-info"><?php echo $seguidos; ?></span></a><br>
+                                <a href="User.php?user=<?php echo $user; ?>">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                           
                             </div>
                         </div>
 
