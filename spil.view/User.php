@@ -162,7 +162,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     <div class="col-sm-8 text-center">
                         <!-- CODIGO PARA MOSTRAR MENSAJES AQUÍ-->
                         <?php
-                        $i = 0;
+                        print_r($spils);
                         foreach ($spils as $spil) {
                             $txt = $spil->getText();
                             $owrUser = $spil->getIdUser();

@@ -45,13 +45,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persisten
 
 $contUser = new UserControllerImpl();
 
-if (UserDAOImpl::EsSeguido("hola", "adios")) {
+$contUser->modifyAvatar("hola", "funciono");
 
-    echo "es seguido";
-} else {
-
-    echo"no es seguido";
-}
 //UserDAOImpl::EsSeguido($idSeguido, $idSeguidor)
 //$contConf = new ConfigurationControllerImpl();
 //$contConf->createConfiguration("hola", 0,0, 0);
