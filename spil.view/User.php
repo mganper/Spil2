@@ -1,4 +1,56 @@
 <!doctype html>
+
+<?php
+
+function object_sorter($clave, $orden = null) {
+    return function ($a, $b) use ($clave, $orden) {
+        $result = ($orden == "DESC") ? strnatcmp($b->$clave, $a->$clave) : strnatcmp($a->$clave, $b->$clave);
+        return $result;
+    };
+}
+
+session_start();
+
+$_SESSION['usuario'] = 'pepe';
+
+if (isset($_SESSION['usuario'])) {
+    $user = $_SESSION['usuario'];
+} else {
+    header('Location: Login.php');
+}
+
+if (isset($_GET['user'])) {
+    $userPerfil = $_GET['user'];
+} else {
+    //header('Location: Lobby.php');
+}
+
+$userController = new UserControllerImpl();
+$spilController = new SpilControllerImpl();
+$respilController = new RespilControllerImpl();
+$likeController = new LikeControllerImpl();
+
+$seguidores = $userController->getNumSeguidores($userPerfil);
+$seguidos = $userController->getNumSeguidos($userPerfil);
+
+$spils = $spilController->listMsgs($userPerfil);
+$respils = $respilController->listarRespilsUsuario($userPerfil);
+
+for ($i = 0; $i < count($respils); $i++) {
+    $spilRec = $spilController->read($respils[$i]->getIdMensaje());
+
+    array_push($spils, $spilRec);
+}
+
+usort($spils, object_sorter('getWriteDate()'));
+
+$numSpils = count($spils);
+
+$likes = count($likeController->listarMegustasUsuario($userPerfil));
+
+
+?>
+
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -45,13 +97,13 @@
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_iz.png" style="max-width: 40px">          
                 <a class="navbar-brand nav-link" href="Lobby.php">Inicio</a>
                 <a class="navbar-brand nav-link" href="Notification.php">Notificaciones</a>
-                <a class="navbar-brand nav-link" href="User.php">Perfil</a>
+                <a class="navbar-brand nav-link" href="User.php?user=<?php echo $user; ?>">Perfil</a>
                 <a class="navbar-brand nav-link" href="Configuration.php">Configuracion</a>
                 <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal"style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px;">
                 <a class='navbar-brand nav-link navbar-right'href>Log out</a>
             </div>
-            
+
         </nav>
         <!-- end navbar  -->
 
