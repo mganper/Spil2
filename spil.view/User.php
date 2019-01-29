@@ -7,11 +7,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerI
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/LikeControllerImpl.php';
 
-function object_sorter($clave, $orden = null) {
-    return function ($a, $b) use ($clave, $orden) {
-        $result = ($orden == "DESC") ? strnatcmp($b->$clave, $a->$clave) : strnatcmp($a->$clave, $b->$clave);
-        return $result;
-    };
+function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
+    $arrAux = array();
+    foreach ($arrIni as $key => $row) {
+        $arrAux[$key] = is_object($row) ? $arrAux[$key] = $row->$col : $row[$col];
+        $arrAux[$key] = strtolower($arrAux[$key]);
+    }
+    array_multisort($arrAux, $order, $arrIni);
 }
 
 session_start();
