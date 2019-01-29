@@ -7,12 +7,15 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerI
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/LikeControllerImpl.php';
 
-function object_sorter($clave, $orden = null) {
-    return function ($a, $b) use ($clave, $orden) {
-        $result = ($orden == "DESC") ? strnatcmp($b->$clave, $a->$clave) : strnatcmp($a->$clave, $b->$clave);
-        return $result;
-    };
+function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
+    $arrAux = array();
+    foreach ($arrIni as $key => $row) {
+        $arrAux[$key] = is_object($row) ? $arrAux[$key] = $row->$col : $row[$col];
+        $arrAux[$key] = strtolower($arrAux[$key]);
+    }
+    array_multisort($arrAux, $order, $arrIni);
 }
+
 session_start();
 
 $_SESSION['usuario'] = 'hola';
@@ -36,6 +39,7 @@ $likeController = new LikeControllerImpl();
 
 $seguidores = $userController->getNumSeguidores($userPerfil);
 $seguidos = $userController->getNumSeguidos($userPerfil);
+$avatar = NULL;//$userController->getAvatar($userPerfil);
 
 $spils = $spilController->listMsgs($userPerfil);
 $respils = $respilController->listarRespilsUsuario($userPerfil);
@@ -112,7 +116,6 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px;">
                 <a class='navbar-brand nav-link navbar-right'href="Logout.php">Log out</a>
             </div>
-
         </nav>
         <!-- end navbar  -->
 
@@ -120,17 +123,17 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
             <div class="container-fluid text-center">    
                 <div class="row content" style="margin-top: 5px;">
                     <div class="col-sm-2 sidenav">
-                        <img class="img-circle" src="pk2-free-v2.0.1/assets/img/faces/erik-lucatero-2.jpg" style="max-height: 200px; max-width: 200px; ">
+                        <img class="img-circle" src="img/<?php echo $avatar; ?>" style="max-height: 200px; max-width: 200px; ">
                         <br>
                         <label class="label label-info">@<?php echo $userPerfil; ?></label>
                         <br>
                         <button class="btn btn-info">Seguir</button>
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
                             <div class="info-user ">
-                                <a href="Seguidores.php">Seguidores <span class="label label-info"><?php echo $seguidores; ?></span></a><br>
-                                <a href="Seguidos.php">Seguidos <span class="label label-info"><?php echo $seguidos; ?></span></a><br>
-                                <a href="User.php">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                                
-                                <a href="Like.php">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a>                             
+                                <a href="Seguidores.php?user=<?php echo $userPerfil; ?>">Seguidores <span class="label label-info"><?php echo $seguidores; ?></span></a><br>
+                                <a href="Seguidos.php?user=<?php echo $userPerfil; ?>">Seguidos <span class="label label-info"><?php echo $seguidos; ?></span></a><br>
+                                <a href="User.php?user=<?php echo $userPerfil; ?>">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                                
+                                <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a>                             
                             </div>
                         </div>
 
