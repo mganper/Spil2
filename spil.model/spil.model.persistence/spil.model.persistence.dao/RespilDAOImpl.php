@@ -63,7 +63,7 @@ class RespilDAOImpl implements RespilDAO {
 
     public function listed($identificador) {
 
-        $respils=FALSE;
+        $respils = FALSE;
 
         if (gettype($identificador) === 'string') {
 
@@ -103,7 +103,7 @@ class RespilDAOImpl implements RespilDAO {
     }
 
     private function listaRespilMensaje($idMensaje) {
-        $respils=FALSE;
+        $respils = FALSE;
         $cont = 0;
 
         $query = "SELECT * FROM respil WHERE idMensaje = '$idMensaje';";
