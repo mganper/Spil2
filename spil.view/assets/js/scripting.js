@@ -1,7 +1,9 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-
+function displayModal(currUser, txt, owrUser) {
+                $("#modal-hiden").css("visibility","collapse");
+                $(".rm").remove();
+                $("#text-father").append("<h5 class='modal-title rm'>" + txt + "</h5><br class='rm'><br class='rm'><h7 class='rm'>-" + owrUser + "</h7>");
+                if (currUser === owrUser) {
+                    $("#modal-hiden").css("visibility","visible");
+                }
+            }

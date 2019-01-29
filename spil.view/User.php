@@ -83,17 +83,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
 
-        <script>
-            function displayModal(currUser, txt, owrUser) {
-                $("#modal-hiden").css("visibility","collapse");
-                $(".rm").remove();
-                $("#text-father").append("<h5 class='modal-title rm'>" + txt + "</h5><br class='rm'><br class='rm'><h7 class='rm'>-" + owrUser + "</h7>");
-                if (currUser === owrUser) {
-                    $("#modal-hiden").css("visibility","visible");
-                }
-            }
-        </script>
-
+        <script type="text/javascript" src="assets/js/scripting.js"></script>
         <style> 
 
             .navbar {
@@ -162,7 +152,6 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     <div class="col-sm-8 text-center">
                         <!-- CODIGO PARA MOSTRAR MENSAJES AQUÍ-->
                         <?php
-                        print_r($spils);
                         foreach ($spils as $spil) {
                             $txt = $spil->getText();
                             $owrUser = $spil->getIdUser();
