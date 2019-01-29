@@ -2,16 +2,23 @@
 
 <?php
 
-function object_sorter($clave, $orden = null) {
-    return function ($a, $b) use ($clave, $orden) {
-        $result = ($orden == "DESC") ? strnatcmp($b->$clave, $a->$clave) : strnatcmp($a->$clave, $b->$clave);
-        return $result;
-    };
+function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
+    $arrAux = array();
+    foreach ($arrIni as $key => $row) {
+        $arrAux[$key] = is_object($row) ? $arrAux[$key] = $row->$col : $row[$col];
+        $arrAux[$key] = strtolower($arrAux[$key]);
+    }
+    array_multisort($arrAux, $order, $arrIni);
 }
+
+require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\LikeControllerImpl.php';
+require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\RespilControllerImpl.php';
+require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\SpilControllerImpl.php';
+require $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\UserControllerImpl.php';
 
 session_start();
 
-$_SESSION['usuario'] = 'pepe';
+$_SESSION['usuario'] = 'hola';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
@@ -22,7 +29,7 @@ if (isset($_SESSION['usuario'])) {
 if (isset($_GET['user'])) {
     $userPerfil = $_GET['user'];
 } else {
-    //header('Location: Lobby.php');
+    header('Location: Lobby.php');
 }
 
 $userController = new UserControllerImpl();
@@ -36,19 +43,25 @@ $seguidos = $userController->getNumSeguidos($userPerfil);
 $spils = $spilController->listMsgs($userPerfil);
 $respils = $respilController->listarRespilsUsuario($userPerfil);
 
-for ($i = 0; $i < count($respils); $i++) {
-    $spilRec = $spilController->read($respils[$i]->getIdMensaje());
+if ($respils) {
+    for ($i = 0; $i < count($respils); $i++) {
+        $spilRec = $spilController->read($respils[$i]->getIdMensaje());
 
-    array_push($spils, $spilRec);
+        array_push($spils, $spilRec);
+    }
+
+    array_sort_by($spils, 'writeDate');
+
 }
-
-usort($spils, object_sorter('getWriteDate()'));
 
 $numSpils = count($spils);
 
-$likes = count($likeController->listarMegustasUsuario($userPerfil));
 
-
+if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
+    $numLikes = count($likes);
+} else {
+    $numLikes = 0;
+}
 ?>
 
 <html lang="en">
@@ -101,7 +114,7 @@ $likes = count($likeController->listarMegustasUsuario($userPerfil));
                 <a class="navbar-brand nav-link" href="Configuration.php">Configuracion</a>
                 <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal"style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px;">
-                <a class='navbar-brand nav-link navbar-right'href>Log out</a>
+                <a class='navbar-brand nav-link navbar-right'href="Logout.php">Log out</a>
             </div>
 
         </nav>
@@ -111,14 +124,17 @@ $likes = count($likeController->listarMegustasUsuario($userPerfil));
             <div class="container-fluid text-center">    
                 <div class="row content" style="margin-top: 5px;">
                     <div class="col-sm-2 sidenav">
-                        <img class="img-circle" src="pk2-free-v2.0.1/assets/img/faces/erik-lucatero-2.jpg" style="max-height: 200px; max-width: 200px;">
-                        <label class="label label-info">@USERname</label>
+                        <img class="img-circle" src="pk2-free-v2.0.1/assets/img/faces/erik-lucatero-2.jpg" style="max-height: 200px; max-width: 200px; ">
+                        <br>
+                        <label class="label label-info">@<?php echo $userPerfil; ?></label>
+                        <br>
+                        <button class="btn btn-info">Seguir</button>
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
                             <div class="info-user ">
-                                <a href="Seguidores.php">Seguidores <span class="label label-info">555</span></a><br>
-                                <a href="Seguidos.php">Seguidos <span class="label label-info">1025</span></a><br>
-                                <a href="User.php">Spils <span class="label label-info">2</span></a><br>                                
-                                <a href="Like.php">Me gusta<span class="label label-info">252</span></a>                             
+                                <a href="Seguidores.php">Seguidores <span class="label label-info"><?php echo $seguidores; ?></span></a><br>
+                                <a href="Seguidos.php">Seguidos <span class="label label-info"><?php echo $seguidos; ?></span></a><br>
+                                <a href="User.php">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                                
+                                <a href="Like.php">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a>                             
                             </div>
                         </div>
 
