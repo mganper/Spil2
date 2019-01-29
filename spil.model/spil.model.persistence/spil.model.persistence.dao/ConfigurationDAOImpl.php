@@ -9,9 +9,9 @@ class ConfigurationDAOImpl implements ConfigurationDAO {
     public function create($configuration) {
         $ret = TRUE;
 
-        $query = 'INSERT INTO configuracion (idsUsuario, temaOscuro, privacidadSpils, modoAdulto) VALUES '
-                . '("' . $configuration->idUsuario . '", "' . $configuration->temaOscuro . '", "'
-                . $configuration->privacidadSpils . '", "' . $configuration->modoAdulto . '")';
+        $query = 'INSERT INTO configuracion (idUsuario, temaOscuro, privacidadSpils, modoAdulto) VALUES '
+                . '("' . $configuration->getIdUsuario() . '", "' . $configuration->isTemaOscuro() . '", "'
+                . $configuration->isPrivacidadSpils() . '", "' . $configuration->isModoAdulto() . '")';
 
         if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
@@ -24,7 +24,7 @@ class ConfigurationDAOImpl implements ConfigurationDAO {
     public function delete($pk) {
         $ret = TRUE;
 
-        $query = 'DELETE FROM configuration WHERE idUsuario = "' . $pk . '"';
+        $query = 'DELETE FROM configuracion WHERE idUsuario = "' . $pk . '"';
 
         if (!connectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
@@ -34,7 +34,7 @@ class ConfigurationDAOImpl implements ConfigurationDAO {
     }
 
     public function read($pk) {
-        $query = 'SELECT temaOscuro, privacidadSpils, modoAdulto FROM configuration WHERE idUsuario = "' . $pk . '"';
+        $query = 'SELECT * FROM configuracion WHERE idUsuario = "' . $pk . '"';
 
         if (!($res = connectionSingleton::getConn()->query($query))) {
             echo 'No se pudieron descargar los usuarios de la base de datos.';
@@ -51,8 +51,8 @@ class ConfigurationDAOImpl implements ConfigurationDAO {
     public function update($configuration) {
         $ret = TRUE;
         
-        $query = 'UPDATE configuracion SET temaOscuro = "' . $configuration->temaOscuro .'", privacidadSpils = "' . $configuration->privacidadSpils 
-                .'", modoAdulto = "' . $configuration->modoAdulto . '" WHERE idUsuario = "' . $configuration->idUsuario .'"' ;
+        $query = 'UPDATE configuracion SET temaOscuro = "' . $configuration->isTemaOscuro() .'", privacidadSpils = "' . $configuration->isPrivacidadSpils() 
+                .'", modoAdulto = "' . $configuration->isModoAdulto() . '" WHERE idUsuario = "' . $configuration->getIdUsuario() .'"' ;
         
         if (!connectionSingleton::getConn()->query($query)) {
             $ret = FALSE;

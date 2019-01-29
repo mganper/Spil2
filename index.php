@@ -45,10 +45,20 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persisten
 //        NOTA IMPORTANTE MODIFICAR ALERTA POR NO INSERCION O NO BORRADO    
 
 
-$contUser = new UserControllerImpl();
-$contConf = new ConfigurationControllerImpl();
+//$contUser = new UserControllerImpl();
+//$contConf = new ConfigurationControllerImpl();
 
-$contConf->createConfiguration("hola", 1, $modoAdulto)
+
+//$contConf->createConfiguration("hola", 0,0, 0);
+//$co=$contConf->getConfiguration("hola");
+//
+//echo $co->getIdUsuario()." ".$co->isTemaOscuro();
+//$contConf->modifyConfiguration("hola", 1, 1, 1);
+//
+//$co=$contConf->getConfiguration("hola");
+//echo $co->getIdUsuario()." ".$co->isTemaOscuro();
+
+//$contConf->deleteConfiguration("hola");
 //$contUser->addReport("andres");
 //echo"andres sigue a ".
 //$contUser->getNumSeguidos("andres"). " y es seguido por ".
