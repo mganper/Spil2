@@ -80,15 +80,17 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
         <!--     Fonts and icons     -->
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
 
         <script>
             function displayModal(currUser, txt, owrUser) {
-                var dir = document.getElementById("text-father");
-                var msg = document.createElement("H5"); 
-                msg.setAttribute('class', "modal-title");
-                msg.data = txt;
-                dir.appendChild(msg);                
+                $("#modal-hiden").css("visibility","collapse");
+                $(".rm").remove();
+                $("#text-father").append("<h5 class='modal-title rm'>" + txt + "</h5><br class='rm'><br class='rm'><h7 class='rm'>-" + owrUser + "</h7>");
+                if (currUser === owrUser) {
+                    $("#modal-hiden").css("visibility","visible");
+                }
             }
         </script>
 
@@ -165,7 +167,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                             $txt = $spil->getText();
                             $owrUser = $spil->getIdUser();
                             ?>
-                        <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user;?>', '<?php echo $txt;?>','<?php echo $owrUser;?>')">
+                            <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>')">
                                 <h3>
                                     <?php
                                     echo $txt;
@@ -173,13 +175,13 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                                 </h3>
                                 <h5>
                                     <?php
-                                    echo $owrUser.' on ';
+                                    echo $owrUser . ' on ';
                                     echo $spil->getWriteDate();
                                     ?>
                                 </h5>
                             </div>
-                        <hr>
-                            <?php } ?>
+                            <hr>
+                        <?php } ?>
                     </div>
                     <div class="col-sm-2 sidenav">
                         <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
@@ -244,18 +246,20 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header" id="text-father">
-                        
+
                     </div>
 
                     <!-- SI ES EL DUEÑO DEL MENSAJE MOSTRAR ESTO -->
-                    <div class="modal-footer" style="display:none;">
-                        <div class="left-side">
-                            <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Editar</button>
+                    <div id="modal-hiden" style="visibility: collapse;">
+                        <div class="modal-footer" id="modal-hidden">
+                            <div class="left-side">
+                                <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Editar</button>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="right-side">
+                                <button type="button" class="btn btn-danger btn-link">Eliminar</button>
+                            </div>                         
                         </div>
-                        <div class="divider"></div>
-                        <div class="right-side">
-                            <button type="button" class="btn btn-danger btn-link">Eliminar</button>
-                        </div>                         
                     </div>
                     </form>
                 </div>
