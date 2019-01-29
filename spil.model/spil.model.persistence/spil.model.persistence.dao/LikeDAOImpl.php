@@ -77,7 +77,7 @@ class LikeDAOImpl implements LikeDAO {
     }
 
     private function listaLikeUsuario($idUsuario) {
-        $likes =FALSE;
+        $likes = FALSE;
         $cont = 0;
 
         $query = "SELECT * FROM megusta WHERE idUsuario = '$idUsuario';";

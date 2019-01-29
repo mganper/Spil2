@@ -28,7 +28,7 @@ class SpilImpl implements Spil {
      *
      * @var Date When the message was written.
      */
-    private $writeDate;
+    public $writeDate;
 
     /**
      *
