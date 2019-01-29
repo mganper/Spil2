@@ -17,7 +17,7 @@ function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
 
 session_start();
 
-$_SESSION['usuario'] = 'cad2298';
+$_SESSION['usuario'] = 'hola';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
@@ -28,7 +28,7 @@ if (isset($_SESSION['usuario'])) {
 if (isset($_GET['user'])) {
     $userPerfil = $_GET['user'];
 } else {
-    //header('Location: Lobby.php');
+    header('Location: Lobby.php');
 }
 
 $userController = new UserControllerImpl();
