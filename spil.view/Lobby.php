@@ -78,7 +78,11 @@ if (isset($_SESSION['usuario'])) {
 
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 10px;">
                             <div>
-                                <footer>FOOTER                              </footer>
+                                <footer><h6>
+                                        © 
+                                        <script>document.write(new Date().getFullYear())</script>
+                                        , Grupo 10 Programacion Avanzada.
+                                    </h6></footer>
                             </div>
                         </div>
                     </div>
@@ -165,7 +169,7 @@ if (isset($_SESSION['usuario'])) {
                     </div>
 
                     <!-- SI ES EL DUEÑO DEL MENSAJE MOSTRAR ESTO -->
-                    <div class="modal-footer" hidden="">
+                    <div class="modal-footer" >
                         <div class="left-side">
                             <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Editar</button>
                         </div>

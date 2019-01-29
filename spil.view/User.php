@@ -1,7 +1,6 @@
 <!doctype html>
 
 <?php
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
@@ -39,7 +38,7 @@ $likeController = new LikeControllerImpl();
 
 $seguidores = $userController->getNumSeguidores($userPerfil);
 $seguidos = $userController->getNumSeguidos($userPerfil);
-$avatar = NULL;//$userController->getAvatar($userPerfil);
+$avatar = NULL; //$userController->getAvatar($userPerfil);
 
 $spils = $spilController->listMsgs($userPerfil);
 $respils = $respilController->listarRespilsUsuario($userPerfil);
@@ -52,7 +51,6 @@ if ($respils) {
     }
 
     array_sort_by($spils, 'writeDate');
-
 }
 
 $numSpils = count($spils);
@@ -140,7 +138,11 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
 
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 10px;">
                             <div>
-                                <footer>FOOTER                              </footer>
+                                <footer><h6>
+                                        © 
+                                        <script>document.write(new Date().getFullYear())</script>
+                                        , Grupo 10 Programacion Avanzada.
+                                    </h6></footer>
                             </div>
                         </div>
                     </div>
@@ -218,7 +220,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                         <img src="pk2-free-v2.0.1/assets/img/faces/clem-onojeghuo-2.jpg" style="max-width: 20%; text-align: left;" class="img-circle">
                         <br>
                         <br>
-                        <h5 class="modal-title " id="exampleModalLabel">
+                        <h5 class="modal-title " id="">
                             METER AQÚI EL CONTENIDO DEL MENSAJE
                         </h5>                                             
                     </div>
