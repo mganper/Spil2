@@ -17,7 +17,7 @@ function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
 
 session_start();
 
-$_SESSION['usuario'] = 'hola';
+$_SESSION['usuario'] = 'cad2298';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
@@ -83,10 +83,12 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
 
         <script>
-            function displayModal(index) {
-                var dir = "img" + index;
-                var msg = document.getElementById(dir);
-                document.getElementById('textModal').value = msg;
+            function displayModal(currUser, txt, owrUser) {
+                var dir = document.getElementById("text-father");
+                var msg = document.createElement("H5"); 
+                msg.setAttribute('class', "modal-title");
+                msg.data = txt;
+                dir.appendChild(msg);                
             }
         </script>
 
@@ -160,20 +162,23 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                         <?php
                         $i = 0;
                         foreach ($spils as $spil) {
+                            $txt = $spil->getText();
+                            $owrUser = $spil->getIdUser();
                             ?>
-                            <div data-toggle="modal" data-target="#IMSGModal">
+                        <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user;?>', '<?php echo $txt;?>','<?php echo $owrUser;?>')">
                                 <h3>
                                     <?php
-                                    echo $spil->getText();
+                                    echo $txt;
                                     ?>
                                 </h3>
                                 <h5>
                                     <?php
-                                    echo $spil->getUser();
-                                    echo $pil->getWriteDate();
+                                    echo $owrUser.' on ';
+                                    echo $spil->getWriteDate();
                                     ?>
                                 </h5>
                             </div>
+                        <hr>
                             <?php } ?>
                     </div>
                     <div class="col-sm-2 sidenav">
@@ -238,17 +243,12 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
         <div class="modal fade" id="IMSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">                        
-                        <h5 class="modal-title " id="textModal">
-                            METER AQÚI EL CONTENIDO DEL MENSAJE
-                        </h5>    
-                        <br>
-                        <br>
-                        <h7>- @usuario</h7>
+                    <div class="modal-header" id="text-father">
+                        
                     </div>
 
                     <!-- SI ES EL DUEÑO DEL MENSAJE MOSTRAR ESTO -->
-                    <div class="modal-footer" hidden="">
+                    <div class="modal-footer" style="display:none;">
                         <div class="left-side">
                             <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Editar</button>
                         </div>
