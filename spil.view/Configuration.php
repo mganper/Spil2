@@ -2,6 +2,7 @@
 
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\ConfigurationControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\UserControllerImpl.php';
 
 session_start();
 
@@ -10,9 +11,42 @@ $_SESSION['usuario'] = 'hola';
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
     $confController = new ConfigurationControllerImpl();
+    $confUsuario = new UserControllerImpl();
     $config = $confController->getConfiguration($user);
+
+ 
+
+    if (isset($_POST['avatar'])) {
+        
+        if ($_FILES['foto']['error'] > 0) {
+            echo 'Error: ' . $_FILES['foto']['error'] . '<br />';
+        } else if (!soloImagenes($_FILES['foto'])) {
+            echo 'Error: Tipo de fichero no aceptado <br />';
+        } else if (!limiteTamanyo($_FILES['foto'], 2 * 1024 * 1024)) {
+            echo 'Error: El tama&ntilde;o del fichero supera los 200KB <br />';
+        } else {
+           
+            $nombreAr = filter_var(filter_var($_FILES['foto']['name'], FILTER_SANITIZE_STRING));
+            $nombreAr =   $_SERVER['REQUEST_TIME'].$nombreAr;
+            if (move_uploaded_file($_FILES["foto"]["tmp_name"], "img/" . $nombreAr)) {
+                $confUsuario->modifyAvatar($_SESSION['usuario'], $nombreAr);
+            }
+        }
+    }
 } else {
     header('Location: Login.php');
+}
+
+function limiteTamanyo($fichero, $limite) {
+    return $fichero['size'] <= $limite;
+}
+
+function soloImagenes($fichero) {
+    $tiposAceptados = Array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/png');
+    if (array_search($fichero['type'], $tiposAceptados) === false)
+        return false;
+    else
+        return true;
 }
 ?>
 
@@ -116,11 +150,11 @@ if (isset($_SESSION['usuario'])) {
                             <button class="btn btn-round bg-info">Enviar</button>
                         </form>
                         <br>
-                        <!-- FOTO PERFIL AQUÍ-->
+                        <!-- FOTO PERFIL AQUÍ////////////////////////////////////////////////////////-->
                         <h5 style="text-align: left"><b>Cambiar foto de perfil:</b></h5><br>
-                        <form class="register-form"  style="text-align: left;" action="#">
-                            <br>
-                            <button class="btn btn-round bg-info">Enviar</button>
+                        <form enctype="multipart/form-data" class="register-form"  style="text-align: left;" action="#" method="Post">
+                            <input id="foto" class="btn btn-round bg-info" name="foto" type="file"/>
+                            <button id="avatar" name="avatar" class="btn btn-round bg-info" type="submit">Subir archivo</button>
                         </form>
                         <hr>
                         <h4 style="text-align: left">Seguridad</h4>
@@ -132,7 +166,7 @@ if (isset($_SESSION['usuario'])) {
                             <label>Nueva contraseña: </label>
                             <input type="password" placeholder="Nueva contraseña" id="npass"><br>
                             <label>Repetir contraseña: </label>
-                            <input class=""type="password" placeholder="Repetir contraseña" id="rnpass"><br><br>
+                            <input class="" type="password" placeholder="Repetir contraseña" id="rnpass"><br><br>
                             <button class="btn btn-round bg-info">Cambiar contraseña</button>
                         </form>
                         <!--<hr>
@@ -170,7 +204,7 @@ if (isset($_SESSION['usuario'])) {
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="#">
+                    <!--<form action="#">-->
                         <div class="modal-body"> 
                             <textarea class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
                             <label>Contenido sensible</label>
@@ -193,7 +227,7 @@ if (isset($_SESSION['usuario'])) {
                             <button type="submit" class="btn btn-default btn-link" data-dismiss="modal">Publicar</button>
                             <div class="divider"></div>                            
                         </div>
-                    </form>
+                    <!--</form>-->
                 </div>
             </div>
         </div>

@@ -29,4 +29,6 @@ interface UserDAO {
     function ascenderModerador($idUsuario);
 
     public static function EsSeguido($idSeguido, $idSeguidor);
+
+    public static function getAvatar($Usuario);
 }

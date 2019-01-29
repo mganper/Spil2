@@ -221,5 +221,24 @@ class UserDAOImpl implements UserDAO {
 
         return $res;
     }
+    
+    public static function getAvatar($Usuario){
+        $res = True;
+         $query = 'SELECT avatar FROM usuario WHERE idUsuarioSeguido = "' . $user . '"';
+
+        if (!($res = connectionSingleton::getConn()->query($query))) {
+           // echo 'No se pudieron comprobar los seguidores.';
+            return FALSE;
+        } else {
+            if (($row = $res->fetch_row())) {
+                $res = $row[0];
+            } else {
+                return false;
+            }
+        }
+
+        return $res;
+        
+    }
 
 }
