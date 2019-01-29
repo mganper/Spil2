@@ -22,7 +22,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persisten
 //$resp = $contLik->listarMegustasUsuario('hola');
 //$resp= $contLik->nuevoLikeGesture(1, 'hola');
 //$resp = $contLik->borrarLikeGesture(3, 'hola');
-
 //$contUser = new UserControllerImpl();
 //$resp = $contUser->createUser("pedro", "pedro", "pedro", "pepon", '2010-10-1');
 //$resp = $contUser->deleteUser("andres");
@@ -37,7 +36,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persisten
 //
 //echo $resp[0]->getUsuario() . "..." . count($resp) . "...";
 //print_r($resp);
-
 //        echo "hola";
 //        for ($i = 0, $size = $resp); $i < $size; $i++) {
 //            echo "<br />el respil $i es " . $resp[$i]->getIdMensaje() . " " + $resp[$i]->getIdUsuario();
@@ -45,10 +43,17 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persisten
 //        NOTA IMPORTANTE MODIFICAR ALERTA POR NO INSERCION O NO BORRADO    
 
 
-//$contUser = new UserControllerImpl();
+$contUser = new UserControllerImpl();
+
+if (UserDAOImpl::EsSeguido("hola", "adios")) {
+
+    echo "es seguido";
+} else {
+
+    echo"no es seguido";
+}
+//UserDAOImpl::EsSeguido($idSeguido, $idSeguidor)
 //$contConf = new ConfigurationControllerImpl();
-
-
 //$contConf->createConfiguration("hola", 0,0, 0);
 //$co=$contConf->getConfiguration("hola");
 //
@@ -57,7 +62,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persisten
 //
 //$co=$contConf->getConfiguration("hola");
 //echo $co->getIdUsuario()." ".$co->isTemaOscuro();
-
 //$contConf->deleteConfiguration("hola");
 //$contUser->addReport("andres");
 //echo"andres sigue a ".
@@ -65,8 +69,5 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persisten
 //$contUser->getNumSeguidores("andres");
 //$contUser->addfollower("andres", "hola");
 //$contUser->removefollower("andres", "hola");
-
-
-
 ?>
 
