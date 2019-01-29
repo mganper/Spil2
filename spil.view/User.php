@@ -82,6 +82,14 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
 
+        <script>
+            function displayModal(index) {
+                var dir = "img" + index;
+                var msg = document.getElementById(dir);
+                document.getElementById('textModal').value = msg;
+            }
+        </script>
+
         <style> 
 
             .navbar {
@@ -149,11 +157,24 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     </div>
                     <div class="col-sm-8 text-center">
                         <!-- CODIGO PARA MOSTRAR MENSAJES AQUÍ-->
-                        <h3 data-toggle="modal" data-target="#IMSGModal">MENSAJE 1</h3>
-                        <hr>
-                        <h3>MENSAJE 2</h3>
-                        <hr>
-                        <h3>MENSAJE N</h3>
+                        <?php
+                        $i = 0;
+                        foreach ($spils as $spil) {
+                            ?>
+                            <div data-toggle="modal" data-target="#IMSGModal">
+                                <h3>
+                                    <?php
+                                    echo $spil->getText();
+                                    ?>
+                                </h3>
+                                <h5>
+                                    <?php
+                                    echo $spil->getUser();
+                                    echo $pil->getWriteDate();
+                                    ?>
+                                </h5>
+                            </div>
+                            <?php } ?>
                     </div>
                     <div class="col-sm-2 sidenav">
                         <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
@@ -218,7 +239,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">                        
-                        <h5 class="modal-title " id="exampleModalLabel">
+                        <h5 class="modal-title " id="textModal">
                             METER AQÚI EL CONTENIDO DEL MENSAJE
                         </h5>    
                         <br>
