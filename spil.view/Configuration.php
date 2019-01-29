@@ -37,33 +37,6 @@ if (isset($_SESSION['usuario'])) {
     header('Location: Login.php');
 }
 
-/////////////////////////////////////////////////////////////
-/* if (isset($_POST['avatar'])) {
-
-  echo $_FILES['foto']['size'];
-  if ($_FILES['foto']['error'] > 0) {
-  echo 'Error: ' . $_FILES['foto']['error'] . '<br />';
-  } else if (!soloImagenes($_FILES['foto'])) {
-  echo 'Error: Tipo de fichero no aceptado <br />';
-  } else if (!limiteTamanyo($_FILES['foto'], 2 * 1024 * 1024)) {
-  echo 'Error: El tama&ntilde;o del fichero supera los 200KB <br />';
-  }
-
-  echo "vamos";
-
-  $nombreAr = filter_var(filter_var($_FILES['foto']['name'], FILTER_SANITIZE_STRING));
-  $nombreAr = $nombreAr . $_SERVER['REQUEST_TIME'];
-  echo move_uploaded_file($_FILES["foto"]["tmp_name"], "img/" . /* basename($_FILES["foto"]["name"]) $nombreAr);
-  if (FALSE) {
-  if ($confUsuario->modifyAvatar("hola", $nombreAr)) {
-
-  echo "funciona";
-  } else {
-  echo "no funciona";
-  }
-  } */
-//}
-//////////////////////////////////////////////////////////////////
 function limiteTamanyo($fichero, $limite) {
     return $fichero['size'] <= $limite;
 }
