@@ -70,7 +70,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
         <link rel="icon" type="image/png" href="assets/img/favicon.ico">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <title>Paper Kit 2 by Creative Tim</title>
+        <title>Spil | <?php echo $userPerfil;?></title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -303,6 +303,3 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
     <!--  Paper Kit Initialization snd functons -->
     <script src="pk2-free-v2.0.1/assets/js/paper-kit.js?v=2.0.1"></script>
 </html>
-
-
-"No se pudieron descargar los mensajes de la base de datos.<br />\n<b>Fatal error</b>: Uncaught Error: Call to a member function getIdUser() on boolean in D:\\xampp\\htdocs\\Spil2\\spil.controller\\LikeControllerImpl.php:30\nStack trace:\n#0 D:\\xampp\\htdocs\\Spil2\\api\\GiveLikeWebService.php(14): LikeControllerImpl-&gt;nuevoLikeGesture('24', 'hola')\n#1 {main}\n thrown in <b>D:\\xampp\\htdocs\\Spil2\\spil.controller\\LikeControllerImpl.php</b> on line <b>30</b><br />\n"

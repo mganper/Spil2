@@ -75,7 +75,7 @@ function soloImagenes($fichero) {
         <link rel="icon" type="image/png" href="assets/img/favicon.ico">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <title>Paper Kit 2 by Creative Tim</title>
+        <title>Spil | Configuracion</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -204,6 +204,7 @@ function soloImagenes($fichero) {
 
 
         <!-- Modal Bodies come here -->
+        
         <div class="modal fade" id="MSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -213,29 +214,35 @@ function soloImagenes($fichero) {
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <!--<form action="#">-->
-                    <div class="modal-body"> 
-                        <textarea class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
-                        <label>Contenido sensible</label>
-                        <div class="form-check-radio">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                Off
-                                <span class="form-check-sign"></span>
-                            </label>
+                    <!-- FORMULARIO QUE RECIBE LA FUNCIONALIDAD ENVIAR SPIL AQUÍ-->
+                    <form action="#">
+                        <div class="modal-body"> 
+                            <textarea id="msg" class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
+                            <label>Contenido sensible</label>
+                            <div class="form-check-radio">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto" value="TRUE" checked>
+                                    Off
+                                    <span class="form-check-sign"></span>
+                                </label>
+                            </div>
+                            <div class="form-check-radio">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto2" value="FALSE" >
+                                    On
+                                    <span class="form-check-sign"></span>
+                                </label>
+                            </div>
                         </div>
-                        <div class="form-check-radio">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" >
-                                On
-                                <span class="form-check-sign"></span>
-                            </label>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal" onclick="sendMsg()">Publicar</button>
+                            <div class="divider"></div>                            
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-default btn-link" data-dismiss="modal">Publicar</button>
-                        <div class="divider"></div>                            
-                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
                     <!--</form>-->
                 </div>
             </div>

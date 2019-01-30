@@ -24,7 +24,7 @@ $notifications = $notfCtlr->listNot($user);
         <link rel="icon" type="image/png" href="assets/img/favicon.ico">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <title>Paper Kit 2 by Creative Tim</title>
+        <title>Spil | Notificaciones</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -128,34 +128,32 @@ $notifications = $notfCtlr->listNot($user);
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title text-center" id="exampleModalLabel">¿Qué tienes que decir?</h5>
-                        <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-
                     <!-- FORMULARIO QUE RECIBE LA FUNCIONALIDAD ENVIAR SPIL AQUÍ-->
-
                     <form action="#">
                         <div class="modal-body"> 
-                            <textarea class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
+                            <textarea id="msg" class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
                             <label>Contenido sensible</label>
                             <div class="form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto" value="TRUE" checked>
                                     Off
                                     <span class="form-check-sign"></span>
                                 </label>
                             </div>
                             <div class="form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" >
+                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto2" value="FALSE" >
                                     On
                                     <span class="form-check-sign"></span>
                                 </label>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal">Publicar</button>
+                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal" onclick="sendMsg()">Publicar</button>
                             <div class="divider"></div>                            
                         </div>
                     </form>
@@ -169,7 +167,7 @@ $notifications = $notfCtlr->listNot($user);
                 <div class="modal-content">
                     <div class="modal-header not-hidden" id="text-father">                    
                     </div>                    
-                    <button type="button" class="btn btn-danger btn-link not-hidden">Eliminar</button>   
+                    <button type="button" class="btn btn-danger btn-link not-hidden" onclick="">Eliminar</button>   
                 </div>
             </div>
         </div> 

@@ -56,7 +56,7 @@ $numSpils = count($spils);
         <link rel="icon" type="image/png" href="assets/img/favicon.ico">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <title>Paper Kit 2 by Creative Tim</title>
+        <title>Spil | Inicio</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -185,30 +185,28 @@ $numSpils = count($spils);
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-
                     <!-- FORMULARIO QUE RECIBE LA FUNCIONALIDAD ENVIAR SPIL AQUÍ-->
-
                     <form action="#">
                         <div class="modal-body"> 
-                            <textarea class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
+                            <textarea id="msg" class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
                             <label>Contenido sensible</label>
                             <div class="form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto" value="TRUE" checked>
                                     Off
                                     <span class="form-check-sign"></span>
                                 </label>
                             </div>
                             <div class="form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" >
+                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto2" value="FALSE" >
                                     On
                                     <span class="form-check-sign"></span>
                                 </label>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal">Publicar</button>
+                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal" onclick="sendMsg()">Publicar</button>
                             <div class="divider"></div>                            
                         </div>
                     </form>
@@ -234,11 +232,11 @@ $numSpils = count($spils);
                     <div id="modal-hiden-non-owner" style="visibility: collapse;">
                         <div class="modal-footer" id="modal-hidden">
                             <div class="left-side">
-                                <button type="button" id="btn-like" class="btn btn-default btn-link" data-dismiss="modal">I like it!</button>
+                                <button type="button" id="btn-like" class="btn btn-default btn-link" data-dismiss="modal" onclick="likear()">I like it!</button>
                             </div>
                             <div class="divider"></div>
                             <div class="right-side">
-                                <button type="button" id="btn-respil" class="btn btn-info btn-link">Respil it!</button>
+                                <button type="button" id="btn-respil" class="btn btn-info btn-link" onclick="respil()">Respil it!</button>
                             </div>                         
                         </div>
                     </div>

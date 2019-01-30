@@ -13,7 +13,7 @@ class LikeModelImpl implements LikeModel {
 
     public function nuevoLike($like) {
         $dao = $this->obtenerImplementacionLikeDao();
-        $dao->create($like);
+        return $dao->create($like);
     }
 
     public function obtenerLike($idMensaje, $idUsuario) {

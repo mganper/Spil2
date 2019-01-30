@@ -21,7 +21,7 @@ class RespilModelImpl implements RespilModel {
 
     public function nuevoRespil($respil) {
         $dao = $this->obtenerImplementacionRespilDao();
-        $dao->create($respil);
+        return $dao->create($respil);
     }
 
     public function obtenerRespil($respil) {
