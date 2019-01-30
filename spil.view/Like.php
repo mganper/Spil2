@@ -1,7 +1,6 @@
 <!doctype html>
 
 <?php
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
@@ -39,7 +38,7 @@ $likeController = new LikeControllerImpl();
 
 $seguidores = $userController->getNumSeguidores($userPerfil);
 $seguidos = $userController->getNumSeguidos($userPerfil);
-$avatar = NULL;//$userController->getAvatar($userPerfil);
+$avatar = UserDAOImpl::getAvatar($user);
 
 $spils = $spilController->listMsgs($userPerfil);
 $respils = $respilController->listarRespilsUsuario($userPerfil);
@@ -52,7 +51,6 @@ if ($respils) {
     }
 
     array_sort_by($spils, 'writeDate');
-
 }
 
 $numSpils = count($spils);
@@ -63,7 +61,6 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
 } else {
     $numLikes = 0;
 }
-
 ?>
 
 <html lang="en">
@@ -84,7 +81,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
-        
+
         <script type="text/javascript" src="../api/WebServiceCalls.js"></script>
         <script type="text/javascript" src="assets/js/scripting.js"></script>
 
@@ -214,7 +211,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
 
         <!-- Modal para ver Spil-->
 
-         <div class="modal fade" id="IMSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="IMSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header" id="text-father">
