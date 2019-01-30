@@ -18,7 +18,7 @@ function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
 
 session_start();
 
-$_SESSION['usuario'] = 'hola';
+$_SESSION['usuario'] = 'cad2298';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
@@ -84,6 +84,9 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
+        
+        <script type="text/javascript" src="../api/WebServiceCalls.js"></script>
+        <script type="text/javascript" src="assets/js/scripting.js"></script>
 
         <style> 
 
@@ -253,26 +256,35 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
 
         <!-- Modal para ver Spil-->
 
-        <div class="modal fade" id="IMSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal fade" id="IMSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">                        
-                        <h5 class="modal-title " id="exampleModalLabel">
-                            METER AQÚI EL CONTENIDO DEL MENSAJE
-                        </h5>    
-                        <br>
-                        <br>
-                        <h7>- @usuario</h7>
+                    <div class="modal-header" id="text-father">
+
                     </div>
+
                     <!-- SI ES EL DUEÑO DEL MENSAJE MOSTRAR ESTO -->
-                    <div class="modal-footer" hidden="">
-                        <div class="left-side">
-                            <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Editar</button>
+                    <div id="modal-hiden-owner" style="visibility: collapse;">
+                        <div class="modal-footer" id="modal-hidden">
+                            <div class="left-side">
+                                <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Editar</button>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="right-side">
+                                <button type="button" class="btn btn-danger btn-link">Eliminar</button>
+                            </div>                         
                         </div>
-                        <div class="divider"></div>
-                        <div class="right-side">
-                            <button type="button" class="btn btn-danger btn-link">Eliminar</button>
-                        </div>                         
+                    </div>
+                    <div id="modal-hiden-non-owner" style="visibility: collapse;">
+                        <div class="modal-footer" id="modal-hidden">
+                            <div class="left-side">
+                                <button type="button" class="btn btn-default btn-link" data-dismiss="modal">I like it!</button>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="right-side">
+                                <button type="button" class="btn btn-info btn-link">Respil it!</button>
+                            </div>                         
+                        </div>
                     </div>
                     </form>
                 </div>

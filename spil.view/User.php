@@ -17,7 +17,7 @@ function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
 
 session_start();
 
-$_SESSION['usuario'] = 'hola';
+$_SESSION['usuario'] = 'cad2298';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
@@ -83,6 +83,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
 
+        <script type="text/javascript" src="../api/WebServiceCalls.js"></script>
         <script type="text/javascript" src="assets/js/scripting.js"></script>
         <style> 
 
@@ -126,7 +127,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     <div class="col-sm-2 sidenav">
                         <img class="img-circle" src="assets/img/<?php echo $avatar; ?>" style="max-height: 200px; max-width: 200px; ">
                         <br>
-                        <label class="label label-info">@<?php echo $userPerfil; ?></label>
+                        <label class="label label-info" id="username">@<?php echo $userPerfil; ?></label>
                         <br>
                         <button class="btn btn-info btn-sm">Seguir</button>
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
@@ -135,7 +136,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                                 <a href="Seguidos.php?user=<?php echo $userPerfil; ?>">Seguidos <span class="label label-info"><?php echo $seguidos; ?></span></a><br>
                                 <a href="User.php?user=<?php echo $userPerfil; ?>">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                                
                                 <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a><br>          
-                                <button class="btn btn-info btn-sm">Ascender</button>
+                                <button class="btn btn-info" onclick="seguir()">Ascender</button>
                             </div>
                         </div>
 
@@ -203,25 +204,25 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     <!-- FORMULARIO QUE RECIBE LA FUNCIONALIDAD ENVIAR SPIL AQUÍ-->
                     <form action="#">
                         <div class="modal-body"> 
-                            <textarea class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
+                            <textarea id="msg" class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
                             <label>Contenido sensible</label>
                             <div class="form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto" value="false" checked>
                                     Off
                                     <span class="form-check-sign"></span>
                                 </label>
                             </div>
                             <div class="form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" >
+                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto2" value="true" >
                                     On
                                     <span class="form-check-sign"></span>
                                 </label>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal">Publicar</button>
+                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal" onclick="sendMsg()">Publicar</button>
                             <div class="divider"></div>                            
                         </div>
                     </form>
@@ -239,7 +240,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     </div>
 
                     <!-- SI ES EL DUEÑO DEL MENSAJE MOSTRAR ESTO -->
-                    <div id="modal-hiden" style="visibility: collapse;">
+                    <div id="modal-hiden-owner" style="visibility: collapse;">
                         <div class="modal-footer" id="modal-hidden">
                             <div class="left-side">
                                 <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Editar</button>
@@ -247,6 +248,17 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                             <div class="divider"></div>
                             <div class="right-side">
                                 <button type="button" class="btn btn-danger btn-link">Eliminar</button>
+                            </div>                         
+                        </div>
+                    </div>
+                    <div id="modal-hiden-non-owner" style="visibility: collapse;">
+                        <div class="modal-footer" id="modal-hidden">
+                            <div class="left-side">
+                                <button type="button" class="btn btn-default btn-link" data-dismiss="modal">I like it!</button>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="right-side">
+                                <button type="button" class="btn btn-info btn-link">Respil it!</button>
                             </div>                         
                         </div>
                     </div>

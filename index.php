@@ -65,3 +65,16 @@ $contUser = new UserControllerImpl();
 //$contUser->removefollower("andres", "hola");
 ?>
 
+<html>
+    <head>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="api/WebServiceCalls.js" type="text/javascript"></script>
+        <script>
+        
+            createSpilCall("mensaje", "true");
+        
+        </script>
+    </head>
+    
+</html>
+
