@@ -6,7 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\UserControllerI
 
 session_start();
 
-$_SESSION['usuario'] = 'cad2298';
+$_SESSION['usuario'] = 'prueba';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
@@ -39,15 +39,17 @@ if (isset($_SESSION['usuario'])) {
 
             $confController->modifyConfiguration($_SESSION['usuario'], 0, 0, $_POST['sensible']);
         }
+    }
 
 
-        if (isset($_POST[' cpsw'])) {
-            if (isset($_POST['npass'])) {
-                if (isset($_POST['pass'])) {
+    if (isset($_POST['cpsw'])) {
+
+        if (isset($_POST['npass'])) {
+
+            if (isset($_POST['pass'])) {
 
 
-                    $confUsuario->modifyPassword($_SESSION['usuario'], $_POST['pass'], $_POST['npass']);
-                }
+                $confUsuario->modifyPassword($_SESSION['usuario'], $_POST['pass'], $_POST['npass']);
             }
         }
     }
