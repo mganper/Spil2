@@ -18,7 +18,8 @@ function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
 
 session_start();
 
-$_SESSION['usuario']='asd';
+$_SESSION['usuario']='userTest';
+
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
 } else {
@@ -41,8 +42,9 @@ foreach ($seguidos as $seguido) {
     array_push($spils, $spilController->listMsgs($seguido->getUsuario()));
     array_push($respils, $respilController->listarRespilsUsuario($seguido->getUsuario()));
 }
-
+echo 'Mensajes';
 array_push($spils, $spilController->listMsgs($user));
+echo '<br>Respils';
 array_push($respils, $respilController->listarRespilsUsuario($user));
 
 foreach ($spils as $spil) {
