@@ -4,9 +4,9 @@ function addModeratorCall(idUsuario) {
     }, function (data, status) {
         var content = JSON.parse(data);
         if (content.resp) {
-            alert("Bien");
+            alert("Usuario ascendido correctamente");
         } else {
-            alert("Mal");
+            alert("El usuario no ha podido ser ascendido");
         }
     });
 }
@@ -18,9 +18,9 @@ function createSpilCall(mensaje, cAdulto) {
     }, function (data, status) {
         var content = JSON.parse(data);
         if (content.resp) {
-            alert("Bien");
+            alert("Mensaje enviado.");
         } else {
-            alert("Mal");
+            alert("Su mensaje no se ha enviado con éxito.");
         }
     });
 }
@@ -31,9 +31,9 @@ function deleteSpilCall(spilId) {
     }, function (data, status) {
         var content = JSON.parse(data);
         if (content.resp) {
-            alert("Bien");
+            alert("Mensaje eliminado correctamente");
         } else {
-            alert("Mal");
+            alert("No se ha podido eliminar el mensaje");
         }
     });
 }
@@ -44,9 +44,9 @@ function followUserCall(idUsuario) {
     }, function (data, status) {
         var content = JSON.parse(data);
         if (content.resp) {
-            alert("Bien");
+            alert("Uusario seguido correctamente");
         } else {
-            alert("Mal");
+            alert("No se ha podido seguir al usuario");
         }
     });
 }
@@ -57,9 +57,9 @@ function giveLikeCall(spilId) {
     }, function (data, status) {
         var content = JSON.parse(data);
         if (content.resp) {
-            alert("Bien");
+            alert("Like enviado correctamente");
         } else {
-            alert("Mal");
+            alert("No se ha podido enviar el like");
         }
     });
 }
@@ -70,9 +70,9 @@ function giveRespilCall(spilId) {
     }, function (data, status) {
         var content = JSON.parse(data);
         if (content.resp) {
-            alert("Bien");
+            alert("Respil enviado correctamente");
         } else {
-            alert("Mal");
+            alert("Respil no enviado correctamente");
         }
     });
 }
@@ -83,9 +83,9 @@ function removeLikeCall(spilId) {
     }, function (data, status) {
         var content = JSON.parse(data);
         if (content.resp) {
-            alert("Bien");
+            alert("Eliminar like realizado correctamente");
         } else {
-            alert("Mal");
+            alert("No se ha podido eliminar el like");
         }
     });
 }
@@ -96,9 +96,9 @@ function removeRespilCall(spilId) {
     }, function (data, status) {
         var content = JSON.parse(data);
         if (content.resp) {
-            alert("Bien");
+            alert("Respil eliminado correctamente");
         } else {
-            alert("Mal");
+            alert("No se ha podido eliminar el respil");
         }
     });
 }
@@ -109,9 +109,9 @@ function unfollowUserCall(idUsuarioSeguido) {
     }, function (data, status) {
         var content = JSON.parse(data);
         if (content.resp) {
-            alert("Bien");
+            alert("Usuario dejado de seguir correctamente");
         } else {
-            alert("Mal");
+            alert("No se ha podido dejar de seguir al usuario");
         }
     });
 }

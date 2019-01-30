@@ -229,14 +229,14 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                             <label>Contenido sensible</label>
                             <div class="form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto" value="0" checked>
+                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto" value="TRUE" checked>
                                     Off
                                     <span class="form-check-sign"></span>
                                 </label>
                             </div>
                             <div class="form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto2" value="1" >
+                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto2" value="FALSE" >
                                     On
                                     <span class="form-check-sign"></span>
                                 </label>
