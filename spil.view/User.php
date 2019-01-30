@@ -219,7 +219,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title text-center" id="exampleModalLabel">¿Qué tienes que decir?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="#MSGModal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -244,7 +244,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal" onclick="sendMsg()">Publicar</button>
+                            <button type="submit" class="btn btn-default btn-link" data-dismiss="#MSGModal" onclick="sendMsg()">Publicar</button>
                             <div class="divider"></div>                            
                         </div>
                     </form>
@@ -264,17 +264,17 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     <!-- SI ES EL DUEÑO DEL MENSAJE MOSTRAR ESTO -->
                     <div id="modal-hiden-owner" style="visibility: collapse;">
                         <div class="modal-footer" id="modal-hidden">
-                            <button type="button" id="btn-eliminar" class="btn btn-danger btn-link" onclick="eliminaSpil()">Eliminar</button>
+                            <button type="button" id="btn-eliminar" class="btn btn-danger btn-link" data-dismiss="#IMSGModal" onclick="eliminaSpil()">Eliminar</button>
                         </div>
                     </div>
                     <div id="modal-hiden-non-owner" style="visibility: collapse;">
                         <div class="modal-footer" id="modal-hidden">
                             <div class="left-side">
-                                <button type="button" id="btn-like" class="btn btn-default btn-link" data-dismiss="modal" onclick="likear()">I like it!</button>
+                                <button type="button" id="btn-like" class="btn btn-default btn-link" data-dismiss="#IMSGModal" onclick="likear()">I like it!</button>
                             </div>
                             <div class="divider"></div>
                             <div class="right-side">
-                                <button type="button" id="btn-respil" class="btn btn-info btn-link" onclick="respil()">Respil it!</button>
+                                <button type="button" id="btn-respil" class="btn btn-info btn-link" data-dismiss="#IMSGModal" onclick="respil()">Respil it!</button>
                             </div>                         
                         </div>
                     </div>
