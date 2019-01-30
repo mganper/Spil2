@@ -81,13 +81,16 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
         <link href="pk2-free-v2.0.1/assets/css/bootstrap.min.css" rel="stylesheet" />
         <link href="pk2-free-v2.0.1/assets/css/paper-kit.css?v=2.0.1" rel="stylesheet"/>
 
+        <script type="text/javascript" src="../api/WebServiceCalls.js"></script>
+        <script type="text/javascript" src="assets/js/scripting.js"></script>
+        
         <!--     Fonts and icons     -->
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
 
-        <script type="text/javascript" src="assets/js/api/WebServiceCalls.js"></script>
+        <script type="text/javascript" src="../api/WebServiceCalls.js"></script>
         <script type="text/javascript" src="assets/js/scripting.js"></script>
         <style> 
 
