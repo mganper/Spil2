@@ -39,6 +39,7 @@ $numSeguidos = $userController->getNumSeguidos($userPerfil);
 $avatar = UserDAOImpl::getAvatar($userPerfil);
 $seguidores = $userController->getSeguidores($userPerfil);
 $isFollowed = UserDAOImpl::EsSeguido($userPerfil, $user);
+$ismoderator = UserDAOImpl::isModerator($user);
 
 $spils = $spilController->listMsgs($userPerfil);
 $respils = $respilController->listarRespilsUsuario($userPerfil);
@@ -129,14 +130,15 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                         <img class="img-circle" src="assets/img/<?php echo $avatar; ?>" style="max-height: 200px; max-width: 200px; ">
                         <br>
                         <label class="label label-info">@<?php echo $userPerfil; ?></label><br>
-                        <?php 
-                        if($user !== $userPerfil) {
+                        <?php
+                        if ($user !== $userPerfil) {
                             if (!$isFollowed) {
                                 ?>
                                 <button class="btn btn-info btn-sm">Seguir</button>
                             <?php } else { ?>
                                 <button class="btn btn-info btn-sm">Dejar de seguir</button>
-                            <?php }
+                            <?php
+                            }
                         }
                         ?>
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
@@ -144,7 +146,10 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                                 <a href="Seguidores.php?user=<?php echo $userPerfil; ?>">Seguidores <span class="label label-info"><?php echo $numSeguidores; ?></span></a><br>
                                 <a href="Seguidos.php?user=<?php echo $userPerfil; ?>">Seguidos <span class="label label-info"><?php echo $numSeguidos; ?></span></a><br>
                                 <a href="User.php?user=<?php echo $userPerfil; ?>">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                                
-                                <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a>                             
+                                <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a>   <br>
+                                <?php if ($ismoderator) { ?>
+                                    <button id="bt-tomoderator" class="btn btn-info" onclick="seguir()">Ascender</button>
+<?php } ?>
                             </div>
                         </div>
 
@@ -161,7 +166,6 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     <div class="col-sm-8 text-center"> 
 
                         <?php
-                        
                         foreach ($seguidores as $usuario) {
                             $nick = $usuario->getUsuario();
                             $imgprofile = $usuario->getAvatar();
