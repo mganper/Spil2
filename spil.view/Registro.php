@@ -34,11 +34,53 @@ function register($name, $surname, $birthdate, $user, $pass) {
                 'user' => FILTER_SANITIZE_STRING,
                 'pass' => FILTER_SANITIZE_STRING
             );
-            
+
             $entry = filter_input_array(INPUT_POST, $filter);
 
             if (register($entry['name'], $entry['surname'], $_POST['birthdate'], $entry['user'], $entry['pass'])) {
                 header('Location: Login.php');
+            } else {
+                ?>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3">
+                            <div class="card-register bg-primary">
+                                <h3 style="color:blue;">Welcome to Spil!</h3>
+                                <!-- FORMULARIO DE REGISTRO-->
+                                <form class="register-form" action="#" method="POST">
+                                    <label>Nombre</label>
+                                    <input type="text" placeholder="Nombre" class="form-control" name="name" required>
+                                    <label>Apellidos</label>
+                                    <input type="text" placeholder="Apellidos" class="form-control" name="surname" required>
+                                    <label>Fecha de nacimiento</label>
+                                    <input type="text" id="birth-date" placeholder="DD-MM-AAAA" class="form-control" onkeyup="checkDate()" name="birthdate">
+                                    <label>User</label>
+                                    <div class="form-group has-danger">
+                                    <input class="form-control form-control-danger" type="text" placeholder="User" name="user" required>
+                                    <div class="form-control-feedback">El usuario ya esta en uno, utilice otro.</div>
+                                    </div>
+                                    <label>Contraseña: </label>
+                                    <div class="">
+                                        <input class="form-control" type="password" placeholder="Nueva contraseña" id="npass" onblur="checkPasswd()" name="pass" required><br>
+                                        <label>Repetir contraseña: </label>
+                                        <input class="form-control" type="password" placeholder="Repetir contraseña" id="rnpass" onblur="checkPasswd()" required><br><br>
+                                        <input id="cpsw" type="submit" name="send" value="Registrar" class="btn btn-danger btn-block btn-round" disabled>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer register-footer text-center">
+                        <h6>
+                            © 
+                            <script>document.write(new Date().getFullYear())</script>
+                            , Grupo 10 Programacion Avanzada.
+                        </h6>
+                    </div>
+                </div>
+
+                <?php
             }
         } else {
             ?>
@@ -85,7 +127,7 @@ function register($name, $surname, $birthdate, $user, $pass) {
                 $("#rnpass").addClass(" form-control-danger");
                 $("#npass").addClass(" form-control-danger");
                 $("#psswd").append("<div id='fallo' class='form-control-feedback' style='color:red;'>Las contraseñas no coinciden.</div>");
-                $("#cpsw").attr("disabled",true);
+                $("#cpsw").attr("disabled", true);
             } else {
                 if ($("#rnpass").val() !== "" && $("#npass").val() !== "") {
                     $("#rnpass").removeClass(" form-control-danger");
@@ -93,7 +135,7 @@ function register($name, $surname, $birthdate, $user, $pass) {
                     $("#rnpass").addClass(" form-control-success");
                     $("#npass").addClass(" form-control-success");
                     $("#fallo").remove();
-                    $("#cpsw").attr("disabled",false);
+                    $("#cpsw").attr("disabled", false);
                 }
             }
         }

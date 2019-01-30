@@ -59,15 +59,9 @@ $notifications = $notfCtlr->listNot($user);
     <body>
         <!--    navbar come here          -->
         <nav class="navbarnavbar-expand-md bg-info">
-            <div class="container" style="text-align: center;">         
-                <img src="pk2-free-v2.0.1/assets/img/spil_favicon_iz.png" style="max-width: 40px">          
-                <a class="navbar-brand nav-link" href="Lobby.php">Inicio</a>
-                <a class="navbar-brand nav-link" href="Notification.php">Notificaciones</a>
-                <a class="navbar-brand nav-link" href="User.php?user=<?php echo $user; ?>">Perfil</a>
-                <a class="navbar-brand nav-link" href="Configuration.php">Configuracion</a>
-                <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal" style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
-                <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px;">
-                <a class='navbar-brand nav-link navbar-right' href="Logout.php">Log out</a>
+            <div class="container" style="text-align: center;">               
+                <a class="navbar-brand nav-link"></a>
+                <a class="navbar-brand nav-link" ></a>
             </div>
         </nav>
         <!-- end navbar  -->
@@ -87,33 +81,10 @@ $notifications = $notfCtlr->listNot($user);
                         </div>
                     </div>
                     <div class="col-sm-8 text-center"> 
-                        <?php
-                        foreach ($notifications as $not) {
-                            $txt = $not->getText();
-                            $id = $not->getIdNotification();
-                            ?>
-                        <div data-toggle="modal" data-target="#notification-modal" onclick="displayNot('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $id; ?>')">
-                                <h3>
-                                    <?php
-                                    echo $txt;
-                                    ?>
-                                </h3>
-                            </div>
-                            <hr>
-                        <?php } ?>
+                        <h1>Parece que algo ha salido mal...</h1>
                     </div>
                     <div class="col-sm-2 sidenav">
-                        <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
-                            <div class="info-user ">
-                                <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
-                                <?php
-                                $ranking = UserDAOImpl::getRank5();
-                                foreach ($ranking as $rank) {
-                                    echo $rank[0] . ' con ' . $rank[2] . ' likes<br>';
-                                }
-                                ?>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

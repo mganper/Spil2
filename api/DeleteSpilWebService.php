@@ -6,11 +6,11 @@ session_start();
 
 if(isset($_SESSION['usuario'])){
     
-    $spilId = $_POST['spilId'];
+    $notificationIde = $_POST['spilId'];
     
     $controller = new SpilControllerImpl();
     
-    $resp = ['resp' => $controller->delete($spilId)];
+    $resp = ['resp' => $controller->delete($notificationIde)];
     
     echo json_encode($resp);
 } else {
