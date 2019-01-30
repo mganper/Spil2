@@ -70,9 +70,11 @@ $contUser->createUser("prueba", "prueba", "prueba", "prueba", '2010-10-1');
     <head>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="api/WebServiceCalls.js" type="text/javascript"></script>
+        <script type="text/javascript" src="spil.view/assets/js/scripting.js"></script>
         <script>
         
-            createSpilCall("mensaje", "true");
+            //createSpilCall("mensaje", "true");
+            sendMsg();
         
         </script>
     </head>

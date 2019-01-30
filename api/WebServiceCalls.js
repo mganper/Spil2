@@ -1,5 +1,5 @@
 function addModeratorCall(idUsuario) {
-    $.post('api/AddModeratorWebService.php', {
+    $.post('spil.view/assets/js/api/AddModeratorWebService.php', {
         idUsuarioAsc: idUsuario
     }, function (data, status) {
         var content = JSON.parse(data);
@@ -12,7 +12,7 @@ function addModeratorCall(idUsuario) {
 }
 
 function createSpilCall(mensaje, cAdulto) {
-    $.post('api/CreateSpilWebService.php', {
+    $.post('spil.view/assets/js/api/CreateSpilWebService.php', {
         msg: mensaje,
         aContent: cAdulto
     }, function (data, status) {

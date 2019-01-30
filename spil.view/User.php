@@ -5,6 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerI
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/LikeControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.persistence/spil.model.persistence.dao/UserDAOImpl.php';
 
 function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
     $arrAux = array();
@@ -38,7 +39,10 @@ $likeController = new LikeControllerImpl();
 
 $seguidores = $userController->getNumSeguidores($userPerfil);
 $seguidos = $userController->getNumSeguidos($userPerfil);
-$avatar = NULL; //$userController->getAvatar($userPerfil);
+$avatar = UserDAOImpl::getAvatar($userPerfil);
+$ismoderator = UserDAOImpl::isModerator($user);
+$isFollowed = UserDAOImpl::EsSeguido($userPerfil, $user);
+echo $ismoderator;
 
 $spils = $spilController->listMsgs($userPerfil);
 $respils = $respilController->listarRespilsUsuario($userPerfil);
@@ -83,7 +87,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
 
-        <script type="text/javascript" src="../api/WebServiceCalls.js"></script>
+        <script type="text/javascript" src="assets/js/api/WebServiceCalls.js"></script>
         <script type="text/javascript" src="assets/js/scripting.js"></script>
         <style> 
 
@@ -129,14 +133,24 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                         <br>
                         <label class="label label-info" id="username">@<?php echo $userPerfil; ?></label>
                         <br>
-                        <button class="btn btn-info btn-sm">Seguir</button>
+                        <?php if($user !== $userPerfil) {
+                            if (!$isFollowed) {
+                                ?>
+                                <button class="btn btn-info btn-sm">Seguir</button>
+                            <?php } else { ?>
+                                <button class="btn btn-info btn-sm">Dejar de seguir</button>
+                            <?php }
+                        }
+                        ?>
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
                             <div class="info-user ">
                                 <a href="Seguidores.php?user=<?php echo $userPerfil; ?>">Seguidores <span class="label label-info"><?php echo $seguidores; ?></span></a><br>
                                 <a href="Seguidos.php?user=<?php echo $userPerfil; ?>">Seguidos <span class="label label-info"><?php echo $seguidos; ?></span></a><br>
                                 <a href="User.php?user=<?php echo $userPerfil; ?>">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                                
-                                <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a><br>          
-                                <button class="btn btn-info" onclick="seguir()">Ascender</button>
+                                <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a><br> 
+<?php if ($ismoderator) { ?>
+                                    <button id="bt-tomoderator" class="btn btn-info" onclick="seguir()">Ascender</button>
+<?php } ?>
                             </div>
                         </div>
 
@@ -159,9 +173,9 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                             ?>
                             <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>')">
                                 <h3>
-                                    <?php
-                                    echo $txt;
-                                    ?>
+    <?php
+    echo $txt;
+    ?>
                                 </h3>
                                 <h5>
                                     <?php
@@ -171,7 +185,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                                 </h5>
                             </div>
                             <hr>
-                        <?php } ?>
+<?php } ?>
                     </div>
                     <div class="col-sm-2 sidenav">
                         <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
@@ -208,14 +222,14 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                             <label>Contenido sensible</label>
                             <div class="form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto" value="false" checked>
+                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto" value="0" checked>
                                     Off
                                     <span class="form-check-sign"></span>
                                 </label>
                             </div>
                             <div class="form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto2" value="true" >
+                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto2" value="1" >
                                     On
                                     <span class="form-check-sign"></span>
                                 </label>

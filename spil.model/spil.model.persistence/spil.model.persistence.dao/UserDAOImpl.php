@@ -262,5 +262,20 @@ class UserDAOImpl implements UserDAO {
 
         return $listaUsuarios;
     }
+    
+    public static function isModerator($user){
+        $query = "SELECT esModerador FROM usuario WHERE usuario='$user';";
+        $ret;
+        
+        if(!($res = connectionSingleton::getConn()->query($query))){
+            return false;
+        }else{
+            while($row = $res->fetch_row()){
+            $ret = $row[0];
+            }
+        }
+        
+        return $ret;
+    }
 
 }
