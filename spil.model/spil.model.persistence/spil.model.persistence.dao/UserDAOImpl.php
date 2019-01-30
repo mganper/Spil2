@@ -243,7 +243,7 @@ class UserDAOImpl implements UserDAO {
     public static function getRank5() {
         $listaUsuarios = Array();
 
-        $query = "SELECT usuario,avatar,count(*) FROM usuario a, megusta b, spil c WHERE  "
+        $query = "SELECT usuario,avatar,count(*) as 'cuenta' FROM usuario a, megusta b, spil c WHERE  "
                 . "  b.idMensaje=c.id and c.idUsuario=a.usuario group by usuario,avatar order by count(*) DESC LIMIT 5";
 
         if (!($res = connectionSingleton::getConn()->query($query))) {
@@ -254,8 +254,8 @@ class UserDAOImpl implements UserDAO {
                 $res = $row->fetch_assoc();
 
                 $userRecovered = new UserImpl($userAvatar['usuario'], $userAvatar['avatar'], null, null, null, null, null);
-
-                array_push($listaUsuarios, $userRecovered);
+             
+                array_push($listaUsuarios, ["user" => $userRecovered, "num" => $userAvatar['cuenta']]);
             }
         }
 
