@@ -23,3 +23,20 @@ function seguir(){
     
     followUserCall(username);
 }
+function checkPasswd() {
+    if (($("#rnpass").val() !== $("#npass").val()) && ($("#rnpass").val() !== "" && $("#npass").val() !== "")) {
+        $("#rnpass").addClass(" form-control-danger");
+        $("#npass").addClass(" form-control-danger");
+        $("#psswd").append("<div id='fallo' class='form-control-feedback' style='color:red;'>Las contraseñas no coinciden.</div>");
+        $("#cpsw").attr("disabled",true);
+    } else {
+        if ($("#rnpass").val() !== "" && $("#npass").val() !== "") {
+            $("#rnpass").removeClass(" form-control-danger");
+            $("#npass").removeClass(" form-control-danger");
+            $("#rnpass").addClass(" form-control-success");
+            $("#npass").addClass(" form-control-success");
+            $("#fallo").remove();
+            $("#cpsw").attr("disabled",false);
+        }
+    }
+}

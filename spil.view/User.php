@@ -129,7 +129,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                         <br>
                         <label class="label label-info" id="username">@<?php echo $userPerfil; ?></label>
                         <br>
-                        <button class="btn btn-info">Seguir</button>
+                        <button class="btn btn-info btn-sm">Seguir</button>
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
                             <div class="info-user ">
                                 <a href="Seguidores.php?user=<?php echo $userPerfil; ?>">Seguidores <span class="label label-info"><?php echo $seguidores; ?></span></a><br>
