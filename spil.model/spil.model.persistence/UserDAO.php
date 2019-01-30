@@ -31,4 +31,6 @@ interface UserDAO {
     public static function EsSeguido($idSeguido, $idSeguidor);
 
     public static function getAvatar($Usuario);
+
+    public static function getRank5();
 }

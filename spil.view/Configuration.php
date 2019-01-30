@@ -14,10 +14,10 @@ if (isset($_SESSION['usuario'])) {
     $confUsuario = new UserControllerImpl();
     $config = $confController->getConfiguration($user);
 
- 
+
 
     if (isset($_POST['avatar'])) {
-        
+
         if ($_FILES['foto']['error'] > 0) {
             echo 'Error: ' . $_FILES['foto']['error'] . '<br />';
         } else if (!soloImagenes($_FILES['foto'])) {
@@ -25,9 +25,9 @@ if (isset($_SESSION['usuario'])) {
         } else if (!limiteTamanyo($_FILES['foto'], 2 * 1024 * 1024)) {
             echo 'Error: El tama&ntilde;o del fichero supera los 200KB <br />';
         } else {
-           
+
             $nombreAr = filter_var(filter_var($_FILES['foto']['name'], FILTER_SANITIZE_STRING));
-            $nombreAr =   $_SERVER['REQUEST_TIME'].$nombreAr;
+            $nombreAr = $_SERVER['REQUEST_TIME'] . $nombreAr;
             if (move_uploaded_file($_FILES["foto"]["tmp_name"], "img/" . $nombreAr)) {
                 $confUsuario->modifyAvatar($_SESSION['usuario'], $nombreAr);
             }
