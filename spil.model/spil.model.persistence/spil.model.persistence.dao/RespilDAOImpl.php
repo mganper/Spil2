@@ -140,5 +140,23 @@ class RespilDAOImpl implements RespilDAO {
 
         return $res;
     }
+    
+     public static function deleteRespilsMensaje($idMensaje) {
+
+
+
+        $query = "DELETE FROM respil WHERE idMensaje ='" . $idMensaje .
+                "';";
+        //try
+        $con = connectionSingleton::getConn();
+
+        if (!($result = $con->query($query))) {
+
+
+           return FALSE; 
+        }
+        return TRUE;
+        //  mysqli_close($con);
+    }
 
 }

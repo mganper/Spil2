@@ -167,5 +167,23 @@ class LikeDAOImpl implements LikeDAO {
         
         
     }
+    public static function deleteLikesMensaje($idMensaje) {
+
+
+
+        $query = "DELETE FROM megusta WHERE idMensaje ='" . $idMensaje .
+                "';";
+        //try
+        $con = connectionSingleton::getConn();
+
+        if (!($result = $con->query($query))) {
+
+
+           return FALSE; 
+        }
+        return TRUE;
+      
+    }
+    
 
 }

@@ -1,14 +1,17 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'\Spil2\spil.controller\SpilController.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\SpilController.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'].'\Spil2\spil.model\SpilModelImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\SpilModelImpl.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'].'\Spil2\spil.model\spil.model.entity\SpilImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.entity\SpilImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.entity\RespilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.entity\LikeControllerImpl.php';
 
-class SpilControllerImpl implements SpilController{
+class SpilControllerImpl implements SpilController {
+
     private $model;
-    
+
     function __construct() {
         $this->model = new SpilModelImpl();
         return $this->model->setController($this);
@@ -16,6 +19,12 @@ class SpilControllerImpl implements SpilController{
 
     public function delete($idSpil) {
         $spil = new SpilImpl($idSpil, NULL, NULL, NULL, NULL, NULL, NULL);
+        $resp = new RespilControllerImpl();
+        $lik = new LikeControllerImpl();
+
+        LikeDAOImpl::deleteLikesMensaje($idSpil);
+        RespilDAOImpl::deleteRespilsMensaje($idSpil);
+
         return $this->model->deleteSpil($spil);
     }
 
