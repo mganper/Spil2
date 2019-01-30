@@ -231,12 +231,9 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                                 <span class="form-check-sign"></span>
                             </label>
                         </div>
-                        <div class="form-check-radio">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" >
-                                On
-                                <span class="form-check-sign"></span>
-                            </label>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-default btn-link" data-dismiss="#MSGModal" onclick="sendMsg()">Publicar</button>
+                            <div class="divider"></div>                            
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -259,17 +256,17 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     <!-- SI ES EL DUEÑO DEL MENSAJE MOSTRAR ESTO -->
                     <div id="modal-hiden-owner" style="visibility: collapse;">
                         <div class="modal-footer" id="modal-hidden">
-                            <button type="button" id="btn-eliminar" class="btn btn-danger btn-link" onclick="eliminaSpil()">Eliminar</button>
+                            <button type="button" id="btn-eliminar" class="btn btn-danger btn-link" data-dismiss="#IMSGModal" onclick="eliminaSpil()">Eliminar</button>
                         </div>
                     </div>
                     <div id="modal-hiden-non-owner" style="visibility: collapse;">
                         <div class="modal-footer" id="modal-hidden">
                             <div class="left-side">
-                                <button type="button" id="btn-like" class="btn btn-default btn-link" data-dismiss="modal" onclick="unlike()">I don't like it anymore...</button>
+                                <button type="button" id="btn-like" class="btn btn-default btn-link" data-dismiss="#IMSGModal" onclick="unlike()">I don't like it anymore...</button>
                             </div>
                             <div class="divider"></div>
                             <div class="right-side">
-                                <button type="button" id="btn-respil" class="btn btn-info btn-link" onclick="respil()">Respil it!</button>
+                                <button type="button" id="btn-respil" class="btn btn-info btn-link" data-dismiss="#IMSGModal" onclick="respil()">Respil it!</button>
                             </div>                         
                         </div>
                     </div>

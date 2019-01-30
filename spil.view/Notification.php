@@ -128,7 +128,7 @@ $notifications = $notfCtlr->listNot($user);
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title text-center" id="exampleModalLabel">¿Qué tienes que decir?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="#MSGModal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -153,7 +153,7 @@ $notifications = $notfCtlr->listNot($user);
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal" onclick="sendMsg()">Publicar</button>
+                            <button type="submit" class="btn btn-default btn-link" data-dismiss="#MSGModal" onclick="sendMsg()">Publicar</button>
                             <div class="divider"></div>                            
                         </div>
                     </form>
@@ -167,7 +167,7 @@ $notifications = $notfCtlr->listNot($user);
                 <div class="modal-content">
                     <div class="modal-header not-hidden" id="text-father">                    
                     </div>                    
-                    <button type="button" class="btn btn-danger btn-link not-hidden" onclick="">Eliminar</button>   
+                    <button type="button" class="btn btn-danger btn-link not-hidden" data-dismiss="#notification-modal" onclick="">Eliminar</button>   
                 </div>
             </div>
         </div> 
