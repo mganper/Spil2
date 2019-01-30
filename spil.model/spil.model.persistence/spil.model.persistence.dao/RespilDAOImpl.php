@@ -33,13 +33,12 @@ class RespilDAOImpl implements RespilDAO {
         $con = connectionSingleton::getConn();
 
         if (!($result = $con->query($query))) {
-
-            echo "no Creado RESPIL"; /////////////ELIMINAR/MODIFICAR!!!
+            return false;
         } else {
-
-
-            // mysqli_close($con);
+            return true;
         }
+        
+        
     }
 
     public function delete($respil) {

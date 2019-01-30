@@ -36,10 +36,10 @@ class LikeDAOImpl implements LikeDAO {
 
             echo("no Creado RESPIL"); /////////////ELIMINAR/MODIFICAR!!!
         } else {
-
-
-            //    mysqli_close($con);
+            return TRUE;
         }
+        
+        return FALSE;
     }
 
     public function delete($like) {
