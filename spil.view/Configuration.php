@@ -33,6 +33,24 @@ if (isset($_SESSION['usuario'])) {
             }
         }
     }
+    if (isset($_POST['radioSensible'])) {
+        if (isset($_POST['sensible'])) {
+
+
+            $confController->modifyConfiguration($_SESSION['usuario'], 0, 0, $_POST['sensible']);
+        }
+
+
+        if (isset($_POST[' cpsw'])) {
+            if (isset($_POST['npass'])) {
+                if (isset($_POST['pass'])) {
+
+
+                    $confUsuario->modifyPassword($_SESSION['usuario'], $_POST['pass'], $_POST['npass']);
+                }
+            }
+        }
+    }
 } else {
     header('Location: Login.php');
 }
@@ -68,8 +86,6 @@ function soloImagenes($fichero) {
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
-        <script type="text/javascript" src="assets/js/scripting.js"></script>
-
 
         <style> .navbar {
                 margin-bottom: 0;
@@ -96,9 +112,9 @@ function soloImagenes($fichero) {
                 <a class="navbar-brand nav-link" href="Notification.php">Notificaciones</a>
                 <a class="navbar-brand nav-link" href="User.php?user=<?php echo $user; ?>">Perfil</a>
                 <a class="navbar-brand nav-link" href="Configuration.php">Configuracion</a>
-                <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal"style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
+                <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal" style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px;">
-                <a class='navbar-brand nav-link navbar-right'href="Logout.php">Log out</a>
+                <a class='navbar-brand nav-link navbar-right' href="Logout.php">Log out</a>
             </div>
         </nav>
         <!-- end navbar  -->
@@ -123,10 +139,10 @@ function soloImagenes($fichero) {
                         <hr>
                         <h5 style="text-align: left"><b>Mostrar contenido sensible:</b></h5><br>
 
-                        <form class="register-form"  style="text-align: left;" action="#">
+                        <form class="register-form"  style="text-align: left;" action="#" method="post">
                             <div class="form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" 
+                                    <input class="form-check-input" type="radio" name="sensible" id="exampleRadios1" value="1" 
                                     <?php
                                     if ($config->isModoAdulto()) {
                                         echo "checked";
@@ -138,7 +154,7 @@ function soloImagenes($fichero) {
                             </div>
                             <div class="form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"
+                                    <input class="form-check-input" type="radio" name="sensible" id="exampleRadios2" value="0"
                                     <?php
                                     if (!$config->isModoAdulto()) {
                                         echo "checked";
@@ -149,7 +165,7 @@ function soloImagenes($fichero) {
                                 </label>
                             </div>
                             <br>
-                            <button class="btn btn-round bg-info">Enviar</button>
+                            <button id="radioSensible" type="submit" name="radioSensible" class="btn btn-round bg-info">Enviar</button>
                         </form>
                         <br>
                         <!-- FOTO PERFIL AQUÍ////////////////////////////////////////////////////////-->
@@ -162,14 +178,14 @@ function soloImagenes($fichero) {
                         <h4 style="text-align: left">Seguridad</h4>
                         <hr>
                         <h5 style="text-align: left"><b>Cambiar contraseña:</b></h5><br>
-                        <form id="psswd" class="register-form has-danger has-success"  style="text-align: left;" action="#">
+                        <form id="psswd" class="register-form has-danger has-success"  style="text-align: left;" action="#" method="Post">
                             <label>Contraseña actual: </label>
-                            <input class="col-sm-2" type="password" placeholder="Contraseña"><br>
+                            <input name="pass" class="col-sm-2" type="password" placeholder="Contraseña"><br>
                             <label>Nueva contraseña: </label>
-                            <input class="col-sm-2" type="password" placeholder="Nueva contraseña" id="npass" onblur="checkPasswd()"><br>
+                            <input class="col-sm-2" name="npass" type="password" placeholder="Nueva contraseña" id="npass" onblur="checkPasswd()"><br>
                             <label>Repetir contraseña: </label>
                             <input class="col-sm-2" type="password" placeholder="Repetir contraseña" id="rnpass" onblur="checkPasswd()"><br><br>
-                            <button  id="cpsw" class="btn btn-round bg-info" disabled>Cambiar contraseña</button>
+                            <button type="submit" id="cpsw" name="cpsw" class="btn btn-round bg-info" disabled>Cambiar contraseña</button>
                         </form>
                     </div>
                     <div class="col-sm-2 sidenav">

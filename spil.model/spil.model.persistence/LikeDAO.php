@@ -13,4 +13,6 @@ interface LikeDAO {
     function delete($like);
 
     function listed($identificador);
+
+    static function tieneLike($idMensaje, $idUsuario);
 }

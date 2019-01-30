@@ -1,6 +1,5 @@
 
 
-
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\RespilControllerImpl.php';
@@ -44,8 +43,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persisten
 
 
 $contUser = new UserControllerImpl();
+$contUser->createUser("prueba", "prueba", "prueba", "prueba", '2010-10-1');
 
-$contUser->modifyAvatar("hola", "funciono");
+//$contUser->modifyAvatar("hola", "funciono");
 
 //UserDAOImpl::EsSeguido($idSeguido, $idSeguidor)
 //$contConf = new ConfigurationControllerImpl();
