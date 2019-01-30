@@ -51,7 +51,7 @@ function register($name, $surname, $birthdate, $user, $pass) {
                             <form class="register-form" action="#" method="POST">
                                 <label>Nombre</label>
                                 <input type="text" placeholder="Nombre" class="form-control" name="name" required>
-                                <label>Nombre</label>
+                                <label>Apellidos</label>
                                 <input type="text" placeholder="Apellidos" class="form-control" name="surname" required>
                                 <label>Fecha de nacimiento</label>
                                 <input type="text" id="birth-date" placeholder="DD-MM-AAAA" class="form-control" onkeyup="checkDate()" name="birthdate">
