@@ -14,10 +14,10 @@ if (isset($_SESSION['usuario'])) {
     $confUsuario = new UserControllerImpl();
     $config = $confController->getConfiguration($user);
 
- 
+
 
     if (isset($_POST['avatar'])) {
-        
+
         if ($_FILES['foto']['error'] > 0) {
             echo 'Error: ' . $_FILES['foto']['error'] . '<br />';
         } else if (!soloImagenes($_FILES['foto'])) {
@@ -25,9 +25,9 @@ if (isset($_SESSION['usuario'])) {
         } else if (!limiteTamanyo($_FILES['foto'], 2 * 1024 * 1024)) {
             echo 'Error: El tama&ntilde;o del fichero supera los 200KB <br />';
         } else {
-           
+
             $nombreAr = filter_var(filter_var($_FILES['foto']['name'], FILTER_SANITIZE_STRING));
-            $nombreAr =   $_SERVER['REQUEST_TIME'].$nombreAr;
+            $nombreAr = $_SERVER['REQUEST_TIME'] . $nombreAr;
             if (move_uploaded_file($_FILES["foto"]["tmp_name"], "img/" . $nombreAr)) {
                 $confUsuario->modifyAvatar($_SESSION['usuario'], $nombreAr);
             }
@@ -68,6 +68,8 @@ function soloImagenes($fichero) {
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
+        <script type="text/javascript" src="assets/js/scripting.js"></script>
+
 
         <style> .navbar {
                 margin-bottom: 0;
@@ -160,29 +162,15 @@ function soloImagenes($fichero) {
                         <h4 style="text-align: left">Seguridad</h4>
                         <hr>
                         <h5 style="text-align: left"><b>Cambiar contraseña:</b></h5><br>
-                        <form class="register-form"  style="text-align: left;" action="#">
+                        <form id="psswd" class="register-form has-danger has-success"  style="text-align: left;" action="#">
                             <label>Contraseña actual: </label>
-                            <input type="password" placeholder="Contraseña"><br>
+                            <input class="col-sm-2" type="password" placeholder="Contraseña"><br>
                             <label>Nueva contraseña: </label>
-                            <input type="password" placeholder="Nueva contraseña" id="npass"><br>
+                            <input class="col-sm-2" type="password" placeholder="Nueva contraseña" id="npass" onblur="checkPasswd()"><br>
                             <label>Repetir contraseña: </label>
-                            <input class="" type="password" placeholder="Repetir contraseña" id="rnpass"><br><br>
-                            <button class="btn btn-round bg-info">Cambiar contraseña</button>
+                            <input class="col-sm-2" type="password" placeholder="Repetir contraseña" id="rnpass" onblur="checkPasswd()"><br><br>
+                            <button  id="cpsw" class="btn btn-round bg-info" disabled>Cambiar contraseña</button>
                         </form>
-                        <!--<hr>
-                        <h4 style="text-align: left">Privacidad</h4>
-                        <hr>
-                        <h5 style="text-align: left"><b>Cambiar nivel de privacidad:</b></h5><br>
-                        <form class="register-form"  style="text-align: left;" action="#">
-                            <div class="form-group">
-                                <label for="sel1">Seleciona un nivel:</label>
-                                <select class="form-control" id="sel1" style="max-width: 30%">
-                                    <option>Baja</option>
-                                    <option>Atla</option>
-                                </select>
-                            </div> 
-                            <button class="btn btn-round bg-info">Enviar</button>
-                        </form> -->
                     </div>
                     <div class="col-sm-2 sidenav">
 
@@ -205,28 +193,28 @@ function soloImagenes($fichero) {
                         </button>
                     </div>
                     <!--<form action="#">-->
-                        <div class="modal-body"> 
-                            <textarea class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
-                            <label>Contenido sensible</label>
-                            <div class="form-check-radio">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                    Off
-                                    <span class="form-check-sign"></span>
-                                </label>
-                            </div>
-                            <div class="form-check-radio">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" >
-                                    On
-                                    <span class="form-check-sign"></span>
-                                </label>
-                            </div>
+                    <div class="modal-body"> 
+                        <textarea class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
+                        <label>Contenido sensible</label>
+                        <div class="form-check-radio">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                Off
+                                <span class="form-check-sign"></span>
+                            </label>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal">Publicar</button>
-                            <div class="divider"></div>                            
+                        <div class="form-check-radio">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" >
+                                On
+                                <span class="form-check-sign"></span>
+                            </label>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default btn-link" data-dismiss="modal">Publicar</button>
+                        <div class="divider"></div>                            
+                    </div>
                     <!--</form>-->
                 </div>
             </div>

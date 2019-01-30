@@ -37,52 +37,11 @@ function register($name, $surname, $birthdate, $user, $pass) {
             $pass = $_POST['pass'];
             $rpass = $_POST['rpass'];
             echo "$pass $rpass";
-            if ($pass !== $rpass) {
-                ?>
-                <div class="container" >
-                    <div class="row">
-                        <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3">
-                            <div class="card-register bg-primary">
-                                <h3 style="color:blue;">Welcome to Spil!</h3>
-                                <!-- FORMULARIO DE REGISTRO-->
-                                <form class="register-form" action="#" method="POST">
-                                    <label>Nombre</label>
-                                    <input type="text" placeholder="Nombre" class="form-control" name="name" required>
-                                    <label>Nombre</label>
-                                    <input type="text" placeholder="Apellidos" class="form-control" name="surname" required>
-                                    <label>Fecha de nacimiento</label>
-                                    <input type="text" id="birth-date" placeholder="DD-MM-AAAA" class="form-control" onkeyup="checkDate()" name="birthdate" required>
-                                    <label>User</label>
-                                    <input class="form-control" type="text" placeholder="User" name="user">
-                                    <label>Contraseña</label>
-                                    <div class="form-group has-danger" id="divpsw1">
-                                        <input class="form-control form-control-danger" type="password" id="pwd1" placeholder="Password" name="pass" onblur="checkPasswd()" required>
-                                    </div>
-                                    <label>Confirmar contraseña</label>
-                                    <div class="form-group has-danger" id="divpwd2">
-                                        <input class="form-control form-control-danger" type="password" id="pwd2" placeholder="Password" name="rpass" onblur="checkPasswd()" required>
-                                        <div id="fallo" class="form-control-feedback">Las contraseñas no coinciden.</div>
-                                    </div>
-                                    <input type="submit" name="send" value="Registrar" class="btn btn-danger btn-block btn-round">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="footer register-footer text-center">
-                        <h6>
-                            © 
-                            <script>document.write(new Date().getFullYear())</script>
-                            , Grupo 10 Programacion Avanzada.
-                        </h6>
-                    </div>
-                </div>
 
-                <?php
-            }
             $entry = filter_input_array(INPUT_POST, $filter);
 
             if (register($entry['name'], $entry['surname'], $_POST['birthdate'], $entry['user'], $entry['pass'])) {
-               header('Location: Login.php');
+                header('Location: Login.php');
             }
         } else {
             ?>
@@ -101,15 +60,13 @@ function register($name, $surname, $birthdate, $user, $pass) {
                                 <input type="text" id="birth-date" placeholder="DD-MM-AAAA" class="form-control" onkeyup="checkDate()" name="birthdate">
                                 <label>User</label>
                                 <input class="form-control" type="text" placeholder="User" name="user">
-                                <label>Contraseña</label>
-                                <div class="form-group" id="divpsw1">
-                                    <input class="form-control" type="password" id="pwd1" placeholder="Password" name="pass" onblur="checkPasswd()">
+                                <label>Contraseña: </label>
+                                <div class="has-success">
+                                    <input class="" type="password" placeholder="Nueva contraseña" id="npass" onblur="checkPasswd()"><br>
+                                    <label>Repetir contraseña: </label>
+                                    <input class="" type="password" placeholder="Repetir contraseña" id="rnpass" onblur="checkPasswd()"><br><br>
+                                    <input type="submit" name="send" value="Registrar" class="btn btn-danger btn-block btn-round">
                                 </div>
-                                <label>Confirmar contraseña</label>
-                                <div class="form-group" id="divpwd2">
-                                    <input class="form-control" type="password" id="pwd2" placeholder="Password" name="rpass" onblur="checkPasswd()">
-                                </div>
-                                <input type="submit" name="send" value="Registrar" class="btn btn-danger btn-block btn-round">
                             </form>
                         </div>
                     </div>
@@ -126,6 +83,21 @@ function register($name, $surname, $birthdate, $user, $pass) {
     </body>
     <!-- javascript -->
     <script>
+        function checkPasswd() {
+            if (($("#rnpass").val() !== $("#npass").val()) && ($("#rnpass").val() !== "" && $("#npass").val() !== "")) {
+                $("#rnpass").addClass(" form-control-danger");
+                $("#npass").addClass(" form-control-danger");
+                $("#psswd").append("<div id='fallo' class='form-control-feedback' style='color:red;'>Las contraseñas no coinciden.</div>");
+            } else {
+                if ($("#rnpass").val() !== "" && $("#npass").val() !== "") {
+                    $("#rnpass").removeClass(" form-control-danger");
+                    $("#npass").removeClass(" form-control-danger");
+                    $("#rnpass").addClass(" form-control-success");
+                    $("#npass").addClass(" form-control-success");
+                    $("#fallo").remove();
+                }
+            }
+        }
         var cont = 0;
         function checkDate() {
             var char = document.getElementById("birth-date").value;
