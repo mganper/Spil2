@@ -34,10 +34,7 @@ function register($name, $surname, $birthdate, $user, $pass) {
                 'user' => FILTER_SANITIZE_STRING,
                 'pass' => FILTER_SANITIZE_STRING
             );
-            $pass = $_POST['pass'];
-            $rpass = $_POST['rpass'];
-            echo "$pass $rpass";
-
+            
             $entry = filter_input_array(INPUT_POST, $filter);
 
             if (register($entry['name'], $entry['surname'], $_POST['birthdate'], $entry['user'], $entry['pass'])) {
@@ -53,19 +50,19 @@ function register($name, $surname, $birthdate, $user, $pass) {
                             <!-- FORMULARIO DE REGISTRO-->
                             <form class="register-form" action="#" method="POST">
                                 <label>Nombre</label>
-                                <input type="text" placeholder="Nombre" class="form-control" name="name">
+                                <input type="text" placeholder="Nombre" class="form-control" name="name" required>
                                 <label>Nombre</label>
-                                <input type="text" placeholder="Apellidos" class="form-control" name="surname">
+                                <input type="text" placeholder="Apellidos" class="form-control" name="surname" required>
                                 <label>Fecha de nacimiento</label>
                                 <input type="text" id="birth-date" placeholder="DD-MM-AAAA" class="form-control" onkeyup="checkDate()" name="birthdate">
                                 <label>User</label>
-                                <input class="form-control" type="text" placeholder="User" name="user">
+                                <input class="form-control" type="text" placeholder="User" name="user" required>
                                 <label>Contraseña: </label>
-                                <div class="has-success">
-                                    <input class="" type="password" placeholder="Nueva contraseña" id="npass" onblur="checkPasswd()"><br>
+                                <div class="">
+                                    <input class="form-control" type="password" placeholder="Nueva contraseña" id="npass" onblur="checkPasswd()" name="pass" required><br>
                                     <label>Repetir contraseña: </label>
-                                    <input class="" type="password" placeholder="Repetir contraseña" id="rnpass" onblur="checkPasswd()"><br><br>
-                                    <input type="submit" name="send" value="Registrar" class="btn btn-danger btn-block btn-round">
+                                    <input class="form-control" type="password" placeholder="Repetir contraseña" id="rnpass" onblur="checkPasswd()" required><br><br>
+                                    <input id="cpsw" type="submit" name="send" value="Registrar" class="btn btn-danger btn-block btn-round" disabled>
                                 </div>
                             </form>
                         </div>
@@ -88,6 +85,7 @@ function register($name, $surname, $birthdate, $user, $pass) {
                 $("#rnpass").addClass(" form-control-danger");
                 $("#npass").addClass(" form-control-danger");
                 $("#psswd").append("<div id='fallo' class='form-control-feedback' style='color:red;'>Las contraseñas no coinciden.</div>");
+                $("#cpsw").attr("disabled",true);
             } else {
                 if ($("#rnpass").val() !== "" && $("#npass").val() !== "") {
                     $("#rnpass").removeClass(" form-control-danger");
@@ -95,6 +93,7 @@ function register($name, $surname, $birthdate, $user, $pass) {
                     $("#rnpass").addClass(" form-control-success");
                     $("#npass").addClass(" form-control-success");
                     $("#fallo").remove();
+                    $("#cpsw").attr("disabled",false);
                 }
             }
         }
