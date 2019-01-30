@@ -7,11 +7,11 @@ session_start();
 if(isset($_SESSION['usuario'])){
     $idSeguidor = $_SESSION['usuario'];
     
-    $spilId = $_POST['spilId'];
+    $notificationIde = $_POST['spilId'];
     
     $controller = new LikeControllerImpl();
     
-    $resp = ['resp' => $controller->borrarLikeGesture($spilId, $idSeguidor)];
+    $resp = ['resp' => $controller->borrarLikeGesture($notificationIde, $idSeguidor)];
     
     echo json_encode($resp);
 } else {

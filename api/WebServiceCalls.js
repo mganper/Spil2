@@ -44,7 +44,7 @@ function followUserCall(idUsuario) {
     }, function (data, status) {
         var content = JSON.parse(data);
         if (content.resp) {
-            alert("Uusario seguido correctamente");
+            alert("Usario seguido correctamente");
         } else {
             alert("No se ha podido seguir al usuario");
         }
@@ -86,6 +86,19 @@ function removeLikeCall(spilId) {
             alert("Eliminar like realizado correctamente");
         } else {
             alert("No se ha podido eliminar el like");
+        }
+    });
+}
+
+function removeNotificationCall(notificationId) {
+    $.post('../api/RemoveNotificationWebService.php', {
+        notificationId: notificationId
+    }, function (data, status) {
+        var content = JSON.parse(data);
+        if (content.resp) {
+            alert("Eliminar notificacion realizado correctamente");
+        } else {
+            alert("No se ha podido eliminar la notificacion");
         }
     });
 }

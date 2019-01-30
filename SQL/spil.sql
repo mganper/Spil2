@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `spil`
 --
-CREATE DATABASE IF NOT EXISTS `spil` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `id8601793_spil2` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `spil`;
 
 -- --------------------------------------------------------
