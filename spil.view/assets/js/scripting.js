@@ -7,3 +7,19 @@ function displayModal(currUser, txt, owrUser) {
     }
 }
 
+function sendMsg(){
+    var cAdulto = $("input[name='cAdulto']:checked").val();
+    var mensaje = $('#msg').val();
+    
+    createSpilCall(mensaje, cAdulto);
+    
+    $('#msg').val('');
+}
+
+function seguir(){
+    var username = document.getElementById("username").firstChild.data;
+    
+    username = username.substring(1, username.length);
+    
+    followUserCall(username);
+}

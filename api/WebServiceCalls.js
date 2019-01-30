@@ -11,9 +11,9 @@ function addModeratorCall(idUsuario) {
     });
 }
 
-function createSpilCall(mensage, cAdulto) {
+function createSpilCall(mensaje, cAdulto) {
     $.post('api/CreateSpilWebService.php', {
-        msg: mensage,
+        msg: mensaje,
         aContent: cAdulto
     }, function (data, status) {
         var content = JSON.parse(data);
