@@ -5,6 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerI
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/LikeControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.persistence/spil.model.persistence.dao/UserDAOImpl.php';
 
 function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
     $arrAux = array();
@@ -32,7 +33,7 @@ $likeController = new LikeControllerImpl();
 
 $seguidores = $userController->getNumSeguidores($user);
 $seguidos = $userController->getNumSeguidos($user);
-$avatar = NULL; //$userController->getAvatar($user);
+$avatar = UserDAOImpl::getAvatar($user);
 
 $spils = $spilController->listMsgs($user);
 $respils = $respilController->listarRespilsUsuario($user);
@@ -156,9 +157,12 @@ $numSpils = count($spils);
                         <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
                             <div class="info-user ">
                                 <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
-                                <h5>RANK1</h5>
-                                <HR>
-                                <h5>RANK2</h5>
+                                <?php
+                                    $ranking = UserDAOImpl::getRank5();
+                                    foreach($ranking as $rank){
+                                        echo $rank[0].' con '. $rank[2] .' likes<br>';
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
