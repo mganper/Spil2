@@ -4,9 +4,9 @@ class ConnectionSingleton {
 
     private static $conn;
     private static $servidor = 'localhost';
-    private static $user = 'id8601793_sys';
-    private static $pass = 'oracle_4U';
-    private static $db = 'id8601793_spil2';
+    private static $user = 'root';
+    private static $pass = '';
+    private static $db = 'spil';
 
     public static function getConn() {
         if (is_null(self::$conn)) {
