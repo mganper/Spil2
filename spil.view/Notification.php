@@ -1,6 +1,7 @@
 <!doctype html>
 
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerImpl.php';
 session_start();
 
 $_SESSION['usuario'] = 'hola';
@@ -59,9 +60,9 @@ if (isset($_SESSION['usuario'])) {
                 <a class="navbar-brand nav-link" href="Notification.php">Notificaciones</a>
                 <a class="navbar-brand nav-link" href="User.php?user=<?php echo $user; ?>">Perfil</a>
                 <a class="navbar-brand nav-link" href="Configuration.php">Configuracion</a>
-                <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal"style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
+                <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal" style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px;">
-                <a class='navbar-brand nav-link navbar-right'href="Logout.php">Log out</a>
+                <a class='navbar-brand nav-link navbar-right' href="Logout.php">Log out</a>
             </div>
         </nav>
         <!-- end navbar  -->
@@ -92,10 +93,10 @@ if (isset($_SESSION['usuario'])) {
                             <div class="info-user ">
                                 <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
                                 <?php
-                                    $ranking = UserDAOImpl::getRank5();
-                                    foreach($ranking as $rank){
-                                        echo $rank[0].' con '. $rank[2] .' likes<br>';
-                                    }
+                                $ranking = UserDAOImpl::getRank5();
+                                foreach ($ranking as $rank) {
+                                    echo $rank[0] . ' con ' . $rank[2] . ' likes<br>';
+                                }
                                 ?>
                             </div>
                         </div>
