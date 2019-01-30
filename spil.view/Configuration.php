@@ -28,7 +28,7 @@ if (isset($_SESSION['usuario'])) {
 
             $nombreAr = filter_var(filter_var($_FILES['foto']['name'], FILTER_SANITIZE_STRING));
             $nombreAr = $_SERVER['REQUEST_TIME'] . $nombreAr;
-            if (move_uploaded_file($_FILES["foto"]["tmp_name"], "img/" . $nombreAr)) {
+            if (move_uploaded_file($_FILES["foto"]["tmp_name"], "assets/img/" . $nombreAr)) {
                 $confUsuario->modifyAvatar($_SESSION['usuario'], $nombreAr);
             }
         }
@@ -85,8 +85,12 @@ function soloImagenes($fichero) {
         <!--     Fonts and icons     -->
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
+
+        <script type="text/javascript" src="../api/WebServiceCalls.js"></script>
         <script type="text/javascript" src="assets/js/scripting.js"></script>
+
         <style> .navbar {
                 margin-bottom: 0;
                 border-radius: 0;
