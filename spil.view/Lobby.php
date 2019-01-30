@@ -32,26 +32,39 @@ $likeController = new LikeControllerImpl();
 
 $numSeguidores = $userController->getNumSeguidores($user);
 $numSeguidos = $userController->getNumSeguidos($user);
-$seguidores = $userController->getSeguidos($user);
+$seguidos = $userController->getSeguidos($user);
 $avatar = UserDAOImpl::getAvatar($user);
+$spils = array();
+$respils = array();
 
-foreach($seguidores as $seguido) {
-    array_push($spils,$spilController->listMsgs($seguido->getUsuario()));
-    array_push($respils = $respilController->listarRespilsUsuario($seguido->getUsuario()));
+foreach ($seguidos as $seguido) {
+    array_push($spils, $spilController->listMsgs($seguido->getUsuario()));
+    array_push($respils, $respilController->listarRespilsUsuario($seguido->getUsuario()));
 }
 
-array_push($spils,$spilController->listMsgs($user));
-array_push($respils,$respilController->listarRespilsUsuario($user));
+array_push($spils, $spilController->listMsgs($user));
+array_push($respils, $respilController->listarRespilsUsuario($user));
 
-if ($respils) {
+foreach ($spils as $spil) {
+    print_r($spil);
+    echo'<br><br>';
+}
+
+foreach ($respils as $spil) {
+    print_r($spil);
+    echo'<br><br>';
+}
+//echo '<br>';
+//print_r($respils);
+
+if (count($respils) !== 0) {
     for ($i = 0; $i < count($respils); $i++) {
         $spilRec = $spilController->read($respils[$i]->getIdMensaje());
 
         array_push($spils, $spilRec);
     }
-
-    array_sort_by($spils, 'writeDate');
 }
+array_sort_by($spils, 'writeDate');
 
 $numSpils = count($spils);
 ?>
@@ -136,39 +149,39 @@ $numSpils = count($spils);
                     </div>
                     <div class="col-sm-8 text-center">
                         <!-- CODIGO PARA MOSTRAR MENSAJES AQUÍ-->
-                        <?php
-                        $i = 0;
-                        foreach ($spils as $spil) {
-                            $txt = $spil->getText();
-                            $owrUser = $spil->getIdUser();
-                            $id = $spil->getId();
-                            ?>
+<?php
+$i = 0;
+foreach ($spils as $spil) {
+    $txt = $spil->getText();
+    $owrUser = $spil->getIdUser();
+    $id = $spil->getId();
+    ?>
                             <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>', '<?php echo $id; ?>')">
                                 <h3>
-                                    <?php
-                                    echo $txt;
-                                    ?>
+    <?php
+    echo $txt;
+    ?>
                                 </h3>
                                 <h5>
-                                    <?php
-                                    echo $owrUser . ' on ';
-                                    echo $spil->getWriteDate();
-                                    ?>
+    <?php
+    echo $owrUser . ' on ';
+    echo $spil->getWriteDate();
+    ?>
                                 </h5>
                             </div>
                             <hr>
-                        <?php } ?>
+<?php } ?>
                     </div>
                     <div class="col-sm-2 sidenav">
                         <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
                             <div class="info-user ">
                                 <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
-                                <?php
-                                $ranking = UserDAOImpl::getRank5();
-                                foreach ($ranking as $rank) {
-                                    echo $rank[0] . ' con ' . $rank[2] . ' likes<br>';
-                                }
-                                ?>
+<?php
+$ranking = UserDAOImpl::getRank5();
+foreach ($ranking as $rank) {
+    echo $rank[0] . ' con ' . $rank[2] . ' likes<br>';
+}
+?>
                             </div>
                         </div>
                     </div>
