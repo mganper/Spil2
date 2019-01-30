@@ -6,7 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\UserControllerI
 
 session_start();
 
-$_SESSION['usuario'] = 'hola';
+$_SESSION['usuario'] = 'cad2298';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
@@ -28,7 +28,7 @@ if (isset($_SESSION['usuario'])) {
 
             $nombreAr = filter_var(filter_var($_FILES['foto']['name'], FILTER_SANITIZE_STRING));
             $nombreAr = $_SERVER['REQUEST_TIME'] . $nombreAr;
-            if (move_uploaded_file($_FILES["foto"]["tmp_name"], "img/" . $nombreAr)) {
+            if (move_uploaded_file($_FILES["foto"]["tmp_name"], "assets/img/" . $nombreAr)) {
                 $confUsuario->modifyAvatar($_SESSION['usuario'], $nombreAr);
             }
         }
@@ -79,17 +79,17 @@ function soloImagenes($fichero) {
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
 
+        <link href="pk2-free-v2.0.1/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="pk2-free-v2.0.1/assets/css/paper-kit.css?v=2.0.1" rel="stylesheet"/>
+
         <!--     Fonts and icons     -->
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
+
+        <script type="text/javascript" src="../api/WebServiceCalls.js"></script>
         <script type="text/javascript" src="assets/js/scripting.js"></script>
-
-
-        <!--     Fonts and icons     -->
-        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
-        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-        <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
 
         <style> .navbar {
                 margin-bottom: 0;

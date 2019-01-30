@@ -222,40 +222,41 @@ class UserDAOImpl implements UserDAO {
         return $res;
     }
 
-    public static function getAvatar($Usuario) {
+    public static function getAvatar($user) {
         $res = True;
-        $query = 'SELECT avatar FROM usuario WHERE idUsuarioSeguido = "' . $user . '"';
+        $query = "SELECT avatar FROM usuario WHERE usuario = '$user'";
 
-        if (!($res = connectionSingleton::getConn()->query($query))) {
+        if (!($ret = connectionSingleton::getConn()->query($query))) {
             // echo 'No se pudieron comprobar los seguidores.';
             return FALSE;
         } else {
-            if (($row = $res->fetch_row())) {
+            while ($row = $ret->fetch_row()) {
                 $res = $row[0];
-            } else {
+            } /*else {
                 return false;
-            }
+            }*/
         }
 
         return $res;
     }
 
     public static function getRank5() {
-        $listaUsuarios = Array();
+        $listaUsuarios = Array(Array());
 
         $query = "SELECT usuario,avatar,count(*) as 'cuenta' FROM usuario a, megusta b, spil c WHERE  "
                 . "  b.idMensaje=c.id and c.idUsuario=a.usuario group by usuario,avatar order by count(*) DESC LIMIT 5";
 
         if (!($res = connectionSingleton::getConn()->query($query))) {
-            // echo 'No se pudieron comprobar los seguidores.';
+             echo 'No se pudieron comprobar los seguidores.';
             return FALSE;
         } else {
-            while ($row = $res->fetch_assoc()) {
+            $i=0;
+            while ($row = $res->fetch_row()) {
                 //$res = $row->fetch_assoc();
-
-                $userRecovered = new UserImpl($row['usuario'], $row['avatar'], null, null, null, null, null);
-
-                array_push($listaUsuarios, ["user" => $userRecovered, "num" => $row['cuenta']]);
+                //array_push($listaUsuarios, ["user" => $userRecovered, "num" => $row['cuenta']]);
+                $listaUsuarios[$i][0] = $row[0];
+                $listaUsuarios[$i][1] = $row[1];                
+                $listaUsuarios[$i++][2] = $row[2];                
             }
         }
 

@@ -7,7 +7,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persisten
 class LikeDAOImpl implements LikeDAO {
 
     public function read($idMensaje, $idUsuario) {
-      
+
 
         $query = "SELECT * FROM megusta WHERE idMensaje ='" + $idMensaje +
                 "' and idUsuario = '" + $idUsuario + "';";
@@ -20,15 +20,15 @@ class LikeDAOImpl implements LikeDAO {
         } else {
 
             $Like = new LikeImpl($result["idMensaje"], $result["idUsuario"]);
-        //    mysqli_close($con);
+            //    mysqli_close($con);
         }
         return $like;
     }
 
     public function create($like) {
-       
 
-        $query = "INSERT INTO megusta (idMensaje,idUsuario) VALUES('".$like->getIdMensaje()."','".$like->getIdUsuario()."');";
+
+        $query = "INSERT INTO megusta (idMensaje,idUsuario) VALUES('" . $like->getIdMensaje() . "','" . $like->getIdUsuario() . "');";
         //try
         $con = connectionSingleton::getConn();
 
@@ -38,7 +38,7 @@ class LikeDAOImpl implements LikeDAO {
         } else {
 
 
-        //    mysqli_close($con);
+            //    mysqli_close($con);
         }
     }
 
@@ -46,8 +46,8 @@ class LikeDAOImpl implements LikeDAO {
 
 
 
-        $query = "DELETE FROM megusta WHERE idMensaje ='".$like->getIdMensaje(). 
-                "' and idUsuario = '".$like->getIdUsuario()."';";
+        $query = "DELETE FROM megusta WHERE idMensaje ='" . $like->getIdMensaje() .
+                "' and idUsuario = '" . $like->getIdUsuario() . "';";
         //try
         $con = connectionSingleton::getConn();
 
@@ -56,11 +56,11 @@ class LikeDAOImpl implements LikeDAO {
 
             echo("no encontrado RESPIL, no posible borrado"); /////////////ELIMINAR/MODIFICAR!!!
         }
-      //  mysqli_close($con);
+        //  mysqli_close($con);
     }
 
     public function listed($identificador) {
-        $likes=FALSE;
+        $likes = FALSE;
 
 
         if (gettype($identificador) === 'string') {
@@ -94,13 +94,13 @@ class LikeDAOImpl implements LikeDAO {
             }
 
 
-          //  mysqli_close($con);
+            //  mysqli_close($con);
         }
         return $likes;
     }
 
     private function listaLikeMensaje($idMensaje) {
-        $likes=FALSE;
+        $likes = FALSE;
         $cont = 0;
 
         $query = "SELECT * FROM megusta WHERE idMensaje = '$idMensaje';";
@@ -117,13 +117,13 @@ class LikeDAOImpl implements LikeDAO {
             }
 
 
-         //   mysqli_close($con);
+            //   mysqli_close($con);
         }
         return $likes;
     }
 
     public static function tieneLike($idMensaje, $idUsuario) {
-        
+
 
         $res = False;
 
@@ -139,10 +139,6 @@ class LikeDAOImpl implements LikeDAO {
 
 
         return $res;
-    }
-        
-        
-        
     }
 
 }

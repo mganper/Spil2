@@ -5,6 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerI
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/LikeControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.persistence/spil.model.persistence.dao/UserDAOImpl.php';
 
 function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
     $arrAux = array();
@@ -32,7 +33,7 @@ $likeController = new LikeControllerImpl();
 
 $seguidores = $userController->getNumSeguidores($user);
 $seguidos = $userController->getNumSeguidos($user);
-$avatar = NULL; //$userController->getAvatar($user);
+$avatar = UserDAOImpl::getAvatar($user);
 
 $spils = $spilController->listMsgs($user);
 $respils = $respilController->listarRespilsUsuario($user);
@@ -158,7 +159,9 @@ $numSpils = count($spils);
                                 <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
                                 <?php
                                     $ranking = UserDAOImpl::getRank5();
-                                    print_r($ranking);
+                                    foreach($ranking as $rank){
+                                        echo $rank[0].' con '. $rank[2] .' likes<br>';
+                                    }
                                 ?>
                             </div>
                         </div>
