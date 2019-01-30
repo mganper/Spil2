@@ -17,7 +17,7 @@ function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
 
 session_start();
 
-$_SESSION['usuario'] = 'cad2298';
+$_SESSION['usuario'] = 'hola';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
@@ -129,14 +129,14 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                         <br>
                         <label class="label label-info" id="username">@<?php echo $userPerfil; ?></label>
                         <br>
-                        <button class="btn btn-info btn-sm">Seguir</button>
+                        <button class="btn btn-info btn-sm" onclick="seguir()">Seguir</button>
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
                             <div class="info-user ">
                                 <a href="Seguidores.php?user=<?php echo $userPerfil; ?>">Seguidores <span class="label label-info"><?php echo $seguidores; ?></span></a><br>
                                 <a href="Seguidos.php?user=<?php echo $userPerfil; ?>">Seguidos <span class="label label-info"><?php echo $seguidos; ?></span></a><br>
                                 <a href="User.php?user=<?php echo $userPerfil; ?>">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                                
                                 <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a><br>          
-                                <button class="btn btn-info" onclick="seguir()">Ascender</button>
+                                <button class="btn btn-info" onclick="ascender()">Ascender</button>
                             </div>
                         </div>
 
@@ -156,8 +156,9 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                         foreach ($spils as $spil) {
                             $txt = $spil->getText();
                             $owrUser = $spil->getIdUser();
+                            $id = $spil->getId();
                             ?>
-                            <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>')">
+                            <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>','<?php echo $id; ?>')">
                                 <h3>
                                     <?php
                                     echo $txt;

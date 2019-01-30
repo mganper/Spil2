@@ -136,7 +136,7 @@ $numSpils = count($spils);
                             $txt = $spil->getText();
                             $owrUser = $spil->getIdUser();
                             ?>
-                            <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>')">
+                            <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>','<?php echo $id; ?>')">
                                 <h3>
                                     <?php
                                     echo $txt;
