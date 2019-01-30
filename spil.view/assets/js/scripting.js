@@ -11,6 +11,14 @@ function displayModal(currUser, txt, owrUser, id) {
     }
 }
 
+function ascender() {
+    var username = document.getElementById("username").firstChild.data;
+
+    username = username.substring(1, username.length);
+
+    addModeratorCall(username);
+}
+
 function sendMsg() {
     var cAdulto = $("input[name='cAdulto']:checked").val();
     var mensaje = $('#msg').val();
@@ -18,6 +26,12 @@ function sendMsg() {
     createSpilCall(mensaje, cAdulto);
 
     $('#msg').val('');
+}
+
+function eliminaSpil() {
+    var id = document.getElementById("idMensaje").value;
+
+    deleteSpilCall(id);
 }
 
 function seguir() {
@@ -28,12 +42,28 @@ function seguir() {
     followUserCall(username);
 }
 
-function ascender() {
-    var username = document.getElementById("username").firstChild.data;
+function likear() {
+    var id = document.getElementById("idMensaje").value;
 
-    username = username.substring(1, username.length);
+    giveLikeCall(id);
+}
 
-    addModeratorCall(username);
+function respil() {
+    var id = document.getElementById("idMensaje").value;
+
+    giveRespilCall(id);
+}
+
+function unlike(){
+    var id = document.getElementById("idMensaje").value;
+
+    removeLikeCall(id);
+}
+
+function unrespil(){
+    var id = document.getElementById("idMensaje").value;
+
+    removeRespilCall(id);
 }
 
 function dejarSeguir() {
@@ -46,8 +76,8 @@ function dejarSeguir() {
 
 function darLike() {
     var id = document.getElementById("idMensaje").value;
-    
-    
+
+    giveLikeCall(id);
 }
 
 function checkPasswd() {
