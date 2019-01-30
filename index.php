@@ -1,6 +1,5 @@
 
 
-
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\RespilControllerImpl.php';
