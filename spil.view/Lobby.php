@@ -18,7 +18,8 @@ function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
 
 session_start();
 
-$_SESSION['usuario']='asd';
+$_SESSION['usuario']='userTest';
+
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
 } else {
@@ -34,33 +35,31 @@ $numSeguidores = $userController->getNumSeguidores($user);
 $numSeguidos = $userController->getNumSeguidos($user);
 $seguidos = $userController->getSeguidos($user);
 $avatar = UserDAOImpl::getAvatar($user);
-$spils = array();
-$respils = array();
+$listSpils;
+$listRespils;
+$spils;
+$respils;
 
 foreach ($seguidos as $seguido) {
-    array_push($spils, $spilController->listMsgs($seguido->getUsuario()));
-    array_push($respils, $respilController->listarRespilsUsuario($seguido->getUsuario()));
+    $spils = $spilController->listMsgs($seguido->getUsuario());
+    $respils = $respilController->listarRespilsUsuario($seguido->getUsuario());
 }
 
-array_push($spils, $spilController->listMsgs($user));
-array_push($respils, $respilController->listarRespilsUsuario($user));
+$listSpils = $spilController->listMsgs($user);
+$listRespils = $respilController->listarRespilsUsuario($user);
 
-foreach ($spils as $spil) {
-    print_r($spil);
-    echo'<br><br>';
+foreach ($listSpils as $msg){
+    array_push($spils, $msg);
 }
 
-foreach ($respils as $spil) {
-    print_r($spil);
-    echo'<br><br>';
+foreach ($listRespils as $msg){
+    array_push($respils, $msg);
 }
-//echo '<br>';
-//print_r($respils);
+
 
 if (count($respils) !== 0) {
     for ($i = 0; $i < count($respils); $i++) {
         $spilRec = $spilController->read($respils[$i]->getIdMensaje());
-
         array_push($spils, $spilRec);
     }
 }
@@ -117,7 +116,7 @@ $numSpils = count($spils);
                 <a class="navbar-brand nav-link" href="Notification.php">Notificaciones</a>
                 <a class="navbar-brand nav-link" href="User.php?user=<?php echo $user; ?>">Perfil</a>
                 <a class="navbar-brand nav-link" href="Configuration.php">Configuracion</a>
-                <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal"style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
+                <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal" style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px;">
                 <a class='navbar-brand nav-link navbar-right' href="Logout.php">Log out</a>
             </div>
