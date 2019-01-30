@@ -156,9 +156,10 @@ $numSpils = count($spils);
                         <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
                             <div class="info-user ">
                                 <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
-                                <h5>RANK1</h5>
-                                <HR>
-                                <h5>RANK2</h5>
+                                <?php
+                                    $ranking = UserDAOImpl::getRank5();
+                                    print_r($ranking);
+                                ?>
                             </div>
                         </div>
                     </div>
