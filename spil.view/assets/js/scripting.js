@@ -3,7 +3,11 @@ function displayModal(currUser, txt, owrUser) {
     $(".rm").remove();
     $("#text-father").append("<h5 class='modal-title rm'>" + txt + "</h5><br class='rm'><br class='rm'><h7 class='rm'>-" + owrUser + "</h7>");
     if (currUser === owrUser) {
-        $("#modal-hiden").css("visibility", "visible");
+        $("#modal-hiden-owner").css("visibility", "visible");
+        $("#modal-hiden-non-owner").css("visibility","collapse");
+    }else{
+        $("#modal-hiden-owner").css("visibility", "collapse");
+        $("#modal-hiden-non-owner").css("visibility","visible");
     }
 }
 

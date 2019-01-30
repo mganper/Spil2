@@ -17,7 +17,7 @@ function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
 
 session_start();
 
-$_SESSION['usuario'] = 'hola';
+$_SESSION['usuario'] = 'cad2298';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
@@ -69,16 +69,9 @@ $numSpils = count($spils);
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script>
-            function displayModal(currUser, txt, owrUser) {
-                $("#modal-hiden").css("visibility","collapse");
-                $(".rm").remove();
-                $("#text-father").append("<h5 class='modal-title rm'>" + txt + "</h5><br class='rm'><br class='rm'><h7 class='rm'>-" + owrUser + "</h7>");
-                if (currUser === owrUser) {
-                    $("#modal-hiden").css("visibility","visible");
-                }
-            }
-        </script>
+        
+        <script type="text/javascript" src="../api/WebServiceCalls.js"></script>
+        <script type="text/javascript" src="assets/js/scripting.js"></script>
 
         <style> .navbar {
                 margin-bottom: 0;
@@ -221,7 +214,7 @@ $numSpils = count($spils);
 
         <!-- Modal para ver Spil-->
 
-        <div class="modal fade" id="IMSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal fade" id="IMSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header" id="text-father">
@@ -229,7 +222,7 @@ $numSpils = count($spils);
                     </div>
 
                     <!-- SI ES EL DUEÑO DEL MENSAJE MOSTRAR ESTO -->
-                    <div id="modal-hiden" style="visibility: collapse;">
+                    <div id="modal-hiden-owner" style="visibility: collapse;">
                         <div class="modal-footer" id="modal-hidden">
                             <div class="left-side">
                                 <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Editar</button>
@@ -237,6 +230,17 @@ $numSpils = count($spils);
                             <div class="divider"></div>
                             <div class="right-side">
                                 <button type="button" class="btn btn-danger btn-link">Eliminar</button>
+                            </div>                         
+                        </div>
+                    </div>
+                    <div id="modal-hiden-non-owner" style="visibility: collapse;">
+                        <div class="modal-footer" id="modal-hidden">
+                            <div class="left-side">
+                                <button type="button" class="btn btn-default btn-link" data-dismiss="modal">I like it!</button>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="right-side">
+                                <button type="button" class="btn btn-info btn-link">Respil it!</button>
                             </div>                         
                         </div>
                     </div>

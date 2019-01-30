@@ -17,7 +17,7 @@ function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
 
 session_start();
 
-$_SESSION['usuario'] = 'hola';
+$_SESSION['usuario'] = 'cad2298';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
@@ -240,7 +240,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     </div>
 
                     <!-- SI ES EL DUEÑO DEL MENSAJE MOSTRAR ESTO -->
-                    <div id="modal-hiden" style="visibility: collapse;">
+                    <div id="modal-hiden-owner" style="visibility: collapse;">
                         <div class="modal-footer" id="modal-hidden">
                             <div class="left-side">
                                 <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Editar</button>
@@ -248,6 +248,17 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                             <div class="divider"></div>
                             <div class="right-side">
                                 <button type="button" class="btn btn-danger btn-link">Eliminar</button>
+                            </div>                         
+                        </div>
+                    </div>
+                    <div id="modal-hiden-non-owner" style="visibility: collapse;">
+                        <div class="modal-footer" id="modal-hidden">
+                            <div class="left-side">
+                                <button type="button" class="btn btn-default btn-link" data-dismiss="modal">I like it!</button>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="right-side">
+                                <button type="button" class="btn btn-info btn-link">Respil it!</button>
                             </div>                         
                         </div>
                     </div>
