@@ -18,7 +18,7 @@ function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
 
 session_start();
 
-$_SESSION['usuario'] = 'hola';
+$_SESSION['usuario'] = 'cad2298';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
@@ -136,6 +136,7 @@ $numSpils = count($spils);
                         foreach ($spils as $spil) {
                             $txt = $spil->getText();
                             $owrUser = $spil->getIdUser();
+                            $id = $spil->getId();
                             ?>
                             <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>','<?php echo $id; ?>')">
                                 <h3>

@@ -265,7 +265,7 @@ class UserDAOImpl implements UserDAO {
     
     public static function isModerator($user){
         $query = "SELECT esModerador FROM usuario WHERE usuario='$user';";
-        $ret;
+        $ret = 0;
         
         if(!($res = connectionSingleton::getConn()->query($query))){
             return false;
