@@ -39,7 +39,8 @@ $likeController = new LikeControllerImpl();
 
 $numSeguidores = $userController->getNumSeguidores($userPerfil);
 $numSeguidos = $userController->getNumSeguidos($userPerfil);
-$avatar = UserDAOImpl::getAvatar($user);
+$avatar = UserDAOImpl::getAvatar($userPerfil);
+$isFollowed = UserDAOImpl::EsSeguido($userPerfil, $user);
 
 $spils = $spilController->listMsgs($userPerfil);
 $respils = $respilController->listarRespilsUsuario($userPerfil);
@@ -130,7 +131,17 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     <div class="col-sm-2 sidenav">
                         <img class="img-circle" src="assets/img/<?php echo $avatar; ?>" style="max-height: 200px; max-width: 200px; ">
                         <br>
-                        <label class="label label-info">@<?php echo $userPerfil; ?></label>
+                        <label class="label label-info">@<?php echo $userPerfil; ?></label><br>
+                        <?php 
+                        if($user !== $userPerfil) {
+                            if (!$isFollowed) {
+                                ?>
+                                <button class="btn btn-info btn-sm">Seguir</button>
+                            <?php } else { ?>
+                                <button class="btn btn-info btn-sm">Dejar de seguir</button>
+                            <?php }
+                        }
+                        ?>
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
                             <div class="info-user ">
                                 <a href="Seguidores.php?user=<?php echo $userPerfil; ?>">Seguidores <span class="label label-info"><?php echo $numSeguidores; ?></span></a><br>

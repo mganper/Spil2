@@ -133,7 +133,9 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                         <br>
                         <label class="label label-info" id="username">@<?php echo $userPerfil; ?></label>
                         <br>
-                        <?php if($user !== $userPerfil) {
+                        
+                        <?php 
+                        if($user !== $userPerfil) {
                             if (!$isFollowed) {
                                 ?>
                                 <button class="btn btn-info btn-sm">Seguir</button>
