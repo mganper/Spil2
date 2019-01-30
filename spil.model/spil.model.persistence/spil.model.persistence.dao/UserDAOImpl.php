@@ -250,12 +250,12 @@ class UserDAOImpl implements UserDAO {
             // echo 'No se pudieron comprobar los seguidores.';
             return FALSE;
         } else {
-            while ($row = $res->fetch_row()) {
-                $res = $row->fetch_assoc();
+            while ($row = $res->fetch_assoc()) {
+                //$res = $row->fetch_assoc();
 
-                $userRecovered = new UserImpl($userAvatar['usuario'], $userAvatar['avatar'], null, null, null, null, null);
-             
-                array_push($listaUsuarios, ["user" => $userRecovered, "num" => $userAvatar['cuenta']]);
+                $userRecovered = new UserImpl($row['usuario'], $row['avatar'], null, null, null, null, null);
+
+                array_push($listaUsuarios, ["user" => $userRecovered, "num" => $row['cuenta']]);
             }
         }
 
