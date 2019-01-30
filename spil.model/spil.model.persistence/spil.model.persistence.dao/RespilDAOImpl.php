@@ -125,4 +125,20 @@ class RespilDAOImpl implements RespilDAO {
         return $respils;
     }
 
+    public static function tieneRespil($idMensaje, $idUsuario) {
+
+
+        $res = False;
+
+        $query = "SELECT 1 FROM megusta WHERE idUsuario = $idUsuario and idMensaje=$idMensaje LIMIT 1";
+
+        if (!($result = connectionSingleton::getConn()->query($query))) {
+            $res = FALSE;
+        } else if ($row = mysqli_fetch_array($result)) {
+            $res = TRUE;
+        }
+
+        return $res;
+    }
+
 }
