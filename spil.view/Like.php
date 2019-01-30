@@ -137,9 +137,9 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                         if ($user !== $userPerfil) {
                             if (!$isFollowed) {
                                 ?>
-                                <button class="btn btn-info btn-sm">Seguir</button>
+                                <button class="btn btn-info btn-sm" onclick="seguir()">Seguir</button>
                             <?php } else { ?>
-                                <button class="btn btn-info btn-sm">Dejar de seguir</button>
+                                <button class="btn btn-info btn-sm" onclick="dejarSeguir()">Dejar de seguir</button>
                             <?php
                             }
                         }
@@ -151,7 +151,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                                 <a href="User.php?user=<?php echo $userPerfil; ?>">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                                
                                 <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a>   <br>  
                                 <?php if ($ismoderator) { ?>
-                                    <button id="bt-tomoderator" class="btn btn-info" onclick="seguir()">Ascender</button>
+                                    <button id="bt-tomoderator" class="btn btn-info" onclick="ascender()">Ascender</button>
 <?php } ?>
                             </div>
                         </div>
@@ -221,7 +221,6 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="#">
                         <div class="modal-body"> 
                             <textarea class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
                             <label>Contenido sensible</label>
@@ -241,10 +240,9 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal">Publicar</button>
+                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal" onclick="sendMsg()">Publicar</button>
                             <div class="divider"></div>                            
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -261,17 +259,17 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     <!-- SI ES EL DUEÑO DEL MENSAJE MOSTRAR ESTO -->
                     <div id="modal-hiden-owner" style="visibility: collapse;">
                         <div class="modal-footer" id="modal-hidden">
-                            <button type="button" id="btn-eliminar" class="btn btn-danger btn-link">Eliminar</button>
+                            <button type="button" id="btn-eliminar" class="btn btn-danger btn-link" onclick="eliminaSpil()">Eliminar</button>
                         </div>
                     </div>
                     <div id="modal-hiden-non-owner" style="visibility: collapse;">
                         <div class="modal-footer" id="modal-hidden">
                             <div class="left-side">
-                                <button type="button" id="btn-like" class="btn btn-default btn-link" data-dismiss="modal">I don't like it anymore...</button>
+                                <button type="button" id="btn-like" class="btn btn-default btn-link" data-dismiss="modal" onclick="unlike()">I don't like it anymore...</button>
                             </div>
                             <div class="divider"></div>
                             <div class="right-side">
-                                <button type="button" id="btn-respil" class="btn btn-info btn-link">Respil it!</button>
+                                <button type="button" id="btn-respil" class="btn btn-info btn-link" onclick="respil()">Respil it!</button>
                             </div>                         
                         </div>
                     </div>
