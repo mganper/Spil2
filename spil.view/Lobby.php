@@ -18,7 +18,7 @@ function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
 
 session_start();
 
-
+$_SESSION['usuario']='asd';
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
 } else {
@@ -32,20 +32,39 @@ $likeController = new LikeControllerImpl();
 
 $numSeguidores = $userController->getNumSeguidores($user);
 $numSeguidos = $userController->getNumSeguidos($user);
+$seguidos = $userController->getSeguidos($user);
 $avatar = UserDAOImpl::getAvatar($user);
+$spils = array();
+$respils = array();
 
-$spils = $spilController->listMsgs($user);
-$respils = $respilController->listarRespilsUsuario($user);
+foreach ($seguidos as $seguido) {
+    array_push($spils, $spilController->listMsgs($seguido->getUsuario()));
+    array_push($respils, $respilController->listarRespilsUsuario($seguido->getUsuario()));
+}
 
-if ($respils) {
+array_push($spils, $spilController->listMsgs($user));
+array_push($respils, $respilController->listarRespilsUsuario($user));
+
+foreach ($spils as $spil) {
+    print_r($spil);
+    echo'<br><br>';
+}
+
+foreach ($respils as $spil) {
+    print_r($spil);
+    echo'<br><br>';
+}
+//echo '<br>';
+//print_r($respils);
+
+if (count($respils) !== 0) {
     for ($i = 0; $i < count($respils); $i++) {
         $spilRec = $spilController->read($respils[$i]->getIdMensaje());
 
         array_push($spils, $spilRec);
     }
-
-    array_sort_by($spils, 'writeDate');
 }
+array_sort_by($spils, 'writeDate');
 
 $numSpils = count($spils);
 ?>
@@ -53,7 +72,7 @@ $numSpils = count($spils);
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+        <link rel="icon" type="image/png" href="assets/img/favicon.png">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
         <title>Spil | Inicio</title>
@@ -69,7 +88,7 @@ $numSpils = count($spils);
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        
+
         <script type="text/javascript" src="../api/WebServiceCalls.js"></script>
         <script type="text/javascript" src="assets/js/scripting.js"></script>
 
@@ -130,39 +149,39 @@ $numSpils = count($spils);
                     </div>
                     <div class="col-sm-8 text-center">
                         <!-- CODIGO PARA MOSTRAR MENSAJES AQUÍ-->
-                        <?php
-                        $i = 0;
-                        foreach ($spils as $spil) {
-                            $txt = $spil->getText();
-                            $owrUser = $spil->getIdUser();
-                            $id = $spil->getId();
-                            ?>
-                            <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>','<?php echo $id; ?>')">
+<?php
+$i = 0;
+foreach ($spils as $spil) {
+    $txt = $spil->getText();
+    $owrUser = $spil->getIdUser();
+    $id = $spil->getId();
+    ?>
+                            <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>', '<?php echo $id; ?>')">
                                 <h3>
-                                    <?php
-                                    echo $txt;
-                                    ?>
+    <?php
+    echo $txt;
+    ?>
                                 </h3>
                                 <h5>
-                                    <?php
-                                    echo $owrUser . ' on ';
-                                    echo $spil->getWriteDate();
-                                    ?>
+    <?php
+    echo $owrUser . ' on ';
+    echo $spil->getWriteDate();
+    ?>
                                 </h5>
                             </div>
                             <hr>
-                        <?php } ?>
+<?php } ?>
                     </div>
                     <div class="col-sm-2 sidenav">
                         <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
                             <div class="info-user ">
                                 <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
-                                <?php
-                                    $ranking = UserDAOImpl::getRank5();
-                                    foreach($ranking as $rank){
-                                        echo $rank[0].' con '. $rank[2] .' likes<br>';
-                                    }
-                                ?>
+<?php
+$ranking = UserDAOImpl::getRank5();
+foreach ($ranking as $rank) {
+    echo $rank[0] . ' con ' . $rank[2] . ' likes<br>';
+}
+?>
                             </div>
                         </div>
                     </div>
@@ -206,8 +225,7 @@ $numSpils = count($spils);
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-default btn-link" data-dismiss="#MSGModal" onclick="sendMsg()">Publicar</button>
-                            <div class="divider"></div>                            
+                            <button type="submit" class="btn btn-default btn-link" data-dismiss="#MSGModal" onclick="sendMsg()">Publicar</button>                       
                         </div>
                     </form>
                 </div>

@@ -72,7 +72,8 @@ function soloImagenes($fichero) {
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+        <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
         <title>Spil | Configuracion</title>
@@ -204,7 +205,7 @@ function soloImagenes($fichero) {
 
 
         <!-- Modal Bodies come here -->
-        
+
         <div class="modal fade" id="MSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -243,30 +244,30 @@ function soloImagenes($fichero) {
             </div>
         </div>
 
-                    <!--</form>-->
-                </div>
-            </div>
-        </div>
-        <!--   end modal -->
+        <!--</form>-->
+    </div>
+</div>
+</div>
+<!--   end modal -->
 
 
-    </body>
-    <!-- Core JS Files -->
-    <script src="pk2-free-v2.0.1/assets/js/jquery-3.2.1.js" type="text/javascript"></script>
-    <script src="pk2-free-v2.0.1/assets/js/jquery-ui-1.12.1.custom.min.js" type="text/javascript"></script>
-    <script src="pk2-free-v2.0.1/assets/js/tether.min.js" type="text/javascript"></script>
-    <script src="pk2-free-v2.0.1/assets/js/bootstrap.min.js" type="text/javascript"></script>
+</body>
+<!-- Core JS Files -->
+<script src="pk2-free-v2.0.1/assets/js/jquery-3.2.1.js" type="text/javascript"></script>
+<script src="pk2-free-v2.0.1/assets/js/jquery-ui-1.12.1.custom.min.js" type="text/javascript"></script>
+<script src="pk2-free-v2.0.1/assets/js/tether.min.js" type="text/javascript"></script>
+<script src="pk2-free-v2.0.1/assets/js/bootstrap.min.js" type="text/javascript"></script>
 
-    <!-- Switches -->
-    <script src="pk2-free-v2.0.1/assets/js/bootstrap-switch.min.js"></script>
+<!-- Switches -->
+<script src="pk2-free-v2.0.1/assets/js/bootstrap-switch.min.js"></script>
 
-    <!--  Plugins for Slider -->
-    <script src="pk2-free-v2.0.1/assets/js/nouislider.js"></script>
+<!--  Plugins for Slider -->
+<script src="pk2-free-v2.0.1/assets/js/nouislider.js"></script>
 
-    <!--  Plugins for DateTimePicker -->
-    <script src="pk2-free-v2.0.1/assets/js/moment.min.js"></script>
-    <script src="pk2-free-v2.0.1/assets/js/bootstrap-datetimepicker.min.js"></script>
+<!--  Plugins for DateTimePicker -->
+<script src="pk2-free-v2.0.1/assets/js/moment.min.js"></script>
+<script src="pk2-free-v2.0.1/assets/js/bootstrap-datetimepicker.min.js"></script>
 
-    <!--  Paper Kit Initialization snd functons -->
-    <script src="pk2-free-v2.0.1/assets/js/paper-kit.js?v=2.0.1"></script>
+<!--  Paper Kit Initialization snd functons -->
+<script src="pk2-free-v2.0.1/assets/js/paper-kit.js?v=2.0.1"></script>
 </html>
