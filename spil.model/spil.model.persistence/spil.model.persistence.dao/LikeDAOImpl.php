@@ -150,6 +150,7 @@ class LikeDAOImpl implements LikeDAO {
             return FALSE;
         } else {
             $i=0;
+            $likes = array();
             while ($row = $res->fetch_row()) {
                 $j = 0;
                 $likes[$i][$j] = $row[$j];

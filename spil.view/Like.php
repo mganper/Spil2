@@ -42,6 +42,8 @@ $numSeguidos = $userController->getNumSeguidos($userPerfil);
 $avatar = UserDAOImpl::getAvatar($userPerfil);
 $isFollowed = UserDAOImpl::EsSeguido($userPerfil, $user);
 $ismoderator = UserDAOImpl::isModerator($user);
+$isModeratorProfile = UserDAOImpl::isModerator($userPerfil);
+
 
 $spils = $spilController->listMsgs($userPerfil);
 $respils = $respilController->listarRespilsUsuario($userPerfil);
@@ -150,7 +152,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                                 <a href="Seguidos.php?user=<?php echo $userPerfil; ?>">Seguidos <span class="label label-info"><?php echo $numSeguidos; ?></span></a><br>
                                 <a href="User.php?user=<?php echo $userPerfil; ?>">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                                
                                 <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a>   <br>  
-                                <?php if ($ismoderator) { ?>
+                                <?php if ($ismoderator && !$isModeratorProfile) { ?>
                                     <button id="bt-tomoderator" class="btn btn-info" onclick="ascender()">Ascender</button>
                                 <?php } ?>
                             </div>
