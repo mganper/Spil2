@@ -60,8 +60,7 @@ class UserDAOImpl implements UserDAO {
                     return FALSE;
                 } else {
                     $userAvatar = $data->fetch_assoc();
-
-                    $userRecovered = new UserImpl($userAvatar['usuario'], $userAvatar['avatar'], null, null, null, null, null);
+                    $userRecovered = new UserImpl($userAvatar['usuario'], null, null, null, null, null, $userAvatar['avatar']);
 
                     array_push($listaUsuarios, $userRecovered);
                 }
@@ -81,15 +80,15 @@ class UserDAOImpl implements UserDAO {
             return FALSE;
         } else {
             while ($row = $res->fetch_assoc()) {
-                $query = 'SELECT u whsuario, avatar FROM usuario WHERE usuario = "' . $row['idUsuarioSeguido'] . '"';
+                $query = 'SELECT usuario, avatar FROM usuario WHERE usuario = "' . $row['idUsuarioSeguido'] . '"';
 
                 if (!($data = connectionSingleton::getConn()->query($query))) {
-                    //echo 'No se pudieron descargar los usuarios de la base de datos.';
+                    echo 'No se pudieron descargar los usuarios de la base de datos.';
                     return FALSE;
                 } else {
                     $userAvatar = $data->fetch_assoc();
 
-                    $userRecovered = new UserImpl($userAvatar['usuario'], $userAvatar['avatar'], null, null, null, null, null);
+                    $userRecovered = new UserImpl($userAvatar['usuario'], null, null, null, null, null, $userAvatar['avatar']);
 
                     array_push($listaUsuarios, $userRecovered);
                 }

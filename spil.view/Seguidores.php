@@ -17,8 +17,6 @@ function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
 
 session_start();
 
-$_SESSION['usuario'] = 'cad2298';
-
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
 } else {
@@ -36,12 +34,14 @@ $spilController = new SpilControllerImpl();
 $respilController = new RespilControllerImpl();
 $likeController = new LikeControllerImpl();
 
-$seguidores = $userController->getNumSeguidores($userPerfil);
-$seguidos = $userController->getNumSeguidos($userPerfil);
-$avatar = UserDAOImpl::getAvatar($user);
+$numSeguidores = $userController->getNumSeguidores($userPerfil);
+$numSeguidos = $userController->getNumSeguidos($userPerfil);
+$avatar = UserDAOImpl::getAvatar($userPerfil);
+$seguidores = $userController->getSeguidores($userPerfil);
 
 $spils = $spilController->listMsgs($userPerfil);
 $respils = $respilController->listarRespilsUsuario($userPerfil);
+
 
 if ($respils) {
     for ($i = 0; $i < count($respils); $i++) {
@@ -130,8 +130,8 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                         <label class="label label-info">@<?php echo $userPerfil; ?></label>
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
                             <div class="info-user ">
-                                <a href="Seguidores.php?user=<?php echo $userPerfil; ?>">Seguidores <span class="label label-info"><?php echo $seguidores; ?></span></a><br>
-                                <a href="Seguidos.php?user=<?php echo $userPerfil; ?>">Seguidos <span class="label label-info"><?php echo $seguidos; ?></span></a><br>
+                                <a href="Seguidores.php?user=<?php echo $userPerfil; ?>">Seguidores <span class="label label-info"><?php echo $numSeguidores; ?></span></a><br>
+                                <a href="Seguidos.php?user=<?php echo $userPerfil; ?>">Seguidos <span class="label label-info"><?php echo $numSeguidos; ?></span></a><br>
                                 <a href="User.php?user=<?php echo $userPerfil; ?>">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                                
                                 <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a>                             
                             </div>
@@ -149,11 +149,24 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     </div>
                     <div class="col-sm-8 text-center"> 
 
-                        <h3>SEGUIDOR 1</h3>
-                        <hr>
-                        <h3>SEGUIDOR 2</h3>
-                        <hr>
-                        <h3>SEGUIDOR N</h3>
+                        <?php
+                        
+                        foreach ($seguidores as $usuario) {
+                            $nick = $usuario->getUsuario();
+                            $imgprofile = $usuario->getAvatar();
+                            ?>
+                            <div>
+                                <img class='img-circle' src='assets/img/<?php echo $imgprofile; ?>' style="max-height: 200px; max-width: 200px; ">
+                                <a href="User.php?user=<?php echo $nick; ?>">
+                                    <h5>
+                                        <?php
+                                        echo $nick;
+                                        ?>
+                                    </h5>
+                                </a>
+                            </div>
+                            <hr>
+                        <?php } ?>
 
                     </div>
                     <div class="col-sm-2 sidenav">
@@ -161,10 +174,10 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                             <div class="info-user ">
                                 <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
                                 <?php
-                                    $ranking = UserDAOImpl::getRank5();
-                                    foreach($ranking as $rank){
-                                        echo $rank[0].' con '. $rank[2] .' likes<br>';
-                                    }
+                                $ranking = UserDAOImpl::getRank5();
+                                foreach ($ranking as $rank) {
+                                    echo $rank[0] . ' con ' . $rank[2] . ' likes<br>';
+                                }
                                 ?>
                             </div>
                         </div>

@@ -18,8 +18,6 @@ function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
 
 session_start();
 
-$_SESSION['usuario'] = 'cad2298';
-
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
 } else {
@@ -37,8 +35,8 @@ $spilController = new SpilControllerImpl();
 $respilController = new RespilControllerImpl();
 $likeController = new LikeControllerImpl();
 
-$seguidores = $userController->getNumSeguidores($userPerfil);
-$seguidos = $userController->getNumSeguidos($userPerfil);
+$numSeguidores = $userController->getNumSeguidores($userPerfil);
+$numSeguidos = $userController->getNumSeguidos($userPerfil);
 $avatar = UserDAOImpl::getAvatar($userPerfil);
 $ismoderator = UserDAOImpl::isModerator($user);
 $isFollowed = UserDAOImpl::EsSeguido($userPerfil, $user);
@@ -146,8 +144,8 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                         ?>
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
                             <div class="info-user ">
-                                <a href="Seguidores.php?user=<?php echo $userPerfil; ?>">Seguidores <span class="label label-info"><?php echo $seguidores; ?></span></a><br>
-                                <a href="Seguidos.php?user=<?php echo $userPerfil; ?>">Seguidos <span class="label label-info"><?php echo $seguidos; ?></span></a><br>
+                                <a href="Seguidores.php?user=<?php echo $userPerfil; ?>">Seguidores <span class="label label-info"><?php echo $numSeguidores; ?></span></a><br>
+                                <a href="Seguidos.php?user=<?php echo $userPerfil; ?>">Seguidos <span class="label label-info"><?php echo $numSeguidos; ?></span></a><br>
                                 <a href="User.php?user=<?php echo $userPerfil; ?>">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                                
                                 <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a><br> 
 <?php if ($ismoderator) { ?>
