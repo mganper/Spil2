@@ -20,20 +20,6 @@ function sendMsg() {
     $('#msg').val('');
 }
 
-function createSpilCall(mensaje, cAdulto) {
-    $.post('api/CreateSpilWebService.php', {
-        msg: mensaje,
-        aContent: cAdulto
-    }, function (data, status) {
-        var content = JSON.parse(data);
-        if (content.resp) {
-            alert("Bien");
-        } else {
-            alert("Mal");
-        }
-    });
-}
-
 function seguir() {
     var username = document.getElementById("username").firstChild.data;
 
