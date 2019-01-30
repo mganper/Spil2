@@ -39,15 +39,17 @@ if (isset($_SESSION['usuario'])) {
 
             $confController->modifyConfiguration($_SESSION['usuario'], 0, 0, $_POST['sensible']);
         }
+    }
 
 
-        if (isset($_POST[' cpsw'])) {
-            if (isset($_POST['npass'])) {
-                if (isset($_POST['pass'])) {
+    if (isset($_POST['cpsw'])) {
 
-                    echo"ayuda";
-                    $confUsuario->modifyPassword($_SESSION['usuario'], $_POST['pass'], $_POST['npass']);
-                }
+        if (isset($_POST['npass'])) {
+
+            if (isset($_POST['pass'])) {
+
+
+                $confUsuario->modifyPassword($_SESSION['usuario'], $_POST['pass'], $_POST['npass']);
             }
         }
     }
