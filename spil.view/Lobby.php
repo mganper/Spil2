@@ -18,7 +18,6 @@ function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
 
 session_start();
 
-$_SESSION['usuario'] = 'cad2298';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
@@ -31,8 +30,8 @@ $spilController = new SpilControllerImpl();
 $respilController = new RespilControllerImpl();
 $likeController = new LikeControllerImpl();
 
-$seguidores = $userController->getNumSeguidores($user);
-$seguidos = $userController->getNumSeguidos($user);
+$numSeguidores = $userController->getNumSeguidores($user);
+$numSeguidos = $userController->getNumSeguidos($user);
 $avatar = UserDAOImpl::getAvatar($user);
 
 $spils = $spilController->listMsgs($user);
@@ -113,8 +112,8 @@ $numSpils = count($spils);
                         <img class="img-circle" src="assets/img/<?php echo $avatar; ?>" style="max-height: 200px; max-width: 200px; ">
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
                             <div class="info-user" style="display: inline;">
-                                <a href="Seguidores.php?user=<?php echo $user; ?>">Seguidores <span class="label label-info"><?php echo $seguidores; ?></span></a><br>
-                                <a href="Seguidos.php?user=<?php echo $user; ?>">Seguidos <span class="label label-info"><?php echo $seguidos; ?></span></a><br>
+                                <a href="Seguidores.php?user=<?php echo $user; ?>">Seguidores <span class="label label-info"><?php echo $numSeguidores; ?></span></a><br>
+                                <a href="Seguidos.php?user=<?php echo $user; ?>">Seguidos <span class="label label-info"><?php echo $numSeguidos; ?></span></a><br>
                                 <a href="User.php?user=<?php echo $user; ?>">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                           
                             </div>
                         </div>

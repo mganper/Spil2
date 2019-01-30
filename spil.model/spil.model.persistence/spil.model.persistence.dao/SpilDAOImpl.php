@@ -55,7 +55,7 @@ class SpilDAOImpl implements SpilDAO {
                 $spil->setEditNum($row[4]);
                 $spil->setAdultContent($row[5]);
                 $spil->setReport($row[6]);
-                print_r($spil);
+                //print_r($spil);
             }else {
                 return false;
             }

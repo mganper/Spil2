@@ -37,9 +37,11 @@ $spilController = new SpilControllerImpl();
 $respilController = new RespilControllerImpl();
 $likeController = new LikeControllerImpl();
 
-$seguidores = $userController->getNumSeguidores($userPerfil);
-$seguidos = $userController->getNumSeguidos($userPerfil);
-$avatar = UserDAOImpl::getAvatar($user);
+$numSeguidores = $userController->getNumSeguidores($userPerfil);
+$numSeguidos = $userController->getNumSeguidos($userPerfil);
+$avatar = UserDAOImpl::getAvatar($userPerfil);
+$isFollowed = UserDAOImpl::EsSeguido($userPerfil, $user);
+$ismoderator = UserDAOImpl::isModerator($user);
 
 $spils = $spilController->listMsgs($userPerfil);
 $respils = $respilController->listarRespilsUsuario($userPerfil);
@@ -130,13 +132,27 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     <div class="col-sm-2 sidenav">
                         <img class="img-circle" src="assets/img/<?php echo $avatar; ?>" style="max-height: 200px; max-width: 200px; ">
                         <br>
-                        <label class="label label-info">@<?php echo $userPerfil; ?></label>
+                        <label class="label label-info">@<?php echo $userPerfil; ?></label><br>
+                        <?php
+                        if ($user !== $userPerfil) {
+                            if (!$isFollowed) {
+                                ?>
+                                <button class="btn btn-info btn-sm">Seguir</button>
+                            <?php } else { ?>
+                                <button class="btn btn-info btn-sm">Dejar de seguir</button>
+                            <?php
+                            }
+                        }
+                        ?>
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
                             <div class="info-user ">
-                                <a href="Seguidores.php?user=<?php echo $userPerfil; ?>">Seguidores <span class="label label-info"><?php echo $seguidores; ?></span></a><br>
-                                <a href="Seguidos.php?user=<?php echo $userPerfil; ?>">Seguidos <span class="label label-info"><?php echo $seguidos; ?></span></a><br>
+                                <a href="Seguidores.php?user=<?php echo $userPerfil; ?>">Seguidores <span class="label label-info"><?php echo $numSeguidores; ?></span></a><br>
+                                <a href="Seguidos.php?user=<?php echo $userPerfil; ?>">Seguidos <span class="label label-info"><?php echo $numSeguidos; ?></span></a><br>
                                 <a href="User.php?user=<?php echo $userPerfil; ?>">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                                
-                                <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a>                             
+                                <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a>   <br>  
+                                <?php if ($ismoderator) { ?>
+                                    <button id="bt-tomoderator" class="btn btn-info" onclick="seguir()">Ascender</button>
+<?php } ?>
                             </div>
                         </div>
 
@@ -172,7 +188,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                                 </h5>
                             </div>
                             <hr>
-                        <?php } ?>
+<?php } ?>
 
                     </div>
                     <div class="col-sm-2 sidenav">
