@@ -11,6 +11,12 @@ function displayModal(currUser, txt, owrUser, id) {
     }
 }
 
+function displayNot(currUser, txt, id){     
+    $(".rm").remove();
+    $("#text-father").append("<input class='rm' type='hidden' value='" + id + "' id='idMensaje'><h5 class='modal-title rm'>" + txt + "</h5><br class='rm'>");
+    $(".not-hidden").css("visibility", "visible");
+}
+
 function ascender() {
     var username = document.getElementById("username").firstChild.data;
 

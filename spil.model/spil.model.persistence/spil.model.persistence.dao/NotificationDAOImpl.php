@@ -41,8 +41,8 @@ class NotificationDAOImpl implements NotificationDAO{
         } else {
             $i = 0;
             while ($row = $res->fetch_row()) {
-                echo '<br/>'.$i.'<br/>';
-                print_r($row);
+                //echo '<br/>'.$i.'<br/>';
+                //print_r($row);
                 $notification[$i] = new NotificationImpl(NULL,NULL,NULL);
                 $notification[$i]->setIdNotification($row[0]);
                 $notification[$i]->setText($row[2]);

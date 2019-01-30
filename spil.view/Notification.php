@@ -2,6 +2,8 @@
 
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/NotificationControllerImpl.php';
+
 session_start();
 
 
@@ -10,6 +12,10 @@ if (isset($_SESSION['usuario'])) {
 } else {
     header('Location: Login.php');
 }
+
+$notfCtlr = new NotificationControllerImpl();
+
+$notifications = $notfCtlr->listNot($user);
 ?>
 
 <html lang="en">
@@ -81,11 +87,20 @@ if (isset($_SESSION['usuario'])) {
                         </div>
                     </div>
                     <div class="col-sm-8 text-center"> 
-                        <h3 data-toggle="modal" data-target="#notification-modal">Notificacion 1</h3>
-                        <hr>
-                        <h3>NOTIFICACION 2</h3>
-                        <hr>
-                        <h3>NOTIFICACION N</h3>
+                        <?php
+                        foreach ($notifications as $not) {
+                            $txt = $not->getText();
+                            $id = $not->getIdNotification();
+                            ?>
+                        <div data-toggle="modal" data-target="#notification-modal" onclick="displayNot('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $id; ?>')">
+                                <h3>
+                                    <?php
+                                    echo $txt;
+                                    ?>
+                                </h3>
+                            </div>
+                            <hr>
+                        <?php } ?>
                     </div>
                     <div class="col-sm-2 sidenav">
                         <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
@@ -113,7 +128,7 @@ if (isset($_SESSION['usuario'])) {
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title text-center" id="exampleModalLabel">¿Qué tienes que decir?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -152,12 +167,9 @@ if (isset($_SESSION['usuario'])) {
         <div class="modal fade" id="notification-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title " id="exampleModalLabel">
-                            METER AQÚI EL CONTENIDO DE LA NOTIFICACION
-                        </h5>                                            
+                    <div class="modal-header not-hidden" id="text-father">                    
                     </div>                    
-                    <button type="button" class="btn btn-danger btn-link">Eliminar</button>   
+                    <button type="button" class="btn btn-danger btn-link not-hidden">Eliminar</button>   
                 </div>
             </div>
         </div> 
