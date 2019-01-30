@@ -128,14 +128,14 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                         <br>
                         <label class="label label-info">@<?php echo $userPerfil; ?></label>
                         <br>
-                        <button class="btn btn-info">Seguir</button>
+                        <button class="btn btn-info btn-sm">Seguir</button>
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
                             <div class="info-user ">
                                 <a href="Seguidores.php?user=<?php echo $userPerfil; ?>">Seguidores <span class="label label-info"><?php echo $seguidores; ?></span></a><br>
                                 <a href="Seguidos.php?user=<?php echo $userPerfil; ?>">Seguidos <span class="label label-info"><?php echo $seguidos; ?></span></a><br>
                                 <a href="User.php?user=<?php echo $userPerfil; ?>">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                                
                                 <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a><br>          
-                                <button class="btn btn-info">Ascender</button>
+                                <button class="btn btn-info btn-sm">Ascender</button>
                             </div>
                         </div>
 
