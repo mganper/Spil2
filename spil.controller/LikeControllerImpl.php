@@ -25,11 +25,9 @@ class LikeControllerImpl implements LikeController {
     public function nuevoLikeGesture($idMensaje, $idUsuario) {
         $like = new LikeImpl($idMensaje, $idUsuario);
 
-
-
         $not = new NotificationControllerImpl();
         $sp = new SpilControllerImpl();
-        $bueno = $sp->read($idUsuario)->getIdUsuario();
+        $bueno = $sp->read($idUsuario)->getIdUser();
 
         $not->createNot($bueno, "El Usuario @$idUsuario Te ha dado LIKE");
 
