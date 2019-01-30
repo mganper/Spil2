@@ -103,3 +103,6 @@ function checkPasswd() {
         }
     }
 }
+
+
+"<br />\n<b>Fatal error</b>: Uncaught Error: Class 'NotificationControllerImpl' not found in D:\\xampp\\htdocs\\Spil2\\spil.controller\\RespilControllerImpl.php:27\nStack trace:\n#0 D:\\xampp\\htdocs\\Spil2\\api\\GiveRespilWebService.php(14): RespilControllerImpl-&gt;nuevoRespilGesture('24', 'hola')\n#1 {main}\n thrown in <b>D:\\xampp\\htdocs\\Spil2\\spil.controller\\RespilControllerImpl.php</b> on line <b>27</b><br />\n"

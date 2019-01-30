@@ -6,6 +6,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\RespilModelImpl.php'
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.entity\RespilImpl.php';
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\NotificationControllerImpl.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\SpilControllerImpl.php';
+
 class RespilControllerImpl implements RespilController {
 
     private $modelRespil;
@@ -26,7 +30,7 @@ class RespilControllerImpl implements RespilController {
         
         $not = new NotificationControllerImpl();
         $sp = new SpilControllerImpl();
-        $bueno = $sp->read($idMensaje)->getIdUsuario();
+        $bueno = $sp->read($idMensaje)->getIdUser();
 
         $not->createNot($bueno, "El Usuario @$idUsuario Te hizo RESPIL");
 
