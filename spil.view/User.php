@@ -39,6 +39,7 @@ $numSeguidores = $userController->getNumSeguidores($userPerfil);
 $numSeguidos = $userController->getNumSeguidos($userPerfil);
 $avatar = UserDAOImpl::getAvatar($userPerfil);
 $ismoderator = UserDAOImpl::isModerator($user);
+$isModeratorProfile = UserDAOImpl::isModerator($userPerfil);
 $isFollowed = UserDAOImpl::EsSeguido($userPerfil, $user);
 
 $spils = $spilController->listMsgs($userPerfil);
@@ -70,7 +71,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
         <link rel="icon" type="image/png" href="assets/img/favicon.ico">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <title>Spil | <?php echo $userPerfil;?></title>
+        <title>Spil | <?php echo $userPerfil; ?></title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -80,7 +81,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
 
         <script type="text/javascript" src="../api/WebServiceCalls.js"></script>
         <script type="text/javascript" src="assets/js/scripting.js"></script>
-        
+
         <!--     Fonts and icons     -->
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -133,15 +134,16 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                         <br>
                         <label class="label label-info" id="username">@<?php echo $userPerfil; ?></label>
                         <br>
-                        
-                        <?php 
-                        if($user !== $userPerfil) {
+
+                        <?php
+                        if ($user !== $userPerfil) {
                             if (!$isFollowed) {
                                 ?>
-                        <button class="btn btn-info btn-sm" onclick="seguir()">Seguir</button>
+                                <button class="btn btn-info btn-sm" onclick="seguir()">Seguir</button>
                             <?php } else { ?>
-                        <button class="btn btn-info btn-sm" onclick="dejarSeguir()">Dejar de seguir</button>
-                            <?php }
+                                <button class="btn btn-info btn-sm" onclick="dejarSeguir()">Dejar de seguir</button>
+                            <?php
+                            }
                         }
                         ?>
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
@@ -150,8 +152,8 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                                 <a href="Seguidos.php?user=<?php echo $userPerfil; ?>">Seguidos <span class="label label-info"><?php echo $numSeguidos; ?></span></a><br>
                                 <a href="User.php?user=<?php echo $userPerfil; ?>">Spils <span class="label label-info"><?php echo $numSpils; ?></span></a><br>                                
                                 <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a><br> 
-<?php if ($ismoderator) { ?>
-                                <button id="bt-tomoderator" class="btn btn-info" onclick="ascender()">Ascender</button>
+                                <?php if ($ismoderator && !$isModeratorProfile) { ?>
+                                    <button id="bt-tomoderator" class="btn btn-info" onclick="ascender()">Ascender</button>
 <?php } ?>
                             </div>
                         </div>
@@ -176,9 +178,9 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                             ?>
                             <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>', '<?php echo $id; ?>')">
                                 <h3>
-    <?php
-    echo $txt;
-    ?>
+                                    <?php
+                                    echo $txt;
+                                    ?>
                                 </h3>
                                 <h5>
                                     <?php
@@ -195,10 +197,10 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                             <div class="info-user ">
                                 <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
                                 <?php
-                                    $ranking = UserDAOImpl::getRank5();
-                                    foreach($ranking as $rank){
-                                        echo $rank[0].' con '. $rank[2] .' likes<br>';
-                                    }
+                                $ranking = UserDAOImpl::getRank5();
+                                foreach ($ranking as $rank) {
+                                    echo $rank[0] . ' con ' . $rank[2] . ' likes<br>';
+                                }
                                 ?>
                             </div>
                         </div>
