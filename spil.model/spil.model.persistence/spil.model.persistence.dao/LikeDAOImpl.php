@@ -140,5 +140,32 @@ class LikeDAOImpl implements LikeDAO {
 
         return $res;
     }
+    
+    public static function listMsgLikes($idUser){
+        $query = "SELECT b.texto, b.idUsuario, b.fechaEscritura, a.idMensaje from megusta a, spil b WHERE a.idMensaje = b.id AND a.idUsuario='$idUser'";
+        $likes;
+        
+        if (!($res = connectionSingleton::getConn()->query($query))) {
+             echo 'No se pudieron comprobar los likes.';
+            return FALSE;
+        } else {
+            $i=0;
+            while ($row = $res->fetch_row()) {
+                $j = 0;
+                $likes[$i][$j] = $row[$j];
+                $j++;
+                $likes[$i][$j] = $row[$j];
+                $j++;
+                $likes[$i][$j] = $row[$j];
+                $j++;
+                $likes[$i][$j] = $row[$j];
+                $i++;
+            }
+        }
+
+        return $likes;
+        
+        
+    }
 
 }

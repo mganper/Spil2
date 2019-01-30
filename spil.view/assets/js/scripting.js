@@ -1,7 +1,7 @@
 function displayModal(currUser, txt, owrUser, id) {
     $("#modal-hiden").css("visibility", "collapse");
     $(".rm").remove();
-    $("#text-father").append("<input type='hidden' value='" + id + "' id='idMensaje'><h5 class='modal-title rm'>" + txt + "</h5><br class='rm'><br class='rm'><h7 class='rm'>-" + owrUser + "</h7>");
+    $("#text-father").append("<input type='hidden' value='" + id + "' id='idMensaje'><h5 class='modal-title rm'>" + txt + "</h5><br class='rm'><br class='rm'><h7 class='rm'><a href='User.php?user=" + owrUser + "'>-" + owrUser + "</a></h7>");
     if (currUser === owrUser) {
         $("#modal-hiden-owner").css("visibility", "visible");
         $("#modal-hiden-non-owner").css("visibility", "collapse");
@@ -54,13 +54,13 @@ function respil() {
     giveRespilCall(id);
 }
 
-function unlike(){
+function unlike() {
     var id = document.getElementById("idMensaje").value;
 
     removeLikeCall(id);
 }
 
-function unrespil(){
+function unrespil() {
     var id = document.getElementById("idMensaje").value;
 
     removeRespilCall(id);

@@ -5,6 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerI
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/LikeControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.persistence/spil.model.persistence.dao/LikeDAOImpl.php';
 
 function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
     $arrAux = array();
@@ -42,6 +43,8 @@ $avatar = UserDAOImpl::getAvatar($user);
 
 $spils = $spilController->listMsgs($userPerfil);
 $respils = $respilController->listarRespilsUsuario($userPerfil);
+
+$likesMsg = LikeDAOImpl::listMsgLikes($user);
 
 if ($respils) {
     for ($i = 0; $i < count($respils); $i++) {
@@ -148,22 +151,39 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                         </div>
                     </div>
                     <div class="col-sm-8 text-center"> 
+                        <?php
+                        $i = 0;
+                        foreach ($likesMsg as $spil) {
+                            $txt = $spil[0];
+                            $owrUser = $spil[1];
+                            $id = $spil[3];
+                            ?>
+                            <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>', '<?php echo $id; ?>')">
+                                <h3>
+                                    <?php
+                                    echo $txt;
+                                    ?>
+                                </h3>
+                                <h5>
+                                    <?php
+                                    echo $owrUser . ' on ';
+                                    echo $spil[2];
+                                    ?>
+                                </h5>
+                            </div>
+                            <hr>
+                        <?php } ?>
 
-                        <h3 data-toggle="modal" data-target="#IMSGModal">LIKE 1</h3>
-                        <hr>
-                        <h3>LIKE 2</h3>
-                        <hr>
-                        <h3>LIKE N</h3>
                     </div>
                     <div class="col-sm-2 sidenav">
                         <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
                             <div class="info-user ">
                                 <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
                                 <?php
-                                    $ranking = UserDAOImpl::getRank5();
-                                    foreach($ranking as $rank){
-                                        echo $rank[0].' con '. $rank[2] .' likes<br>';
-                                    }
+                                $ranking = UserDAOImpl::getRank5();
+                                foreach ($ranking as $rank) {
+                                    echo $rank[0] . ' con ' . $rank[2] . ' likes<br>';
+                                }
                                 ?>
                             </div>
                         </div>
@@ -231,7 +251,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     <div id="modal-hiden-non-owner" style="visibility: collapse;">
                         <div class="modal-footer" id="modal-hidden">
                             <div class="left-side">
-                                <button type="button" id="btn-like" class="btn btn-default btn-link" data-dismiss="modal">I like it!</button>
+                                <button type="button" id="btn-like" class="btn btn-default btn-link" data-dismiss="modal">I don't like it anymore...</button>
                             </div>
                             <div class="divider"></div>
                             <div class="right-side">
