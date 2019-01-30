@@ -32,10 +32,16 @@ $likeController = new LikeControllerImpl();
 
 $numSeguidores = $userController->getNumSeguidores($user);
 $numSeguidos = $userController->getNumSeguidos($user);
+$seguidores = $userController->getSeguidos($user);
 $avatar = UserDAOImpl::getAvatar($user);
 
-$spils = $spilController->listMsgs($user);
-$respils = $respilController->listarRespilsUsuario($user);
+foreach($seguidores as $seguido) {
+    array_push($spils,$spilController->listMsgs($seguido->getUsuario()));
+    array_push($respils = $respilController->listarRespilsUsuario($seguido->getUsuario()));
+}
+
+array_push($spils,$spilController->listMsgs($user));
+array_push($respils,$respilController->listarRespilsUsuario($user));
 
 if ($respils) {
     for ($i = 0; $i < count($respils); $i++) {
@@ -53,7 +59,7 @@ $numSpils = count($spils);
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+        <link rel="icon" type="image/png" href="assets/img/favicon.png">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
         <title>Spil | Inicio</title>
@@ -69,7 +75,7 @@ $numSpils = count($spils);
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        
+
         <script type="text/javascript" src="../api/WebServiceCalls.js"></script>
         <script type="text/javascript" src="assets/js/scripting.js"></script>
 
@@ -137,7 +143,7 @@ $numSpils = count($spils);
                             $owrUser = $spil->getIdUser();
                             $id = $spil->getId();
                             ?>
-                            <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>','<?php echo $id; ?>')">
+                            <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>', '<?php echo $id; ?>')">
                                 <h3>
                                     <?php
                                     echo $txt;
@@ -158,10 +164,10 @@ $numSpils = count($spils);
                             <div class="info-user ">
                                 <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
                                 <?php
-                                    $ranking = UserDAOImpl::getRank5();
-                                    foreach($ranking as $rank){
-                                        echo $rank[0].' con '. $rank[2] .' likes<br>';
-                                    }
+                                $ranking = UserDAOImpl::getRank5();
+                                foreach ($ranking as $rank) {
+                                    echo $rank[0] . ' con ' . $rank[2] . ' likes<br>';
+                                }
                                 ?>
                             </div>
                         </div>
@@ -206,8 +212,7 @@ $numSpils = count($spils);
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal" onclick="sendMsg()">Publicar</button>
-                            <div class="divider"></div>                            
+                            <button type="submit" class="btn btn-default btn-link" data-dismiss="#MSGModal" onclick="sendMsg()">Publicar</button>                       
                         </div>
                     </form>
                 </div>
@@ -226,7 +231,7 @@ $numSpils = count($spils);
                     <!-- SI ES EL DUEÑO DEL MENSAJE MOSTRAR ESTO -->
                     <div id="modal-hiden-owner" style="visibility: collapse;">
                         <div class="modal-footer" id="modal-hidden">
-                            <button type="button" id="btn-eliminar" class="btn btn-danger btn-link">Eliminar</button>
+                            <button type="button" id="btn-eliminar" class="btn btn-danger btn-link" onclick="eliminaSpil()">Eliminar</button>
                         </div>
                     </div>
                     <div id="modal-hiden-non-owner" style="visibility: collapse;">
@@ -236,7 +241,7 @@ $numSpils = count($spils);
                             </div>
                             <div class="divider"></div>
                             <div class="right-side">
-                                <button type="button" id="btn-respil" class="btn btn-info btn-link" onclick="respil()">Respil it!</button>
+                                <button type="button" id="btn-respil" data-dimiss="#IMSGModal" class="btn btn-info btn-link" onclick="respil()">Respil it!</button>
                             </div>                         
                         </div>
                     </div>

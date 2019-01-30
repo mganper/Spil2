@@ -71,10 +71,10 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+        <link rel="icon" type="image/png" href="assets/img/favicon.png">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <title>Spil | Likes <?php echo $userPerfil;?></title>
+        <title>Spil | Likes <?php echo $userPerfil; ?></title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -140,7 +140,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                                 <button class="btn btn-info btn-sm" onclick="seguir()">Seguir</button>
                             <?php } else { ?>
                                 <button class="btn btn-info btn-sm" onclick="dejarSeguir()">Dejar de seguir</button>
-                            <?php
+                                <?php
                             }
                         }
                         ?>
@@ -152,7 +152,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                                 <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a>   <br>  
                                 <?php if ($ismoderator) { ?>
                                     <button id="bt-tomoderator" class="btn btn-info" onclick="ascender()">Ascender</button>
-<?php } ?>
+                                <?php } ?>
                             </div>
                         </div>
 
@@ -188,7 +188,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                                 </h5>
                             </div>
                             <hr>
-<?php } ?>
+                        <?php } ?>
 
                     </div>
                     <div class="col-sm-2 sidenav">
@@ -221,28 +221,28 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                        <div class="modal-body"> 
-                            <textarea class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
-                            <label>Contenido sensible</label>
-                            <div class="form-check-radio">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                    Off
-                                    <span class="form-check-sign"></span>
-                                </label>
-                            </div>
-                            <div class="form-check-radio">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" >
-                                    On
-                                    <span class="form-check-sign"></span>
-                                </label>
-                            </div>
+                    <div class="modal-body"> 
+                        <textarea class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
+                        <label>Contenido sensible</label>
+                        <div class="form-check-radio">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                Off
+                                <span class="form-check-sign"></span>
+                            </label>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal" onclick="sendMsg()">Publicar</button>
-                            <div class="divider"></div>                            
+                        <div class="form-check-radio">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" >
+                                On
+                                <span class="form-check-sign"></span>
+                            </label>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default btn-link" data-dismiss="modal" onclick="sendMsg()">Publicar</button>
+                        <div class="divider"></div>                            
+                    </div>
                 </div>
             </div>
         </div>
