@@ -27,13 +27,10 @@ class LikeControllerImpl implements LikeController {
 
         $not = new NotificationControllerImpl();
         $sp = new SpilControllerImpl();
-        $bueno = $sp->read($idUsuario)->getIdUser();
+        $bueno = $sp->read($idMensaje)->getIdUser();
 
         $not->createNot($bueno, "El Usuario @$idUsuario Te ha dado LIKE");
-
-
-
-
+        
         return $this->modelLike->nuevoLike($like);
     }
 
