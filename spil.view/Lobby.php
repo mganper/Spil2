@@ -18,7 +18,7 @@ function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
 
 session_start();
 
-$_SESSION['usuario']='userTest';
+$_SESSION['usuario'] = 'userTest';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
@@ -37,8 +37,10 @@ $seguidos = $userController->getSeguidos($user);
 $avatar = UserDAOImpl::getAvatar($user);
 $listSpils;
 $listRespils;
-$spils;
-$respils;
+$spils = array();
+$respils = array();
+
+
 
 foreach ($seguidos as $seguido) {
     $spils = $spilController->listMsgs($seguido->getUsuario());
@@ -48,24 +50,29 @@ foreach ($seguidos as $seguido) {
 $listSpils = $spilController->listMsgs($user);
 $listRespils = $respilController->listarRespilsUsuario($user);
 
-foreach ($listSpils as $msg){
+foreach ($listSpils as $msg) {
     array_push($spils, $msg);
 }
 
-foreach ($listRespils as $msg){
-    array_push($respils, $msg);
-}
-
-
-if (count($respils) !== 0) {
-    for ($i = 0; $i < count($respils); $i++) {
-        $spilRec = $spilController->read($respils[$i]->getIdMensaje());
-        array_push($spils, $spilRec);
+if ($listRespils) {
+    foreach ($listRespils as $msg) {
+        array_push($respils, $msg);
     }
 }
-array_sort_by($spils, 'writeDate');
 
-$numSpils = count($spils);
+
+if ($respils) {
+    if (count($respils) !== 0) {
+        for ($i = 0; $i < count($respils); $i++) {
+            $spilRec = $spilController->read($respils[$i]->getIdMensaje());
+            array_push($spils, $spilRec);
+        }
+    }
+}
+if(count($spils) > 0) {
+    array_sort_by($spils, 'writeDate');
+}
+$numSpils = count($listSpils) + count($listRespils);
 ?>
 
 <html lang="en">
@@ -148,39 +155,41 @@ $numSpils = count($spils);
                     </div>
                     <div class="col-sm-8 text-center">
                         <!-- CODIGO PARA MOSTRAR MENSAJES AQUÍ-->
-<?php
-$i = 0;
-foreach ($spils as $spil) {
-    $txt = $spil->getText();
-    $owrUser = $spil->getIdUser();
-    $id = $spil->getId();
-    ?>
+                        <?php
+                        $i = 0;
+                        foreach ($spils as $spil) {
+                            $txt = $spil->getText();
+                            $owrUser = $spil->getIdUser();
+                            $id = $spil->getId();
+                            ?>
                             <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>', '<?php echo $id; ?>')">
                                 <h3>
-    <?php
-    echo $txt;
-    ?>
+                                    <?php
+                                    echo $txt;
+                                    ?>
                                 </h3>
                                 <h5>
-    <?php
-    echo $owrUser . ' on ';
-    echo $spil->getWriteDate();
-    ?>
+                                    <?php
+                                    echo $owrUser . ' on ';
+                                    echo $spil->getWriteDate();
+                                    ?>
                                 </h5>
                             </div>
                             <hr>
-<?php } ?>
+                        <?php } ?>
                     </div>
                     <div class="col-sm-2 sidenav">
                         <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
                             <div class="info-user ">
                                 <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
-<?php
-$ranking = UserDAOImpl::getRank5();
-foreach ($ranking as $rank) {
-    echo $rank[0] . ' con ' . $rank[2] . ' likes<br>';
-}
-?>
+                                <h3>RANKING</h3>
+                                <hr>
+                                <?php
+                                $ranking = UserDAOImpl::getRank5();
+                                foreach ($ranking as $rank) {
+                                    echo $rank[0] . ' con ' . $rank[2] . ' likes<br>';
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>

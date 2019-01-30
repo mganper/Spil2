@@ -9,13 +9,13 @@ class UserDAOImpl implements UserDAO {
     public function create($user) {
         $ret = TRUE;
 
-        $query = "INSERT INTO usuario (usuario, contrasenya, nombre, apellidos, fechaNacimiento, fechaAlta, esModerador,numReportes)"
+        $query = "INSERT INTO usuario (usuario, contrasenya, nombre, apellidos, fechaNacimiento, fechaAlta, esModerador,numReportes,avatar)"
                 . "VALUES ('" . $user->getUsuario() . "','" . password_hash($user->getContrasenya(), PASSWORD_DEFAULT) . "','" . $user->getNombre() . "','"
-                . $user->getApellidos() . "','" . $user->getFechaNacimiento() . "','" . $user->getFechaAlta() . "', 0,0)";
+                . $user->getApellidos() . "','" . $user->getFechaNacimiento() . "','" . $user->getFechaAlta() . "', 0,0,'default.png')";
 
         if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
-            //echo 'Error al acceder a la base de datos';
+            
         }
 
         return $ret;
