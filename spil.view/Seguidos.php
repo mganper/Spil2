@@ -1,7 +1,6 @@
 <!doctype html>
 
 <?php
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
@@ -39,7 +38,7 @@ $likeController = new LikeControllerImpl();
 
 $seguidores = $userController->getNumSeguidores($userPerfil);
 $seguidos = $userController->getNumSeguidos($userPerfil);
-$avatar = NULL;//$userController->getAvatar($userPerfil);
+$avatar = UserDAOImpl::getAvatar($user);
 
 $spils = $spilController->listMsgs($userPerfil);
 $respils = $respilController->listarRespilsUsuario($userPerfil);
@@ -52,7 +51,6 @@ if ($respils) {
     }
 
     array_sort_by($spils, 'writeDate');
-
 }
 
 $numSpils = count($spils);
@@ -63,7 +61,6 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
 } else {
     $numLikes = 0;
 }
-
 ?>
 
 <html lang="en">
@@ -84,6 +81,9 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
+
+        <script type="text/javascript" src="../api/WebServiceCalls.js"></script>
+        <script type="text/javascript" src="assets/js/scripting.js"></script>
 
         <style> 
 
@@ -159,9 +159,13 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     <div class="col-sm-2 sidenav">
                         <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
                             <div class="info-user ">
-                                <h5>RANK1</h5>
-                                <HR>
-                                <h5>RANK2</h5>
+                                <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
+                                <?php
+                                    $ranking = UserDAOImpl::getRank5();
+                                    foreach($ranking as $rank){
+                                        echo $rank[0].' con '. $rank[2] .' likes<br>';
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
-function displayModal(currUser, txt, owrUser) {
+function displayModal(currUser, txt, owrUser, id) {
     $("#modal-hiden").css("visibility", "collapse");
     $(".rm").remove();
-    $("#text-father").append("<h5 class='modal-title rm'>" + txt + "</h5><br class='rm'><br class='rm'><h7 class='rm'>-" + owrUser + "</h7>");
+    $("#text-father").append("<input type='hidden' value='" + id + "' id='idMensaje'><h5 class='modal-title rm'>" + txt + "</h5><br class='rm'><br class='rm'><h7 class='rm'>-" + owrUser + "</h7>");
     if (currUser === owrUser) {
         $("#modal-hiden-owner").css("visibility", "visible");
         $("#modal-hiden-non-owner").css("visibility", "collapse");
@@ -11,21 +11,27 @@ function displayModal(currUser, txt, owrUser) {
     }
 }
 
-function checkModerator(isModerator) {
-    alert(isModerator);
-    if (isModerator) {
-        $("#bt-tomoderator").css("visibility", "visible");
-    }
+function ascender() {
+    var username = document.getElementById("username").firstChild.data;
 
+    username = username.substring(1, username.length);
+
+    addModeratorCall(username);
 }
 
 function sendMsg() {
-    var cAdulto = 0;//$("input[name='cAdulto']:checked").val();
-    var mensaje = "texto";//$('#msg').val();
+    var cAdulto = $("input[name='cAdulto']:checked").val();
+    var mensaje = $('#msg').val();
 
     createSpilCall(mensaje, cAdulto);
 
     $('#msg').val('');
+}
+
+function eliminaSpil() {
+    var id = document.getElementById("idMensaje").value;
+
+    deleteSpilCall(id);
 }
 
 function seguir() {
@@ -35,6 +41,45 @@ function seguir() {
 
     followUserCall(username);
 }
+
+function likear() {
+    var id = document.getElementById("idMensaje").value;
+
+    giveLikeCall(id);
+}
+
+function respil() {
+    var id = document.getElementById("idMensaje").value;
+
+    giveRespilCall(id);
+}
+
+function unlike(){
+    var id = document.getElementById("idMensaje").value;
+
+    removeLikeCall(id);
+}
+
+function unrespil(){
+    var id = document.getElementById("idMensaje").value;
+
+    removeRespilCall(id);
+}
+
+function dejarSeguir() {
+    var username = document.getElementById("username").firstChild.data;
+
+    username = username.substring(1, username.length);
+
+    unfollowUserCall(username);
+}
+
+function darLike() {
+    var id = document.getElementById("idMensaje").value;
+
+    giveLikeCall(id);
+}
+
 function checkPasswd() {
     if (($("#rnpass").val() !== $("#npass").val()) && ($("#rnpass").val() !== "" && $("#npass").val() !== "")) {
         $("#rnpass").addClass(" form-control-danger");

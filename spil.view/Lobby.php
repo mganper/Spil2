@@ -137,7 +137,7 @@ $numSpils = count($spils);
                             $txt = $spil->getText();
                             $owrUser = $spil->getIdUser();
                             ?>
-                            <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>')">
+                            <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>','<?php echo $id; ?>')">
                                 <h3>
                                     <?php
                                     echo $txt;
@@ -218,7 +218,7 @@ $numSpils = count($spils);
 
         <!-- Modal para ver Spil-->
 
-         <div class="modal fade" id="IMSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="IMSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header" id="text-father">
@@ -228,27 +228,20 @@ $numSpils = count($spils);
                     <!-- SI ES EL DUEÑO DEL MENSAJE MOSTRAR ESTO -->
                     <div id="modal-hiden-owner" style="visibility: collapse;">
                         <div class="modal-footer" id="modal-hidden">
-                            <div class="left-side">
-                                <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Editar</button>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="right-side">
-                                <button type="button" class="btn btn-danger btn-link">Eliminar</button>
-                            </div>                         
+                            <button type="button" id="btn-eliminar" class="btn btn-danger btn-link">Eliminar</button>
                         </div>
                     </div>
                     <div id="modal-hiden-non-owner" style="visibility: collapse;">
                         <div class="modal-footer" id="modal-hidden">
                             <div class="left-side">
-                                <button type="button" class="btn btn-default btn-link" data-dismiss="modal">I like it!</button>
+                                <button type="button" id="btn-like" class="btn btn-default btn-link" data-dismiss="modal">I like it!</button>
                             </div>
                             <div class="divider"></div>
                             <div class="right-side">
-                                <button type="button" class="btn btn-info btn-link">Respil it!</button>
+                                <button type="button" id="btn-respil" class="btn btn-info btn-link">Respil it!</button>
                             </div>                         
                         </div>
                     </div>
-                    </form>
                 </div>
             </div>
         </div> 

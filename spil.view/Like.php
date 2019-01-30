@@ -1,7 +1,6 @@
 <!doctype html>
 
 <?php
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
@@ -39,7 +38,7 @@ $likeController = new LikeControllerImpl();
 
 $seguidores = $userController->getNumSeguidores($userPerfil);
 $seguidos = $userController->getNumSeguidos($userPerfil);
-$avatar = NULL;//$userController->getAvatar($userPerfil);
+$avatar = UserDAOImpl::getAvatar($user);
 
 $spils = $spilController->listMsgs($userPerfil);
 $respils = $respilController->listarRespilsUsuario($userPerfil);
@@ -52,7 +51,6 @@ if ($respils) {
     }
 
     array_sort_by($spils, 'writeDate');
-
 }
 
 $numSpils = count($spils);
@@ -63,7 +61,6 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
 } else {
     $numLikes = 0;
 }
-
 ?>
 
 <html lang="en">
@@ -84,7 +81,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
-        
+
         <script type="text/javascript" src="../api/WebServiceCalls.js"></script>
         <script type="text/javascript" src="assets/js/scripting.js"></script>
 
@@ -117,9 +114,9 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                 <a class="navbar-brand nav-link" href="Notification.php">Notificaciones</a>
                 <a class="navbar-brand nav-link" href="User.php?user=<?php echo $user; ?>">Perfil</a>
                 <a class="navbar-brand nav-link" href="Configuration.php">Configuracion</a>
-                <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal"style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
+                <button class="navbar-brand btn" data-toggle="modal" data-target="#MSGModal" style="margin: 5px; border: none; text-align: right; color: #00bbff; background-color: white;">Spilear</button>
                 <img src="pk2-free-v2.0.1/assets/img/spil_favicon_de.png" style="max-width: 40px; margin-left: 20px;">
-                <a class='navbar-brand nav-link navbar-right'href="Logout.php">Log out</a>
+                <a class='navbar-brand nav-link navbar-right' href="Logout.php">Log out</a>
             </div>
         </nav>
         <!-- end navbar  -->
@@ -161,9 +158,13 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     <div class="col-sm-2 sidenav">
                         <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
                             <div class="info-user ">
-                                <h5>RANK1</h5>
-                                <HR>
-                                <h5>RANK2</h5>
+                                <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
+                                <?php
+                                    $ranking = UserDAOImpl::getRank5();
+                                    foreach($ranking as $rank){
+                                        echo $rank[0].' con '. $rank[2] .' likes<br>';
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -214,7 +215,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
 
         <!-- Modal para ver Spil-->
 
-         <div class="modal fade" id="IMSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="IMSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header" id="text-father">
@@ -224,27 +225,20 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                     <!-- SI ES EL DUEÑO DEL MENSAJE MOSTRAR ESTO -->
                     <div id="modal-hiden-owner" style="visibility: collapse;">
                         <div class="modal-footer" id="modal-hidden">
-                            <div class="left-side">
-                                <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Editar</button>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="right-side">
-                                <button type="button" class="btn btn-danger btn-link">Eliminar</button>
-                            </div>                         
+                            <button type="button" id="btn-eliminar" class="btn btn-danger btn-link">Eliminar</button>
                         </div>
                     </div>
                     <div id="modal-hiden-non-owner" style="visibility: collapse;">
                         <div class="modal-footer" id="modal-hidden">
                             <div class="left-side">
-                                <button type="button" class="btn btn-default btn-link" data-dismiss="modal">I like it!</button>
+                                <button type="button" id="btn-like" class="btn btn-default btn-link" data-dismiss="modal">I like it!</button>
                             </div>
                             <div class="divider"></div>
                             <div class="right-side">
-                                <button type="button" class="btn btn-info btn-link">Respil it!</button>
+                                <button type="button" id="btn-respil" class="btn btn-info btn-link">Respil it!</button>
                             </div>                         
                         </div>
                     </div>
-                    </form>
                 </div>
             </div>
         </div> 
