@@ -128,7 +128,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
             <div class="container-fluid text-center">    
                 <div class="row content" style="margin-top: 5px;">
                     <div class="col-sm-2 sidenav">
-                        <img class="img-circle" src="assets/img/<?php echo $avatar; ?>" style="max-height: 200px; max-width: 200px; ">
+                        <img class="img-circle" src="assets/img/<?php echo $avatar; ?>" style="max-height: 200px; max-width: 200px;">
                         <br>
                         <label class="label label-info">@<?php echo $userPerfil; ?></label><br>
                         <?php 

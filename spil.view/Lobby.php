@@ -6,6 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerI
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/LikeControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.persistence/spil.model.persistence.dao/UserDAOImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/ConfigurationControllerImpl.php';
 
 function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
     $arrAux = array();
@@ -30,11 +31,13 @@ $userController = new UserControllerImpl();
 $spilController = new SpilControllerImpl();
 $respilController = new RespilControllerImpl();
 $likeController = new LikeControllerImpl();
+$configController = new ConfigurationControllerImpl();
 
 $numSeguidores = $userController->getNumSeguidores($user);
 $numSeguidos = $userController->getNumSeguidos($user);
 $seguidos = $userController->getSeguidos($user);
 $avatar = UserDAOImpl::getAvatar($user);
+$modoAdulto = $configController->getConfiguration($user)->isModoAdulto();
 $listSpils;
 $listRespils;
 $spils = array();
@@ -69,7 +72,7 @@ if ($respils) {
         }
     }
 }
-if(count($spils) > 0) {
+if (count($spils) > 0) {
     array_sort_by($spils, 'writeDate');
 }
 $numSpils = count($listSpils) + count($listRespils);
@@ -158,38 +161,64 @@ $numSpils = count($listSpils) + count($listRespils);
                         <?php
                         $i = 0;
                         foreach ($spils as $spil) {
-                            $txt = $spil->getText();
-                            $owrUser = $spil->getIdUser();
-                            $id = $spil->getId();
-                            ?>
-                            <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>', '<?php echo $id; ?>')">
-                                <h3>
-                                    <?php
-                                    echo $txt;
+                            if ($spil->getAdultContent()) {
+                                if ($modoAdulto) {
+                                    $txt = $spil->getText();
+                                    $owrUser = $spil->getIdUser();
+                                    $id = $spil->getId();
                                     ?>
-                                </h3>
-                                <h5>
+                                    <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>', '<?php echo $id; ?>')">
+                                        <h3>
+                                            <?php
+                                            echo $txt;
+                                            ?>
+                                        </h3>
+                                        <h5>
+                                            <?php
+                                            echo $owrUser . ' on ';
+                                            echo $spil->getWriteDate();
+                                            ?>
+                                        </h5>
+                                    </div>
+                                    <hr>
                                     <?php
-                                    echo $owrUser . ' on ';
-                                    echo $spil->getWriteDate();
-                                    ?>
-                                </h5>
-                            </div>
-                            <hr>
-                        <?php } ?>
-                    </div>
-                    <div class="col-sm-2 sidenav">
-                        <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
-                            <div class="info-user ">
-                                <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
-                                <h3>RANKING</h3>
+                                }
+                            } else {
+                                $txt = $spil->getText();
+                                $owrUser = $spil->getIdUser();
+                                $id = $spil->getId();
+                                ?>
+                                <div data-toggle="modal" data-target="#IMSGModal" onclick="displayModal('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $owrUser; ?>', '<?php echo $id; ?>')">
+                                    <h3>
+                                        <?php
+                                        echo $txt;
+                                        ?>
+                                    </h3>
+                                    <h5>
+                                        <?php
+                                        echo $owrUser . ' on ';
+                                        echo $spil->getWriteDate();
+                                        ?>
+                                    </h5>
+                                </div>
                                 <hr>
                                 <?php
-                                $ranking = UserDAOImpl::getRank5();
-                                foreach ($ranking as $rank) {
-                                    echo $rank[0] . ' con ' . $rank[2] . ' likes<br>';
+                                }
                                 }
                                 ?>
+                            </div>
+                            <div class="col-sm-2 sidenav">
+                                <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
+                                    <div class="info-user ">
+                                        <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
+                                        <h3>RANKING</h3>
+                                        <hr>
+                                        <?php
+                                        $ranking = UserDAOImpl::getRank5();
+                                        foreach ($ranking as $rank) {
+                                            echo $rank[0] . ' con ' . $rank[2] . ' likes<br>';
+                                        }
+                                        ?>
                             </div>
                         </div>
                     </div>
