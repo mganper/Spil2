@@ -17,7 +17,7 @@ function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
 
 session_start();
 
-$_SESSION['usuario'] = 'cad2298';
+$_SESSION['usuario'] = 'hola';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
@@ -116,7 +116,7 @@ $numSpils = count($spils);
             <div class="container-fluid text-center">    
                 <div class="row content" style="margin-top: 5px;">
                     <div class="col-sm-2 sidenav">
-                        <img class="img-circle" src="img/<?php echo $avatar; ?>" style="max-height: 200px; max-width: 200px; ">
+                        <img class="img-circle" src="assets/img/<?php echo $avatar; ?>" style="max-height: 200px; max-width: 200px; ">
                         <div class="card-block col-sm-12" style="background-color: white; margin-top: 20px;">
                             <div class="info-user" style="display: inline;">
                                 <a href="Seguidores.php?user=<?php echo $user; ?>">Seguidores <span class="label label-info"><?php echo $seguidores; ?></span></a><br>

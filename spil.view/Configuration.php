@@ -151,21 +151,9 @@ function soloImagenes($fichero) {
                         </form>
                         <br>
                         <!-- FOTO PERFIL AQUÍ////////////////////////////////////////////////////////-->
-
-
                         <h5 style="text-align: left"><b>Cambiar foto de perfil:</b></h5><br>
                         <form enctype="multipart/form-data" class="register-form"  style="text-align: left;" action="#" method="Post">
-                            <input id="foto" name="foto" type="file"/>
-                            <?php ?>
-                            <!--                            <form enctype="multipart/form-data" action="uploader.php" method="POST">
-                            <input type="hidden" name="MAX_FILE_SIZE" value="200000" />
-                            <input name="uploadedfile" type="file" />
-                            <input type="submit" value="Subir archivo" />
-                            </form>-->
-
-
-
-                            <br>
+                            <input id="foto" class="btn btn-round bg-info" name="foto" type="file"/>
                             <button id="avatar" name="avatar" class="btn btn-round bg-info" type="submit">Subir archivo</button>
                         </form>
                         <hr>
@@ -216,7 +204,7 @@ function soloImagenes($fichero) {
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="#">
+                    <!--<form action="#">-->
                         <div class="modal-body"> 
                             <textarea class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
                             <label>Contenido sensible</label>
@@ -239,7 +227,7 @@ function soloImagenes($fichero) {
                             <button type="submit" class="btn btn-default btn-link" data-dismiss="modal">Publicar</button>
                             <div class="divider"></div>                            
                         </div>
-                    </form>
+                    <!--</form>-->
                 </div>
             </div>
         </div>

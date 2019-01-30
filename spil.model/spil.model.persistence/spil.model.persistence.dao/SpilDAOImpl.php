@@ -42,18 +42,20 @@ class SpilDAOImpl implements SpilDAO {
         $spil = new SpilImpl(NULL,NULL,NULL,NULL,NULL,NULL,NULL);
         $query = "SELECT * FROM SPIL WHERE id=$pk";
 
+        
         if (!($res = connectionSingleton::getConn()->query($query))) {
             echo 'No se pudieron descargar los mensajes de la base de datos.';
             return FALSE;
         } else {
-            if (($row = $res->fetch_row()) === 1) {
+            if ($row = $res->fetch_row()) {
                 $spil->setId($row[0]);
                 $spil->setText($row[1]);
-                $spil->setIdUsuario($row[2]);
+                $spil->setIdUser($row[2]);
                 $spil->setWriteDate($row[3]);
                 $spil->setEditNum($row[4]);
                 $spil->setAdultContent($row[5]);
                 $spil->setReport($row[6]);
+                print_r($spil);
             }else {
                 return false;
             }

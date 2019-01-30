@@ -3,7 +3,7 @@
 <?php
 session_start();
 
-$_SESSION['usuario'] = 'pepe';
+$_SESSION['usuario'] = 'hola';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
