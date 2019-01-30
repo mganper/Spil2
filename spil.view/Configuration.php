@@ -6,7 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\UserControllerI
 
 session_start();
 
-$_SESSION['usuario'] = 'hola';
+$_SESSION['usuario'] = 'prueba';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
@@ -45,7 +45,7 @@ if (isset($_SESSION['usuario'])) {
             if (isset($_POST['npass'])) {
                 if (isset($_POST['pass'])) {
 
-
+                    echo"ayuda";
                     $confUsuario->modifyPassword($_SESSION['usuario'], $_POST['pass'], $_POST['npass']);
                 }
             }
@@ -86,7 +86,7 @@ function soloImagenes($fichero) {
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
-
+        <script type="text/javascript" src="assets/js/scripting.js"></script>
         <style> .navbar {
                 margin-bottom: 0;
                 border-radius: 0;
