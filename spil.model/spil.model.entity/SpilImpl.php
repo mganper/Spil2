@@ -51,7 +51,7 @@ class SpilImpl implements Spil {
     function __construct($id, $text, $idUser, $writeDate, $editNum, $adultContent, $report) {
         $this->id = $id;
         $this->text = $text;
-        $this->idUsuario = $idUser;
+        $this->idUser = $idUser;
         $this->writeDate = $writeDate;
         $this->editNum = $editNum;
         $this->adultContent = $adultContent;

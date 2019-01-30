@@ -8,7 +8,7 @@ if(isset($_SESSION['usuario'])){
     $idSeguidor = $_SESSION['usuario'];
     
     $msg = $_POST['msg'];
-    $aContent = ($_POST['aContent'] === 'true') ? TRUE : FALSE;
+    $aContent = $_POST['aContent'];
     
     $controller = new SpilControllerImpl();
     
