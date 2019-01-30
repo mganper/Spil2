@@ -22,17 +22,29 @@ class RespilControllerImpl implements RespilController {
     public function nuevoRespilGesture($idMensaje, $idUsuario) {
 
         $respil = new RespilImpl($idMensaje, $idUsuario);
-        $this->modelRespil->nuevoRespil($respil);
+        // $this->modelRespil->nuevoRespil($respil);
+
+
+        $not = new NotificationControllerImpl();
+        $sp = new SpilControllerImpl();
+        $bueno = $sp->read($idUsuario)->getIdUsuario();
+
+        $not->createNot($bueno, "El Usuario @$idUsuario Te hizo RESPIL");
+
+
+
+
+        return $this->modelLike->nuevoLike($like);
     }
 
     public function listarRespilsMensaje($idMensaje) {
-        
+
 
         return $this->modelRespil->listarRespilsPorMensaje($idMensaje);
     }
 
     public function listarRespilsUsuario($idUsuario) {
-       
+
         return $this->modelRespil->listarRespilsPorUsuario($idUsuario);
     }
 
