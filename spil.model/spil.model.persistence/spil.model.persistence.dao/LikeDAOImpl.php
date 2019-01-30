@@ -122,4 +122,27 @@ class LikeDAOImpl implements LikeDAO {
         return $likes;
     }
 
+    public static function tieneLike($idMensaje, $idUsuario) {
+        
+
+        $res = False;
+
+        $query = "SELECT 1 FROM megusta WHERE idUsuario = $idUsuario and idMensaje=$idMensaje LIMIT 1";
+
+        if (!($result = connectionSingleton::getConn()->query($query))) {
+            $res = FALSE;
+        } else if ($row = mysqli_fetch_array($result)) {
+            $res = password_verify($pass, $row['contrasenya']);
+        }
+
+
+
+
+        return $res;
+    }
+        
+        
+        
+    }
+
 }
