@@ -21,7 +21,7 @@ class NotificationDAOImpl implements NotificationDAO{
         $ret = TRUE;
         $query = 'DELETE FROM NOTIFICACIONES WHERE idNotificacion = ' . $notification->getIdNotification() . ';';
 
-        echo $query;
+        //echo $query;
         if (!connectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
             echo 'fallo';

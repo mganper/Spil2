@@ -66,6 +66,12 @@ function unlike() {
     removeLikeCall(id);
 }
 
+function eliminaNoti(){
+    var id = document.getElementById("idMensaje").value;
+    
+    removeNotificationCall(id);
+}
+
 function unrespil() {
     var id = document.getElementById("idMensaje").value;
 

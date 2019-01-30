@@ -167,7 +167,7 @@ $notifications = $notfCtlr->listNot($user);
                 <div class="modal-content">
                     <div class="modal-header not-hidden" id="text-father">                    
                     </div>                    
-                    <button type="button" class="btn btn-danger btn-link not-hidden" data-dismiss="#notification-modal" onclick="">Eliminar</button>   
+                    <button type="button" class="btn btn-danger btn-link not-hidden" data-dismiss="#notification-modal" onclick="eliminaNoti()">Eliminar</button>   
                 </div>
             </div>
         </div> 
