@@ -5,8 +5,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\SpilController.
 require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\SpilModelImpl.php';
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.entity\SpilImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.entity\RespilControllerImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.entity\LikeControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\RespilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\LikeControllerImpl.php';
 
 class SpilControllerImpl implements SpilController {
 
