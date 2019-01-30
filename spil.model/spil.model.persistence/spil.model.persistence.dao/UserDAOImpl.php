@@ -49,7 +49,7 @@ class UserDAOImpl implements UserDAO {
         $query = "SELECT idUsuarioSeguidor FROM seguidores WHERE idUsuarioSeguido = '" . $pk . "'";
 
         if (!($res = connectionSingleton::getConn()->query($query))) {
-           // echo 'No se pudieron descargar los usuarios de la base de datos.';
+            // echo 'No se pudieron descargar los usuarios de la base de datos.';
             return FALSE;
         } else {
             while ($row = $res->fetch_assoc()) {
@@ -81,7 +81,7 @@ class UserDAOImpl implements UserDAO {
             return FALSE;
         } else {
             while ($row = $res->fetch_assoc()) {
-                $query = 'SELECT usuario, avatar FROM usuario WHERE usuario = "' . $row['idUsuarioSeguido'] . '"';
+                $query = 'SELECT u whsuario, avatar FROM usuario WHERE usuario = "' . $row['idUsuarioSeguido'] . '"';
 
                 if (!($data = connectionSingleton::getConn()->query($query))) {
                     //echo 'No se pudieron descargar los usuarios de la base de datos.';
@@ -103,7 +103,7 @@ class UserDAOImpl implements UserDAO {
         $query = 'SELECT COUNT(*) FROM seguidores WHERE idUsuarioSeguido = "' . $user . '"';
 
         if (!($res = connectionSingleton::getConn()->query($query))) {
-           // echo 'No se pudieron comprobar los seguidores.';
+            // echo 'No se pudieron comprobar los seguidores.';
             return FALSE;
         } else {
             if (($row = $res->fetch_row())) {
@@ -210,7 +210,7 @@ class UserDAOImpl implements UserDAO {
         $res = False;
 
         $query = "SELECT *  FROM seguidores WHERE idUsuarioSeguidor = '" . $idSeguidor . "' AND "
-                . "idUsuarioSeguido ='". $idSeguido . "' LIMIT 1";
+                . "idUsuarioSeguido ='" . $idSeguido . "' LIMIT 1";
 
         if (!($result = connectionSingleton::getConn()->query($query))) {
             $res = FALSE;
@@ -221,13 +221,13 @@ class UserDAOImpl implements UserDAO {
 
         return $res;
     }
-    
-    public static function getAvatar($Usuario){
+
+    public static function getAvatar($Usuario) {
         $res = True;
-         $query = 'SELECT avatar FROM usuario WHERE idUsuarioSeguido = "' . $user . '"';
+        $query = 'SELECT avatar FROM usuario WHERE idUsuarioSeguido = "' . $user . '"';
 
         if (!($res = connectionSingleton::getConn()->query($query))) {
-           // echo 'No se pudieron comprobar los seguidores.';
+            // echo 'No se pudieron comprobar los seguidores.';
             return FALSE;
         } else {
             if (($row = $res->fetch_row())) {
@@ -238,7 +238,28 @@ class UserDAOImpl implements UserDAO {
         }
 
         return $res;
-        
+    }
+
+    public static function getRank5() {
+        $listaUsuarios = Array();
+
+        $query = "SELECT usuario,avatar,count(*) as 'cuenta' FROM usuario a, megusta b, spil c WHERE  "
+                . "  b.idMensaje=c.id and c.idUsuario=a.usuario group by usuario,avatar order by count(*) DESC LIMIT 5";
+
+        if (!($res = connectionSingleton::getConn()->query($query))) {
+            // echo 'No se pudieron comprobar los seguidores.';
+            return FALSE;
+        } else {
+            while ($row = $res->fetch_row()) {
+                $res = $row->fetch_assoc();
+
+                $userRecovered = new UserImpl($userAvatar['usuario'], $userAvatar['avatar'], null, null, null, null, null);
+             
+                array_push($listaUsuarios, ["user" => $userRecovered, "num" => $userAvatar['cuenta']]);
+            }
+        }
+
+        return $listaUsuarios;
     }
 
 }
