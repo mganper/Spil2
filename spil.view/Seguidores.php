@@ -204,7 +204,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
 
 
 
-        <!-- Modal Bodies come here -->
+        <!-- Modal Bodies come here -->        
         <div class="modal fade" id="MSGModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -214,33 +214,35 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <!-- FORMULARIO QUE RECIBE LA FUNCIONALIDAD ENVIAR SPIL AQUÍ-->
                     <form action="#">
                         <div class="modal-body"> 
-                            <textarea class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
+                            <textarea id="msg" class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
                             <label>Contenido sensible</label>
                             <div class="form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto" value="TRUE" checked>
                                     Off
                                     <span class="form-check-sign"></span>
                                 </label>
                             </div>
                             <div class="form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" >
+                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto2" value="FALSE" >
                                     On
                                     <span class="form-check-sign"></span>
                                 </label>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal">Publicar</button>
+                            <button type="submit" class="btn btn-default btn-link" data-dismiss="modal" onclick="sendMsg()">Publicar</button>
                             <div class="divider"></div>                            
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+
         <!--   end modal -->
 
 
