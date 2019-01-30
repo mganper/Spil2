@@ -1,5 +1,5 @@
 function addModeratorCall(idUsuario) {
-    $.post('spil.view/assets/js/api/AddModeratorWebService.php', {
+    $.post('../api/AddModeratorWebService.php', {
         idUsuarioAsc: idUsuario
     }, function (data, status) {
         var content = JSON.parse(data);
@@ -12,7 +12,7 @@ function addModeratorCall(idUsuario) {
 }
 
 function createSpilCall(mensaje, cAdulto) {
-    $.post('spil.view/assets/js/api/CreateSpilWebService.php', {
+    $.post('../api/CreateSpilWebService.php', {
         msg: mensaje,
         aContent: cAdulto
     }, function (data, status) {
@@ -26,7 +26,7 @@ function createSpilCall(mensaje, cAdulto) {
 }
 
 function deleteSpilCall(spilId) {
-    $.post('api/DeleteSpilWebService.php', {
+    $.post('../api/DeleteSpilWebService.php', {
         spilId: spilId
     }, function (data, status) {
         var content = JSON.parse(data);
@@ -39,7 +39,7 @@ function deleteSpilCall(spilId) {
 }
 
 function followUserCall(idUsuario) {
-    $.post('api/FollowUserWebService.php', {
+    $.post('../api/FollowUserWebService.php', {
         idUsuarioSeguido: idUsuario
     }, function (data, status) {
         var content = JSON.parse(data);
@@ -52,7 +52,7 @@ function followUserCall(idUsuario) {
 }
 
 function giveLikeCall(spilId) {
-    $.post('api/GiveLikeWebService.php', {
+    $.post('../api/GiveLikeWebService.php', {
         spilId: spilId
     }, function (data, status) {
         var content = JSON.parse(data);
@@ -65,7 +65,7 @@ function giveLikeCall(spilId) {
 }
 
 function giveRespilCall(spilId) {
-    $.post('api/GiveRespilWebService.php', {
+    $.post('../api/GiveRespilWebService.php', {
         spilId: spilId
     }, function (data, status) {
         var content = JSON.parse(data);
@@ -78,7 +78,7 @@ function giveRespilCall(spilId) {
 }
 
 function removeLikeCall(spilId) {
-    $.post('api/RemoveLikeWebService.php', {
+    $.post('../api/RemoveLikeWebService.php', {
         spilId: spilId
     }, function (data, status) {
         var content = JSON.parse(data);
@@ -91,7 +91,7 @@ function removeLikeCall(spilId) {
 }
 
 function removeRespilCall(spilId) {
-    $.post('api/RemoveRespilWebService.php', {
+    $.post('../api/RemoveRespilWebService.php', {
         spilId: spilId
     }, function (data, status) {
         var content = JSON.parse(data);
@@ -104,7 +104,7 @@ function removeRespilCall(spilId) {
 }
 
 function unfollowUserCall(idUsuarioSeguido) {
-    $.post('api/UnfollowUserWebService.php', {
+    $.post('../api/UnfollowUserWebService.php', {
         idUsuarioSeguido: idUsuarioSeguido
     }, function (data, status) {
         var content = JSON.parse(data);
