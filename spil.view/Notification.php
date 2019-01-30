@@ -31,6 +31,9 @@ if (isset($_SESSION['usuario'])) {
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href="pk2-free-v2.0.1/assets/css/nucleo-icons.css" rel="stylesheet" />
 
+        <script type="text/javascript" src="../api/WebServiceCalls.js"></script>
+        <script type="text/javascript" src="assets/js/scripting.js"></script>
+
         <style> .navbar {
                 margin-bottom: 0;
                 border-radius: 0;
