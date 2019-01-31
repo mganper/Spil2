@@ -52,19 +52,40 @@ if (isset($_POST['login'])) {
         <title>Spil</title>
     </head>
     <body style="background-image: url('https://simbiotica.files.wordpress.com/2017/03/south-africa-927268_1920.jpg');">
-        <div class="container" >
-            <div class="row">
-                <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3 ">
-                    <div class="card-register bg-primary">
-                        <h3 style="color:blue;">Welcome to Spil!</h3>
-                        <!-- FORMULARIO DE LOGIN-->
-                        <form class="register-form" action='#' method="POST">
-                            <label>User</label>
-                            <div class="form-group <?php
-                            if (isset($fallo))
-                                echo 'has-danger';
-                            ?>">
-                                <input class="form-control <?php if (isset($fallo)) echo 'form-control-danger'; ?>" id="inputDanger1" type="text" placeholder="User" name="user">
+        <?php
+        if (isset($_POST['login'])) {
+            $filter = Array(
+                'user' => FILTER_SANITIZE_STRING,
+                'pass' => FILTER_SANITIZE_STRING
+            );
+
+            $entry = filter_input_array(INPUT_POST, $filter);
+
+            if (isGoodLogin($entry['user'], $entry['pass'])) {
+                session_start();
+                $_SESSION['usuario'] = $entry['user'];
+                header('Location: Lobby.php');
+            } else {
+                ?>
+                <div class="container" >
+                    <div class="row">
+                        <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3 ">
+                            <div class="card-register bg-primary">
+                                <h3 style="color:blue;">Welcome to Spil!</h3>
+                                <!-- FORMULARIO DE LOGIN-->
+                                <form class="register-form" action='#' method="POST">
+                                    <label>User</label>
+                                    <div class="form-group has-danger">
+                                        <input class="form-control form-control-danger" id="" type="text" placeholder="User" name="user">
+                                    </div>
+                                    <label>Password</label>
+                                    <div class="form-group has-danger">
+                                        <input class="form-control form-control-danger" id="inputDanger1" type="password" placeholder="Password" name="pass">
+                                        <div class="form-control-feedback">Usuario o contraseña incorrectos.</div>
+                                    </div>
+                                    <button class="btn btn-danger btn-block btn-round" name="login">Log in</button>
+                                </form>
+                                <a type="button" class="btn btn-register btn-block btn-round" href="Registro.php">Register</a>
                             </div>
                             <label>Password</label>
                             <div class="form-group <?php if (isset($fallo)) echo 'has-danger'; ?>">
