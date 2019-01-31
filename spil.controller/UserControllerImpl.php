@@ -1,9 +1,9 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\UserController.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\UserModelImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.entity\UserImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persistence\spil.model.persistence.dao\UserDAOImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/UserController.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/UserModelImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.entity/UserImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.persistence/spil.model.persistence.dao/UserDAOImpl.php';
 
 class UserControllerImpl implements UserController {
 
