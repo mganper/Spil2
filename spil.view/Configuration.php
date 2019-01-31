@@ -1,8 +1,8 @@
 <!doctype html>
 
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\ConfigurationControllerImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\UserControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/pil2/spil.controller/ConfigurationControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerImpl.php';
 
 session_start();
 

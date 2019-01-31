@@ -1,8 +1,8 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.controller\NotificationController.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\NotificationModelImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.entity\NotificationImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/NotificationController.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/NotificationModelImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.entity/NotificationImpl.php';
 
 class NotificationControllerImpl implements NotificationController {
 

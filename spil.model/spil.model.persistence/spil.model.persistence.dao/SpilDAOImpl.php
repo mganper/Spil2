@@ -1,8 +1,8 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/Spil2\spil.model\spil.model.persistence\SpilDAO.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Spil2/spil.model/spil.model.persistence/SpilDAO.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'].'\Spil2\spil.model\spil.model.persistence\spil.model.persistence.dao\connectionSingleton.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Spil2/spil.model/spil.model.persistence/spil.model.persistence.dao/connectionSingleton.php';
 
 class SpilDAOImpl implements SpilDAO {    
     
