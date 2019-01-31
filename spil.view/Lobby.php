@@ -19,7 +19,6 @@ function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
 
 session_start();
 
-$_SESSION['usuario'] = 'cad2298';
 
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
@@ -38,8 +37,8 @@ $numSeguidos = $userController->getNumSeguidos($user);
 $seguidos = $userController->getSeguidos($user);
 $avatar = UserDAOImpl::getAvatar($user);
 $modoAdulto = $configController->getConfiguration($user)->isModoAdulto();
-$listSpils;
-$listRespils;
+$listSpils ;
+$listRespils ;
 $spils = array();
 $respils = array();
 
@@ -75,6 +74,15 @@ if ($respils) {
 if (count($spils) > 0) {
     array_sort_by($spils, 'writeDate');
 }
+
+if($listRespils === true || $listRespils === false){
+    $listRespils = array();
+}
+
+if($listSpils === true || $listSpils === FALSE){
+    $listSpils = array();
+}
+
 $numSpils = count($listSpils) + count($listRespils);
 ?>
 

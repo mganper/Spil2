@@ -59,7 +59,7 @@ function isGoodLogin($user, $pass) {
                                 <form class="register-form" action='#' method="POST">
                                     <label>User</label>
                                     <div class="form-group has-danger">
-                                        <input class="form-control form-control-danger" id="inputDanger1" type="text" placeholder="User" name="user">
+                                        <input class="form-control form-control-danger" id="" type="text" placeholder="User" name="user">
                                     </div>
                                     <label>Password</label>
                                     <div class="form-group has-danger">
