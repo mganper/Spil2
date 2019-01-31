@@ -1,8 +1,8 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.persistence/spil.model.persistence.dao/ConnectionSingleton.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.persistence/UserDAO.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.entity/UserImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.persistence/spil.model.persistence.dao/ConnectionSingleton.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.persistence/UserDAO.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.entity/UserImpl.php';
 
 class UserDAOImpl implements UserDAO {
 
@@ -25,7 +25,7 @@ class UserDAOImpl implements UserDAO {
         $ret = TRUE;
         $query = "DELETE FROM usuario WHERE usuario = '" . $pk . "';";
 
-        if (!connectionSingleton::getConn()->query($query)) {
+        if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
         }
 
@@ -36,7 +36,7 @@ class UserDAOImpl implements UserDAO {
         $ret = TRUE;
         $query = "UPDATE usuario SET contrasenya = '" . password_hash($user->getContrasenya(), PASSWORD_DEFAULT) . "' WHERE usuario = '" . $user->getUsuario() . "'";
 
-        if (!connectionSingleton::getConn()->query($query)) {
+        if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
         }
 
@@ -48,14 +48,14 @@ class UserDAOImpl implements UserDAO {
 
         $query = "SELECT idUsuarioSeguidor FROM seguidores WHERE idUsuarioSeguido = '" . $pk . "'";
 
-        if (!($res = connectionSingleton::getConn()->query($query))) {
+        if (!($res = ConnectionSingleton::getConn()->query($query))) {
             // echo 'No se pudieron descargar los usuarios de la base de datos.';
             return FALSE;
         } else {
             while ($row = $res->fetch_assoc()) {
                 $query = 'SELECT usuario, avatar FROM usuario WHERE usuario = "' . $row['idUsuarioSeguidor'] . '"';
 
-                if (!($data = connectionSingleton::getConn()->query($query))) {
+                if (!($data = ConnectionSingleton::getConn()->query($query))) {
                     //echo 'No se pudieron descargar los usuarios de la base de datos.';
                     return FALSE;
                 } else {
@@ -75,14 +75,14 @@ class UserDAOImpl implements UserDAO {
 
         $query = 'SELECT idUsuarioSeguido FROM seguidores WHERE idUsuarioSeguidor = "' . $pk . '"';
 
-        if (!($res = connectionSingleton::getConn()->query($query))) {
+        if (!($res = ConnectionSingleton::getConn()->query($query))) {
             //echo 'No se pudieron descargar los usuarios de la base de datos.';
             return FALSE;
         } else {
             while ($row = $res->fetch_assoc()) {
                 $query = 'SELECT usuario, avatar FROM usuario WHERE usuario = "' . $row['idUsuarioSeguido'] . '"';
 
-                if (!($data = connectionSingleton::getConn()->query($query))) {
+                if (!($data = ConnectionSingleton::getConn()->query($query))) {
                     echo 'No se pudieron descargar los usuarios de la base de datos.';
                     return FALSE;
                 } else {
@@ -101,7 +101,7 @@ class UserDAOImpl implements UserDAO {
     public function getNumFollowers($user) {
         $query = 'SELECT COUNT(*) FROM seguidores WHERE idUsuarioSeguido = "' . $user . '"';
 
-        if (!($res = connectionSingleton::getConn()->query($query))) {
+        if (!($res = ConnectionSingleton::getConn()->query($query))) {
             // echo 'No se pudieron comprobar los seguidores.';
             return FALSE;
         } else {
@@ -118,7 +118,7 @@ class UserDAOImpl implements UserDAO {
     public function getNumFollows($user) {
         $query = "SELECT COUNT(*) FROM seguidores WHERE idUsuarioSeguidor = '" . $user . "'";
 
-        if (!($res = connectionSingleton::getConn()->query($query))) {
+        if (!($res = ConnectionSingleton::getConn()->query($query))) {
             //echo 'No se pudieron comprobar los seguidos.';
             return FALSE;
         } else {
@@ -136,7 +136,7 @@ class UserDAOImpl implements UserDAO {
         $ret = TRUE;
         $query = "UPDATE usuario SET avatar = '" . $user->getAvatar() . "' WHERE usuario = '" . $user->getUsuario() . "';";
 
-        if (!connectionSingleton::getConn()->query($query)) {
+        if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
         }
 
@@ -147,7 +147,7 @@ class UserDAOImpl implements UserDAO {
         $ret = TRUE;
         $query = "UPDATE usuario SET numReportes=(numReportes + 1) WHERE usuario = '" . $id . "';";
 
-        if (!connectionSingleton::getConn()->query($query)) {
+        if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
         }
 
@@ -160,7 +160,7 @@ class UserDAOImpl implements UserDAO {
 
         $query = "SELECT contrasenya FROM usuario WHERE UPPER(usuario) like UPPER('" . $user . "') LIMIT 1";
 
-        if (!($result = connectionSingleton::getConn()->query($query))) {
+        if (!($result = ConnectionSingleton::getConn()->query($query))) {
             $res = FALSE;
         } else if ($row = mysqli_fetch_array($result)) {
             $res = password_verify($pass, $row['contrasenya']);
@@ -176,7 +176,7 @@ class UserDAOImpl implements UserDAO {
         $res = True;
         $query = "INSERT INTO seguidores (idUsuarioSeguidor, idUsuarioSeguido)VALUES ('" . $idSeguidor . "','" . $idSeguido . "');";
 
-        if (!($result = connectionSingleton::getConn()->query($query))) {
+        if (!($result = ConnectionSingleton::getConn()->query($query))) {
             $res = FALSE;
         }
         return $res;
@@ -186,7 +186,7 @@ class UserDAOImpl implements UserDAO {
         $res = True;
         $query = "DELETE FROM seguidores WHERE idUsuarioSeguidor = '" . $idSeguidor . "'AND idUsuarioSeguido ='" . $idSeguido . "';";
 
-        if (!($result = connectionSingleton::getConn()->query($query))) {
+        if (!($result = ConnectionSingleton::getConn()->query($query))) {
             $res = FALSE;
         }
         return $res;
@@ -197,7 +197,7 @@ class UserDAOImpl implements UserDAO {
         $ret = TRUE;
         $query = "UPDATE usuario SET esModerador=1 WHERE usuario = '" . $idUsuario . "';";
 
-        if (!connectionSingleton::getConn()->query($query)) {
+        if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
         }
 
@@ -211,7 +211,7 @@ class UserDAOImpl implements UserDAO {
         $query = "SELECT *  FROM seguidores WHERE idUsuarioSeguidor = '" . $idSeguidor . "' AND "
                 . "idUsuarioSeguido ='" . $idSeguido . "' LIMIT 1";
 
-        if (!($result = connectionSingleton::getConn()->query($query))) {
+        if (!($result = ConnectionSingleton::getConn()->query($query))) {
             $res = FALSE;
             echo "error";
         } else if ($row = mysqli_fetch_array($result)) {
@@ -225,7 +225,7 @@ class UserDAOImpl implements UserDAO {
         $res = True;
         $query = "SELECT avatar FROM usuario WHERE usuario = '$user'";
 
-        if (!($ret = connectionSingleton::getConn()->query($query))) {
+        if (!($ret = ConnectionSingleton::getConn()->query($query))) {
             // echo 'No se pudieron comprobar los seguidores.';
             return FALSE;
         } else {
@@ -245,7 +245,7 @@ class UserDAOImpl implements UserDAO {
         $query = "SELECT usuario,avatar,count(*) as 'cuenta' FROM usuario a, megusta b, spil c WHERE  "
                 . "  b.idMensaje=c.id and c.idUsuario=a.usuario group by usuario,avatar order by count(*) DESC LIMIT 5";
 
-        if (!($res = connectionSingleton::getConn()->query($query))) {
+        if (!($res = ConnectionSingleton::getConn()->query($query))) {
              echo 'No se pudieron comprobar los seguidores.';
             return FALSE;
         } else {
@@ -266,7 +266,7 @@ class UserDAOImpl implements UserDAO {
         $query = "SELECT esModerador FROM usuario WHERE usuario='$user';";
         $ret = 0;
         
-        if(!($res = connectionSingleton::getConn()->query($query))){
+        if(!($res = ConnectionSingleton::getConn()->query($query))){
             return false;
         }else{
             while($row = $res->fetch_row()){

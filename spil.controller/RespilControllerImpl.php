@@ -1,14 +1,14 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilController.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/RespilController.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/RespilModelImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/RespilModelImpl.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.entity/RespilImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.entity/RespilImpl.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/NotificationControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/NotificationControllerImpl.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/SpilControllerImpl.php';
 
 class RespilControllerImpl implements RespilController {
 

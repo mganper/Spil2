@@ -1,12 +1,10 @@
-<!doctype html>
-
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/LikeControllerImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.persistence/spil.model.persistence.dao/UserDAOImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/ConfigurationControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/UserControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/SpilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/RespilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/LikeControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.persistence/spil.model.persistence.dao/UserDAOImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/ConfigurationControllerImpl.php';
 
 function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
     $arrAux = array();
@@ -52,8 +50,10 @@ foreach ($seguidos as $seguido) {
 $listSpils = $spilController->listMsgs($user);
 $listRespils = $respilController->listarRespilsUsuario($user);
 
-foreach ($listSpils as $msg) {
-    array_push($spils, $msg);
+if ($listSpils) {
+    foreach ($listSpils as $msg) {
+        array_push($spils, $msg);
+    }
 }
 
 if ($listRespils) {
@@ -86,6 +86,7 @@ if($listSpils === true || $listSpils === FALSE){
 $numSpils = count($listSpils) + count($listRespils);
 ?>
 
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -211,22 +212,22 @@ $numSpils = count($listSpils) + count($listRespils);
                                 </div>
                                 <hr>
                                 <?php
-                                }
+                            }
+                        }
+                        ?>
+                    </div>
+                    <div class="col-sm-2 sidenav">
+                        <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
+                            <div class="info-user ">
+                                <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
+                                <h3>RANKING</h3>
+                                <hr>
+                                <?php
+                                $ranking = UserDAOImpl::getRank5();
+                                foreach ($ranking as $rank) {
+                                    echo $rank[0] . ' con ' . $rank[2] . ' likes<br>';
                                 }
                                 ?>
-                            </div>
-                            <div class="col-sm-2 sidenav">
-                                <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
-                                    <div class="info-user ">
-                                        <!-- CODIGO PARA MOSTRAR RANKING AQUÍ-->
-                                        <h3>RANKING</h3>
-                                        <hr>
-                                        <?php
-                                        $ranking = UserDAOImpl::getRank5();
-                                        foreach ($ranking as $rank) {
-                                            echo $rank[0] . ' con ' . $rank[2] . ' likes<br>';
-                                        }
-                                        ?>
                             </div>
                         </div>
                     </div>
@@ -250,29 +251,27 @@ $numSpils = count($listSpils) + count($listRespils);
                         </button>
                     </div>
                     <!-- FORMULARIO QUE RECIBE LA FUNCIONALIDAD ENVIAR SPIL AQUÍ-->
-                    <form action="#">
-                        <div class="modal-body"> 
-                            <textarea id="msg" class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
-                            <label>Contenido sensible</label>
-                            <div class="form-check-radio">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto" value="TRUE" checked>
-                                    Off
-                                    <span class="form-check-sign"></span>
-                                </label>
-                            </div>
-                            <div class="form-check-radio">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto2" value="FALSE" >
-                                    On
-                                    <span class="form-check-sign"></span>
-                                </label>
-                            </div>
+                    <div class="modal-body"> 
+                        <textarea id="msg" class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
+                        <label>Contenido sensible</label>
+                        <div class="form-check-radio">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto" value="TRUE" checked>
+                                Off
+                                <span class="form-check-sign"></span>
+                            </label>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-default btn-link" data-dismiss="#MSGModal" onclick="sendMsg()">Publicar</button>                       
+                        <div class="form-check-radio">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto2" value="FALSE" >
+                                On
+                                <span class="form-check-sign"></span>
+                            </label>
                         </div>
-                    </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default btn-link" data-dismiss="#MSGModal" onclick="sendMsg()">Publicar</button>                       
+                    </div>
                 </div>
             </div>
         </div>

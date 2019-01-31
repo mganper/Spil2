@@ -1,6 +1,6 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/LikeControllerImpl.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/LikeControllerImpl.php';
 
 session_start();
 

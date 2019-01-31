@@ -1,11 +1,9 @@
-<!doctype html>
-
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/RespilControllerImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/LikeControllerImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.persistence/spil.model.persistence.dao/UserDAOImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/UserControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/SpilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/RespilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/LikeControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.persistence/spil.model.persistence.dao/UserDAOImpl.php';
 
 function array_sort_by(&$arrIni, $col, $order = SORT_DESC) {
     $arrAux = array();
@@ -67,10 +65,11 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
 }
 ?>
 
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-         <link rel="icon" type="image/png" href="assets/img/favicon.png">
+        <link rel="icon" type="image/png" href="assets/img/favicon.png">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
         <title>Spil | <?php echo $userPerfil; ?></title>
@@ -144,7 +143,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                                 <button class="btn btn-info btn-sm" onclick="seguir()">Seguir</button>
                             <?php } else { ?>
                                 <button class="btn btn-info btn-sm" onclick="dejarSeguir()">Dejar de seguir</button>
-                            <?php
+                                <?php
                             }
                         }
                         ?>
@@ -156,7 +155,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                                 <a href="Like.php?user=<?php echo $userPerfil; ?>">Me gusta<span class="label label-info"><?php echo $numLikes; ?></span></a><br> 
                                 <?php if ($ismoderator && !$isModeratorProfile) { ?>
                                     <button id="bt-tomoderator" class="btn btn-info" onclick="ascender()">Ascender</button>
-<?php } ?>
+                                <?php } ?>
                             </div>
                         </div>
 
@@ -192,7 +191,7 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                                 </h5>
                             </div>
                             <hr>
-<?php } ?>
+                        <?php } ?>
                     </div>
                     <div class="col-sm-2 sidenav">
                         <div class="card-block col-sm-11 offset-sm-1" style="background-color: white;">
@@ -226,30 +225,28 @@ if (($likes = $likeController->listarMegustasUsuario($userPerfil))) {
                         </button>
                     </div>
                     <!-- FORMULARIO QUE RECIBE LA FUNCIONALIDAD ENVIAR SPIL AQUÍ-->
-                    <form action="#">
-                        <div class="modal-body"> 
-                            <textarea id="msg" class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
-                            <label>Contenido sensible</label>
-                            <div class="form-check-radio">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto" value="TRUE" checked>
-                                    Off
-                                    <span class="form-check-sign"></span>
-                                </label>
-                            </div>
-                            <div class="form-check-radio">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto2" value="FALSE" >
-                                    On
-                                    <span class="form-check-sign"></span>
-                                </label>
-                            </div>
+                    <div class="modal-body"> 
+                        <textarea id="msg" class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
+                        <label>Contenido sensible</label>
+                        <div class="form-check-radio">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto" value="TRUE" checked>
+                                Off
+                                <span class="form-check-sign"></span>
+                            </label>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-default btn-link" data-dismiss="#MSGModal" onclick="sendMsg()">Publicar</button>
-                            <div class="divider"></div>                            
+                        <div class="form-check-radio">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto2" value="FALSE" >
+                                On
+                                <span class="form-check-sign"></span>
+                            </label>
                         </div>
-                    </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default btn-link" data-dismiss="#MSGModal" onclick="sendMsg()">Publicar</button>
+                        <div class="divider"></div>                            
+                    </div>
                 </div>
             </div>
         </div>

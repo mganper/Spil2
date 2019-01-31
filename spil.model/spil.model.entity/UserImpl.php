@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.entity/User.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.entity/User.php';
 
 class UserImpl implements User {
 

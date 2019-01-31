@@ -1,12 +1,29 @@
-<!DOCTYPE html>
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/UserControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/UserControllerImpl.php';
 
 function register($name, $surname, $birthdate, $user, $pass) {
     $userController = new UserControllerImpl();
     return $userController->createUser($user, $pass, $name, $surname, $birthdate);
 }
+
+if (isset($_POST['send'])) {
+            $filter = Array(
+                'name' => FILTER_SANITIZE_STRING,
+                'surname' => FILTER_SANITIZE_STRING,
+                'user' => FILTER_SANITIZE_STRING,
+                'pass' => FILTER_SANITIZE_STRING
+            );
+
+            $entry = filter_input_array(INPUT_POST, $filter);
+
+            if (register($entry['name'], $entry['surname'], $_POST['birthdate'], $entry['user'], $entry['pass'])) {
+                header('Location: Login.php');
+            } else {
+                $fallo = true;
+            }
+}
 ?>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -27,19 +44,19 @@ function register($name, $surname, $birthdate, $user, $pass) {
     </head>
     <body style="background-image: url('https://simbiotica.files.wordpress.com/2017/03/south-africa-927268_1920.jpg');">
         <?php
-        if (isset($_POST['send'])) {
-            $filter = Array(
-                'name' => FILTER_SANITIZE_STRING,
-                'surname' => FILTER_SANITIZE_STRING,
-                'user' => FILTER_SANITIZE_STRING,
-                'pass' => FILTER_SANITIZE_STRING
-            );
-
-            $entry = filter_input_array(INPUT_POST, $filter);
-
-            if (register($entry['name'], $entry['surname'], $_POST['birthdate'], $entry['user'], $entry['pass'])) {
-                header('Location: Login.php');
-            } else {
+//        if (isset($_POST['send'])) {
+//            $filter = Array(
+//                'name' => FILTER_SANITIZE_STRING,
+//                'surname' => FILTER_SANITIZE_STRING,
+//                'user' => FILTER_SANITIZE_STRING,
+//                'pass' => FILTER_SANITIZE_STRING
+//            );
+//
+//            $entry = filter_input_array(INPUT_POST, $filter);
+//
+//            if (register($entry['name'], $entry['surname'], $_POST['birthdate'], $entry['user'], $entry['pass'])) {
+//                header('Location: Login.php');
+//            } else {
                 ?>
 
                 <div class="container">
@@ -56,9 +73,9 @@ function register($name, $surname, $birthdate, $user, $pass) {
                                     <label>Fecha de nacimiento</label>
                                     <input type="text" id="birth-date" placeholder="DD-MM-AAAA" class="form-control" onkeyup="checkDate()" name="birthdate">
                                     <label>User</label>
-                                    <div class="form-group has-danger">
-                                    <input class="form-control form-control-danger" type="text" placeholder="User" name="user" required>
-                                    <div class="form-control-feedback">El usuario ya esta en uno, utilice otro.</div>
+                                    <div class="form-group <?php if(isset($fallo)) echo 'has-danger';?>">
+                                    <input class="form-control <?php if(isset($fallo)) echo 'form-control-danger';?>" type="text" placeholder="User" name="user" required>
+                                    <?php if(isset($fallo)) echo '<div class="form-control-feedback">El usuario ya esta en uno, utilice otro.</div>';?>
                                     </div>
                                     <label>Contraseña: </label>
                                     <div class="">
@@ -80,45 +97,6 @@ function register($name, $surname, $birthdate, $user, $pass) {
                     </div>
                 </div>
 
-                <?php
-            }
-        } else {
-            ?>
-            <div class="container" >
-                <div class="row">
-                    <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3">
-                        <div class="card-register bg-primary">
-                            <h3 style="color:blue;">Welcome to Spil!</h3>
-                            <!-- FORMULARIO DE REGISTRO-->
-                            <form class="register-form" action="#" method="POST">
-                                <label>Nombre</label>
-                                <input type="text" placeholder="Nombre" class="form-control" name="name" required>
-                                <label>Apellidos</label>
-                                <input type="text" placeholder="Apellidos" class="form-control" name="surname" required>
-                                <label>Fecha de nacimiento</label>
-                                <input type="text" id="birth-date" placeholder="DD-MM-AAAA" class="form-control" onkeyup="checkDate()" name="birthdate">
-                                <label>User</label>
-                                <input class="form-control" type="text" placeholder="User" name="user" required>
-                                <label>Contraseña: </label>
-                                <div class="">
-                                    <input class="form-control" type="password" placeholder="Nueva contraseña" id="npass" onblur="checkPasswd()" name="pass" required><br>
-                                    <label>Repetir contraseña: </label>
-                                    <input class="form-control" type="password" placeholder="Repetir contraseña" id="rnpass" onblur="checkPasswd()" required><br><br>
-                                    <input id="cpsw" type="submit" name="send" value="Registrar" class="btn btn-danger btn-block btn-round" disabled>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer register-footer text-center">
-                    <h6>
-                        © 
-                        <script>document.write(new Date().getFullYear())</script>
-                        , Grupo 10 Programacion Avanzada.
-                    </h6>
-                </div>
-            </div>
-        <?php } ?>
     </body>
     <!-- javascript -->
     <script>

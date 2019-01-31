@@ -1,13 +1,13 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/LikeController.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/LikeController.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/LikeModelImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/LikeModelImpl.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.entity/LikeImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.entity/LikeImpl.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/NotificationControllerImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/NotificationControllerImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/SpilControllerImpl.php';
 
 class LikeControllerImpl implements LikeController {
 

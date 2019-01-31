@@ -1,8 +1,8 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'\Spil2\spil.model\SpilModel.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/spil.model/SpilModel.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'].'\Spil2\spil.model\spil.model.persistence\spil.model.persistence.dao\SpilDAOImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/spil.model/spil.model.persistence/spil.model.persistence.dao/SpilDAOImpl.php';
 
 class SpilModelImpl implements SpilModel {
 

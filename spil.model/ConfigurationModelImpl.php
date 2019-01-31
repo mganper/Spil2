@@ -1,7 +1,7 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/ConfigurationModel.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.persistence/spil.model.persistence.dao/ConfigurationDAOImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/ConfigurationModel.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.persistence/spil.model.persistence.dao/ConfigurationDAOImpl.php';
 
 class ConfigurationModelImpl implements ConfigurationModel {
     private $controller; 

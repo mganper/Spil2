@@ -1,6 +1,6 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/NotificationControllerImpl.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/NotificationControllerImpl.php';
 
 session_start();
 

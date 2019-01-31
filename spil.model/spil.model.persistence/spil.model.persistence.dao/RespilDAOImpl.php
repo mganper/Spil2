@@ -1,8 +1,8 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.persistence/RespilDAO.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.persistence/RespilDAO.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.persistence/spil.model.persistence.dao/connectionSingleton.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.persistence/spil.model.persistence.dao/ConnectionSingleton.php';
 
 class RespilDAOImpl implements RespilDAO {
 
@@ -12,7 +12,7 @@ class RespilDAOImpl implements RespilDAO {
         $query = "SELECT * FROM respil WHERE idMensaje ='" + $respil->getIdMensaje() +
                 "' and idUsuario = '" + $respil->getIdUsuario() + "';";
         //try
-        $con = connectionSingleton::getConn();
+        $con = ConnectionSingleton::getConn();
 
         if (!($result = $conn->query($query))) {
 
@@ -30,7 +30,7 @@ class RespilDAOImpl implements RespilDAO {
 
         $query = "INSERT INTO respil (idMensaje,idUsuario) VALUES( '" . $respil->getIdMensaje() . "' ,  '" . $respil->getIdUsuario() . "');";
         //try
-        $con = connectionSingleton::getConn();
+        $con = ConnectionSingleton::getConn();
 
         if (!($result = $con->query($query))) {
             return false;
@@ -48,7 +48,7 @@ class RespilDAOImpl implements RespilDAO {
         $query = "DELETE FROM respil WHERE idMensaje ='" . $respil->getIdMensaje() . "
                 ' and idUsuario = '" . $respil->getIdUsuario() . "';";
         //try
-        $con = connectionSingleton::getConn();
+        $con = ConnectionSingleton::getConn();
 
         if (!($result = $con->query($query))) {
 
@@ -83,7 +83,7 @@ class RespilDAOImpl implements RespilDAO {
 
         $query = "SELECT * FROM respil WHERE idUsuario = '$idUsuario';";
         //try
-        $con = connectionSingleton::getConn();
+        $con = ConnectionSingleton::getConn();
 
         if (!($result = $con->query($query))) {
 
@@ -107,7 +107,7 @@ class RespilDAOImpl implements RespilDAO {
 
         $query = "SELECT * FROM respil WHERE idMensaje = '$idMensaje';";
         //try
-        $con = connectionSingleton::getConn();
+        $con = ConnectionSingleton::getConn();
 
         if (!($result = $con->query($query))) {
 
@@ -131,7 +131,7 @@ class RespilDAOImpl implements RespilDAO {
 
         $query = "SELECT 1 FROM megusta WHERE idUsuario = $idUsuario and idMensaje=$idMensaje LIMIT 1";
 
-        if (!($result = connectionSingleton::getConn()->query($query))) {
+        if (!($result = ConnectionSingleton::getConn()->query($query))) {
             $res = FALSE;
         } else if ($row = mysqli_fetch_array($result)) {
             $res = TRUE;
@@ -147,7 +147,7 @@ class RespilDAOImpl implements RespilDAO {
         $query = "DELETE FROM respil WHERE idMensaje ='" . $idMensaje .
                 "';";
         //try
-        $con = connectionSingleton::getConn();
+        $con = ConnectionSingleton::getConn();
 
         if (!($result = $con->query($query))) {
 
