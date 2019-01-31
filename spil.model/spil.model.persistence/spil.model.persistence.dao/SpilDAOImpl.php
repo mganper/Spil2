@@ -1,8 +1,8 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/Spil2/spil.model/spil.model.persistence/SpilDAO.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/spil.model/spil.model.persistence/SpilDAO.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/Spil2/spil.model/spil.model.persistence/spil.model.persistence.dao/connectionSingleton.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/spil.model/spil.model.persistence/spil.model.persistence.dao/ConnectionSingleton.php';
 
 class SpilDAOImpl implements SpilDAO {    
     
@@ -19,7 +19,7 @@ class SpilDAOImpl implements SpilDAO {
                 . $spil->getWriteDate() . "', 0, $adult, 0);";
 
         //echo $query;
-        if (!connectionSingleton::getConn()->query($query)) {
+        if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
             echo 'Error al acceder a la base de datos';
         }
@@ -31,7 +31,7 @@ class SpilDAOImpl implements SpilDAO {
         $ret = TRUE;
         $query = 'DELETE FROM SPIL WHERE ID = ' . $spil->getId() . ';';
 
-        if (!connectionSingleton::getConn()->query($query)) {
+        if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
         }
 
@@ -43,7 +43,7 @@ class SpilDAOImpl implements SpilDAO {
         $query = "SELECT * FROM SPIL WHERE id=$pk";
 
         
-        if (!($res = connectionSingleton::getConn()->query($query))) {
+        if (!($res = ConnectionSingleton::getConn()->query($query))) {
             echo 'No se pudieron descargar los mensajes de la base de datos.';
             return FALSE;
         } else {
@@ -69,7 +69,7 @@ class SpilDAOImpl implements SpilDAO {
         $query = "UPDATE spil SET texto = '" . $spil->getText() . "' WHERE id=" . $spil->getId() . ";";
 
         echo $query;
-        if (!connectionSingleton::getConn()->query($query)) {
+        if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
             echo 'fallo';
         }
@@ -82,7 +82,7 @@ class SpilDAOImpl implements SpilDAO {
         $query = "UPDATE spil SET reportado = 1 WHERE id=$pk;";
 
         echo $query;
-        if (!connectionSingleton::getConn()->query($query)) {
+        if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
             echo 'fallo';
         }
@@ -97,7 +97,7 @@ class SpilDAOImpl implements SpilDAO {
         
         //echo $query;
 
-        if (!($res = connectionSingleton::getConn()->query($query))) {
+        if (!($res = ConnectionSingleton::getConn()->query($query))) {
             echo 'No se pudieron descargar los mensajes de la base de datos.';
             return FALSE;
         } else {

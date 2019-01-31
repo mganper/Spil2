@@ -1,8 +1,8 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/ConfigurationController.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/ConfigurationModelImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT']. '/Spil2/spil.model/spil.model.entity/ConfigurationImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/ConfigurationController.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/ConfigurationModelImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT']. '/spil.model/spil.model.entity/ConfigurationImpl.php';
 
 class ConfigurationControllerImpl implements ConfigurationController{
     

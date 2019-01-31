@@ -3,10 +3,10 @@
 class ConnectionSingleton {
 
     private static $conn;
-    private static $servidor = 'localhost';
-    private static $user = 'root';
-    private static $pass = '';
-    private static $db = 'spil';
+    private static $servidor = 'fdb26.awardspace.net';
+    private static $user = '2950915_spil';
+    private static $pass = 'oracle_4U';
+    private static $db = '2950915_spil';
 
     public static function getConn() {
         if (is_null(self::$conn)) {

@@ -1,6 +1,3 @@
-
-<!doctype html>
-
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/UserControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/NotificationControllerImpl.php';
@@ -18,11 +15,11 @@ $notfCtlr = new NotificationControllerImpl();
 
 $notifications = $notfCtlr->listNot($user);
 ?>
-
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-         <link rel="icon" type="image/png" href="assets/img/favicon.png">
+        <link rel="icon" type="image/png" href="assets/img/favicon.png">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
         <title>Spil | Notificaciones</title>
@@ -93,7 +90,7 @@ $notifications = $notfCtlr->listNot($user);
                             $txt = $not->getText();
                             $id = $not->getIdNotification();
                             ?>
-                        <div data-toggle="modal" data-target="#notification-modal" onclick="displayNot('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $id; ?>')">
+                            <div data-toggle="modal" data-target="#notification-modal" onclick="displayNot('<?php echo $user; ?>', '<?php echo $txt; ?>', '<?php echo $id; ?>')">
                                 <h3>
                                     <?php
                                     echo $txt;
@@ -134,30 +131,28 @@ $notifications = $notfCtlr->listNot($user);
                         </button>
                     </div>
                     <!-- FORMULARIO QUE RECIBE LA FUNCIONALIDAD ENVIAR SPIL AQUÍ-->
-                    <form action="#">
-                        <div class="modal-body"> 
-                            <textarea id="msg" class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
-                            <label>Contenido sensible</label>
-                            <div class="form-check-radio">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto" value="TRUE" checked>
-                                    Off
-                                    <span class="form-check-sign"></span>
-                                </label>
-                            </div>
-                            <div class="form-check-radio">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto2" value="FALSE" >
-                                    On
-                                    <span class="form-check-sign"></span>
-                                </label>
-                            </div>
+                    <div class="modal-body"> 
+                        <textarea id="msg" class="form-control" rows="4" placeholder="Tell us your thoughts"></textarea>
+                        <label>Contenido sensible</label>
+                        <div class="form-check-radio">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto" value="TRUE" checked>
+                                Off
+                                <span class="form-check-sign"></span>
+                            </label>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-default btn-link" data-dismiss="#MSGModal" onclick="sendMsg()">Publicar</button>
-                            <div class="divider"></div>                            
+                        <div class="form-check-radio">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="cAdulto" id="cAdulto2" value="FALSE" >
+                                On
+                                <span class="form-check-sign"></span>
+                            </label>
                         </div>
-                    </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default btn-link" data-dismiss="#MSGModal" onclick="sendMsg()">Publicar</button>
+                        <div class="divider"></div>                            
+                    </div>
                 </div>
             </div>
         </div>

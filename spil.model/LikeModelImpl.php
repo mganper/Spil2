@@ -1,8 +1,8 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\LikeModel.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/LikeModel.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persistence\spil.model.persistence.dao\LikeDAOImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.persistence/spil.model.persistence.dao/LikeDAOImpl.php';
 
 class LikeModelImpl implements LikeModel {
 

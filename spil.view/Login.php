@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.persistence/spil.model.persistence.dao/ConnectionSingleton.php';
 
@@ -15,7 +14,25 @@ function isGoodLogin($user, $pass) {
 
     return $res;
 }
+
+if (isset($_POST['login'])) {
+    $filter = Array(
+        'user' => FILTER_SANITIZE_STRING,
+        'pass' => FILTER_SANITIZE_STRING
+    );
+
+    $entry = filter_input_array(INPUT_POST, $filter);
+
+    if (isGoodLogin($entry['user'], $entry['pass'])) {
+        session_start();
+        $_SESSION['usuario'] = $entry['user'];
+        header('Location: Lobby.php');
+    } else {
+        $fallo = true;
+    }
+}
 ?>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -35,80 +52,41 @@ function isGoodLogin($user, $pass) {
         <title>Spil</title>
     </head>
     <body style="background-image: url('https://simbiotica.files.wordpress.com/2017/03/south-africa-927268_1920.jpg');">
-        <?php
-        if (isset($_POST['login'])) {
-            $filter = Array(
-                'user' => FILTER_SANITIZE_STRING,
-                'pass' => FILTER_SANITIZE_STRING
-            );
-
-            $entry = filter_input_array(INPUT_POST, $filter);
-
-            if (isGoodLogin($entry['user'], $entry['pass'])) {
-                session_start();
-                $_SESSION['usuario'] = $entry['user'];
-                header('Location: Lobby.php');
-            } else {
-                ?>
-                <div class="container" >
-                    <div class="row">
-                        <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3 ">
-                            <div class="card-register bg-primary">
-                                <h3 style="color:blue;">Welcome to Spil!</h3>
-                                <!-- FORMULARIO DE LOGIN-->
-                                <form class="register-form" action='#' method="POST">
-                                    <label>User</label>
-                                    <div class="form-group has-danger">
-                                        <input class="form-control form-control-danger" id="inputDanger1" type="text" placeholder="User" name="user">
-                                    </div>
-                                    <label>Password</label>
-                                    <div class="form-group has-danger">
-                                        <input class="form-control form-control-danger" id="inputDanger1" type="password" placeholder="Password" name="pass">
-                                        <div class="form-control-feedback">Usuario o contraseña incorrectos.</div>
-                                    </div>
-                                    <button class="btn btn-danger btn-block btn-round" name="login">Log in</button>
-                                </form>
-                                <a type="button" class="btn btn-register btn-block btn-round" href="Registro.php">Register</a>
+        <div class="container" >
+            <div class="row">
+                <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3 ">
+                    <div class="card-register bg-primary">
+                        <h3 style="color:blue;">Welcome to Spil!</h3>
+                        <!-- FORMULARIO DE LOGIN-->
+                        <form class="register-form" action='#' method="POST">
+                            <label>User</label>
+                            <div class="form-group <?php
+                            if (isset($fallo))
+                                echo 'has-danger';
+                            ?>">
+                                <input class="form-control <?php if (isset($fallo)) echo 'form-control-danger'; ?>" id="inputDanger1" type="text" placeholder="User" name="user">
                             </div>
-                        </div>
+                            <label>Password</label>
+                            <div class="form-group <?php if (isset($fallo)) echo 'has-danger'; ?>">
+                                <input class="form-control <?php if (isset($fallo)) echo 'form-control-danger'; ?>" id="inputDanger1" type="password" placeholder="Password" name="pass">
+                                <?php
+                                if (isset($fallo)) echo'<div class="form-control-feedback">Usuario o contraseña incorrectos.</div>';
+                                ?>
+                            </div>
+                            <button class="btn btn-danger btn-block btn-round" name="login">Log in</button>
+                        </form>
+                        <a type="button" class="btn btn-register btn-block btn-round" href="Registro.php">Register</a>
                     </div>
-                    <div class="footer register-footer text-center">
-                        <h6>
-                            © 
-                            <script>document.write(new Date().getFullYear())</script>
-                            , Grupo 10 Programacion Avanzada.
-                        </h6>
-                    </div>
-                </div>
-                <?php
-            }
-        } else {
-            ?>
-            <div class="container" >
-                <div class="row">
-                    <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3 ">
-                        <div class="card-register bg-primary">
-                            <h3 style="color:blue;">Welcome to Spil!</h3>
-                            <!-- FORMULARIO DE LOGIN-->
-                            <form class="register-form" action='#' method="POST">
-                                <label>User</label>
-                                <input class="form-control" type="text" placeholder="User" name="user">
-                                <label>Password</label>
-                                <input class="form-control" type="password" placeholder="Password" name="pass">
-                                <input type="submit" value="Log In" name="login" class="btn btn-danger btn-block btn-round" name="login">
-                            </form>
-                            <a type="button" class="btn btn-register btn-block btn-round" href="Registro.php">Register</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer register-footer text-center">
-                    <h6>
-                        © 
-                        <script>document.write(new Date().getFullYear())</script>
-                        , Grupo 10 Programacion Avanzada.
-                    </h6>
                 </div>
             </div>
-        <?php } ?>
+            <div class="footer register-footer text-center">
+                <h6>
+                    © 
+                    <script>document.write(new Date().getFullYear())</script>
+                    , Grupo 10 Programacion Avanzada.
+                </h6>
+            </div>
+        </div>
+
     </body>
 </html>

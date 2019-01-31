@@ -1,6 +1,6 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.controller/SpilControllerImpl.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/SpilControllerImpl.php';
 
 session_start();
 

@@ -26,7 +26,7 @@ class ConfigurationDAOImpl implements ConfigurationDAO {
 
         $query = 'DELETE FROM configuracion WHERE idUsuario = "' . $pk . '"';
 
-        if (!connectionSingleton::getConn()->query($query)) {
+        if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
         }
 
@@ -36,7 +36,7 @@ class ConfigurationDAOImpl implements ConfigurationDAO {
     public function read($pk) {
         $query = 'SELECT * FROM configuracion WHERE idUsuario = "' . $pk . '"';
 
-        if (!($res = connectionSingleton::getConn()->query($query))) {
+        if (!($res = ConnectionSingleton::getConn()->query($query))) {
             echo 'No se pudieron descargar los usuarios de la base de datos.';
             return FALSE;
         } else {
@@ -54,7 +54,7 @@ class ConfigurationDAOImpl implements ConfigurationDAO {
         $query = 'UPDATE configuracion SET temaOscuro = "' . $configuration->isTemaOscuro() .'", privacidadSpils = "' . $configuration->isPrivacidadSpils() 
                 .'", modoAdulto = "' . $configuration->isModoAdulto() . '" WHERE idUsuario = "' . $configuration->getIdUsuario() .'"' ;
         
-        if (!connectionSingleton::getConn()->query($query)) {
+        if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
         }
 

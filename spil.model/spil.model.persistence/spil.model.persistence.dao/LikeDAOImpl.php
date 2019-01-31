@@ -1,8 +1,8 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.persistence/LikeDAO.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.persistence/LikeDAO.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.persistence/spil.model.persistence.dao/connectionSingleton.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.persistence/spil.model.persistence.dao/ConnectionSingleton.php';
 
 class LikeDAOImpl implements LikeDAO {
 
@@ -12,7 +12,7 @@ class LikeDAOImpl implements LikeDAO {
         $query = "SELECT * FROM megusta WHERE idMensaje ='" + $idMensaje +
                 "' and idUsuario = '" + $idUsuario + "';";
         //try
-        $con = connectionSingleton::getConn();
+        $con = ConnectionSingleton::getConn();
 
         if (!($result = $conn->query($query))) {
 
@@ -30,7 +30,7 @@ class LikeDAOImpl implements LikeDAO {
 
         $query = "INSERT INTO megusta (idMensaje,idUsuario) VALUES('" . $like->getIdMensaje() . "','" . $like->getIdUsuario() . "');";
         //try
-        $con = connectionSingleton::getConn();
+        $con = ConnectionSingleton::getConn();
 
         if (!($result = $con->query($query))) {
 
@@ -49,7 +49,7 @@ class LikeDAOImpl implements LikeDAO {
         $query = "DELETE FROM megusta WHERE idMensaje ='" . $like->getIdMensaje() .
                 "' and idUsuario = '" . $like->getIdUsuario() . "';";
         //try
-        $con = connectionSingleton::getConn();
+        $con = ConnectionSingleton::getConn();
 
         if (!($result = $con->query($query))) {
 
@@ -82,7 +82,7 @@ class LikeDAOImpl implements LikeDAO {
 
         $query = "SELECT * FROM megusta WHERE idUsuario = '$idUsuario';";
         //try
-        $con = connectionSingleton::getConn();
+        $con = ConnectionSingleton::getConn();
 
         if (!($result = $con->query($query))) {
 
@@ -105,7 +105,7 @@ class LikeDAOImpl implements LikeDAO {
 
         $query = "SELECT * FROM megusta WHERE idMensaje = '$idMensaje';";
         //try
-        $con = connectionSingleton::getConn();
+        $con = ConnectionSingleton::getConn();
 
         if (!($result = $con->query($query))) {
 
@@ -129,7 +129,7 @@ class LikeDAOImpl implements LikeDAO {
 
         $query = "SELECT 1 FROM megusta WHERE idUsuario = $idUsuario and idMensaje=$idMensaje LIMIT 1";
 
-        if (!($result = connectionSingleton::getConn()->query($query))) {
+        if (!($result = ConnectionSingleton::getConn()->query($query))) {
             $res = FALSE;
         } else if ($row = mysqli_fetch_array($result)) {
             $res = TRUE;
@@ -145,7 +145,7 @@ class LikeDAOImpl implements LikeDAO {
         $query = "SELECT b.texto, b.idUsuario, b.fechaEscritura, a.idMensaje from megusta a, spil b WHERE a.idMensaje = b.id AND a.idUsuario='$idUser'";
         $likes;
         
-        if (!($res = connectionSingleton::getConn()->query($query))) {
+        if (!($res = ConnectionSingleton::getConn()->query($query))) {
              echo 'No se pudieron comprobar los likes.';
             return FALSE;
         } else {
@@ -175,7 +175,7 @@ class LikeDAOImpl implements LikeDAO {
         $query = "DELETE FROM megusta WHERE idMensaje ='" . $idMensaje .
                 "';";
         //try
-        $con = connectionSingleton::getConn();
+        $con = ConnectionSingleton::getConn();
 
         if (!($result = $con->query($query))) {
 

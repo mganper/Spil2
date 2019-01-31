@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/Spil2/spil.model/spil.model.entity/Like.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/spil.model/spil.model.entity/Like.php';
 
 class LikeImpl implements Like {
 

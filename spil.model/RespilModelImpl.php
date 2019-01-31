@@ -1,8 +1,8 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\RespilModel.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/RespilModel.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '\Spil2\spil.model\spil.model.persistence\spil.model.persistence.dao\RespilDAOImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.persistence/spil.model.persistence.dao/RespilDAOImpl.php';
 
 class RespilModelImpl implements RespilModel {
 
@@ -15,7 +15,7 @@ class RespilModelImpl implements RespilModel {
 //       // return $respilcontroller;
 //    }
 //
-//    public function setController(\RespilController $resCont) {
+//    public function setController(/RespilController $resCont) {
 //       // $this->$RespilController = $resCont;
 //    }
 

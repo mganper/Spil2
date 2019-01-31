@@ -1,6 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.persistence/NotificationDAO.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Spil2/spil.model/spil.model.persistence/spil.model.persistence.dao/connectionSingleton.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.persistence/NotificationDAO.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.persistence/spil.model.persistence.dao/ConnectionSingleton.php';
 class NotificationDAOImpl implements NotificationDAO{
     //TODO CERRAR LAS CONEXIONES
     
@@ -10,7 +10,7 @@ class NotificationDAOImpl implements NotificationDAO{
                 . $notification->getIdUser() . "', '"
                 . $notification->getText() . "');";
         
-        if (!connectionSingleton::getConn()->query($query)) {
+        if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
         }
 
@@ -22,7 +22,7 @@ class NotificationDAOImpl implements NotificationDAO{
         $query = 'DELETE FROM NOTIFICACIONES WHERE idNotificacion = ' . $notification->getIdNotification() . ';';
 
         //echo $query;
-        if (!connectionSingleton::getConn()->query($query)) {
+        if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
             echo 'fallo';
         }
@@ -35,7 +35,7 @@ class NotificationDAOImpl implements NotificationDAO{
         $i;
         $query = "SELECT * FROM NOTIFICACIONES WHERE idUsuario='$idUser';";
 
-        if (!($res = connectionSingleton::getConn()->query($query))) {
+        if (!($res = ConnectionSingleton::getConn()->query($query))) {
             echo 'No se pudieron descargar las notificaciones de la base de datos.';
             return FALSE;
         } else {
@@ -57,7 +57,7 @@ class NotificationDAOImpl implements NotificationDAO{
         $notification = new NotificationImpl();
         $query = "SELECT * FROM NOTIFICACIONES WHERE idUsuario=$pk;";
 
-        if (!($res = connectionSingleton::getConn()->query($query))) {
+        if (!($res = ConnectionSingleton::getConn()->query($query))) {
             echo 'No se pudieron descargar las notificaciones de la base de datos.';
             return FALSE;
         } else {
@@ -78,7 +78,7 @@ class NotificationDAOImpl implements NotificationDAO{
         $query = "UPDATE notificaciones SET texto='" . $notification->getText() . "' WHERE idNotificacion =" . $notification->getIdNotification() . ";";
 
         echo $query;
-        if (!connectionSingleton::getConn()->query($query)) {
+        if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
             echo '<br>'.'fallo';
         }
