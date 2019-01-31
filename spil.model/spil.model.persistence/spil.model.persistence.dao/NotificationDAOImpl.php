@@ -6,7 +6,7 @@ class NotificationDAOImpl implements NotificationDAO{
     
     public function create($notification) {
         $ret = TRUE;
-        $query = "INSERT INTO NOTIFICACIONES(idNotificacion, idUsuario, texto) VALUES (NULL, '"
+        $query = "INSERT INTO notificaciones(idNotificacion, idUsuario, texto) VALUES (NULL, '"
                 . $notification->getIdUser() . "', '"
                 . $notification->getText() . "');";
         
@@ -19,7 +19,7 @@ class NotificationDAOImpl implements NotificationDAO{
 
     public function delete($notification) {
         $ret = TRUE;
-        $query = 'DELETE FROM NOTIFICACIONES WHERE idNotificacion = ' . $notification->getIdNotification() . ';';
+        $query = 'DELETE FROM notificaciones WHERE idNotificacion = ' . $notification->getIdNotification() . ';';
 
         //echo $query;
         if (!ConnectionSingleton::getConn()->query($query)) {
@@ -33,7 +33,7 @@ class NotificationDAOImpl implements NotificationDAO{
     public function listByUser($idUser) {
         $notification = Array();
         $i;
-        $query = "SELECT * FROM NOTIFICACIONES WHERE idUsuario='$idUser';";
+        $query = "SELECT * FROM notificaciones WHERE idUsuario='$idUser';";
 
         if (!($res = ConnectionSingleton::getConn()->query($query))) {
             echo 'No se pudieron descargar las notificaciones de la base de datos.';
@@ -55,7 +55,7 @@ class NotificationDAOImpl implements NotificationDAO{
 
     public function read($pk) {
         $notification = new NotificationImpl();
-        $query = "SELECT * FROM NOTIFICACIONES WHERE idUsuario=$pk;";
+        $query = "SELECT * FROM notificaciones WHERE idUsuario=$pk;";
 
         if (!($res = ConnectionSingleton::getConn()->query($query))) {
             echo 'No se pudieron descargar las notificaciones de la base de datos.';

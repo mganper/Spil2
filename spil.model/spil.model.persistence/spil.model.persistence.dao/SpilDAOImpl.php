@@ -13,12 +13,12 @@ class SpilDAOImpl implements SpilDAO {
         }else{
             $adult = 0;
         }
-        $query = "INSERT INTO SPIL(id, texto, idUsuario, fechaEscritura, numEdiciones, contenidoAdulto, reportado) VALUES (NULL, '"
+        $query = "INSERT INTO spil(id, texto, idUsuario, fechaEscritura, numEdiciones, contenidoAdulto, reportado) VALUES (NULL, '"
                 . $spil->getText() . "', '"
                 . $spil->getIdUser() . "', '"
                 . $spil->getWriteDate() . "', 0, $adult, 0);";
-
-        //echo $query;
+        
+//        echo $query;
         if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
             echo 'Error al acceder a la base de datos';
@@ -29,7 +29,7 @@ class SpilDAOImpl implements SpilDAO {
 
     public function delete($spil) {
         $ret = TRUE;
-        $query = 'DELETE FROM SPIL WHERE ID = ' . $spil->getId() . ';';
+        $query = 'DELETE FROM spil WHERE ID = ' . $spil->getId() . ';';
 
         if (!ConnectionSingleton::getConn()->query($query)) {
             $ret = FALSE;
@@ -40,7 +40,7 @@ class SpilDAOImpl implements SpilDAO {
 
     public function read($pk) {
         $spil = new SpilImpl(NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-        $query = "SELECT * FROM SPIL WHERE id=$pk";
+        $query = "SELECT * FROM spil WHERE id=$pk";
 
         
         if (!($res = ConnectionSingleton::getConn()->query($query))) {
@@ -93,7 +93,7 @@ class SpilDAOImpl implements SpilDAO {
     public function listByUser($idUser) {
         $spil = Array();
         $i;
-        $query = "SELECT * FROM SPIL WHERE idUsuario='$idUser' ORDER BY fechaEscritura DESC;";
+        $query = "SELECT * FROM spil WHERE idUsuario='$idUser' ORDER BY fechaEscritura DESC;";
         
         //echo $query;
 

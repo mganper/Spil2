@@ -1,6 +1,7 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/UserController.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.controller/ConfigurationControllerImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/UserModelImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.entity/UserImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/spil.model/spil.model.persistence/spil.model.persistence.dao/UserDAOImpl.php';
@@ -26,8 +27,10 @@ class UserControllerImpl implements UserController {
         $user = new UserImpl($usuario, $contrasenya, $nombre, $apellidos, $fechaNacimiento, date('Y-m-d'), NULL);
 
 
-        if ($res2 = $this->model->newUser($user)) {
+        if ($this->model->newUser($user)) {
             $res = True;
+            $config = new ConfigurationControllerImpl();
+            $config->createConfiguration($usuario, 0, 0, 0);
             if (!isset($_SESSION['usuario'])) {
                 session_start();
                 $_SESSION['usuario'] = $usuario;
@@ -92,7 +95,6 @@ class UserControllerImpl implements UserController {
 
     public function ascenderModerador($idUsuario) {
         return $this->model->ascenderModerador($idUsuario);
-        
     }
 
 }
